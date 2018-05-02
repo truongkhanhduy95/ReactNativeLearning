@@ -1,0 +1,1 @@
+Stores images, audios and other assets

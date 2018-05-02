@@ -1,0 +1,1 @@
+Shared style files, text, colors, etc.
