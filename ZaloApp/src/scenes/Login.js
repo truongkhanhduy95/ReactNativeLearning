@@ -1,71 +1,93 @@
-import React,{Component} from 'react'
-import {View, Text, TextInput, StyleSheet, TouchableOpacity, StatusBar} from 'react-native'
+import React, { Component } from 'react'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, StatusBar } from 'react-native'
 import { Button } from 'native-base';
+import { BackHandler } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 
-export default class Login extends Component{
+export default class Login extends Component {
     state = {
-        username:'',
-        password:''
+        username: '',
+        password: ''
     }
 
+    constructor(props) {
+        super(props);
+        // this.goBack=this.goBack.bind(this);
+    }
+
+
     handleUsername = (text) => {
-        this.setState({username:text})
+        this.setState({ username: text })
     }
 
     handlePassword = (text) => {
-        this.setState({password:text})
+        this.setState({ password: text })
     }
 
-    onLoginButtonPressed(){
+    onLoginButtonPressed() {
         console.log('Login pressed');
     }
 
-    render(){
+    goBack = () => {
+        let action = NavigationActions.back({ key: 'intro' })
+        this.props.navigation.dispatch({ type: 'Navigation/BACK' });
+        return true;
+    }
+
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.goBack);
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.goBack);
+    }
+
+    render() {
         let title = 'You can login with your phone number or username'
         let loginText = 'Login'
         let username = 'Username'
         let password = 'Password'
-        return(
+        return (
             <View style={styles.container}>
                 <Text style={styles.title}>{title}</Text>
-                <View style={styles.line}/>
+                <View style={styles.line} />
                 <View style={styles.rowField}>
                     <TextInput
-                        placeholder = {username}
-                        placeholderTextColor = 'gray'
-                        onChangeText = {this.handleUsername}
+                        placeholder={username}
+                        placeholderTextColor='gray'
+                        onChangeText={this.handleUsername}
                     />
                     <Button
                         bordered
                         dark
                         small
                         onPress={this.onLoginButtonPressed.bind(this)}>
-                        <Text style={{color:'gray',fontWeight:'bold'}}> ABC </Text>
+                        <Text style={{ color: 'gray', fontWeight: 'bold' }}> ABC </Text>
                     </Button>
                 </View>
-                <View style={styles.line}/>
+                <View style={styles.line} />
                 <View style={styles.rowField}>
                     <TextInput
-                        placeholder = {password}
-                        placeholderTextColor = 'gray'
-                        onChangeText = {this.handleUsername}
+                        placeholder={password}
+                        placeholderTextColor='gray'
+                        onChangeText={this.handleUsername}
                     />
                     <TouchableOpacity>
-                        <Text style={{color:'gray'}}>SHOW</Text>
+                        <Text style={{ color: 'gray' }}>SHOW</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.line}/>
+                <View style={styles.line} />
                 <Button
-                        style={styles.loginButton}
-                        rounded
-                        info
-                        onPress={this.onLoginButtonPressed.bind(this)}>
-                        <Text style={{color:'white',fontWeight:'bold'}}>{loginText.toUpperCase()}</Text>
+                    style={styles.loginButton}
+                    rounded
+                    info
+                    onPress={this.onLoginButtonPressed.bind(this)}>
+                    <Text style={{ color: 'white', fontWeight: 'bold' }}>{loginText.toUpperCase()}</Text>
                 </Button>
                 <TouchableOpacity>
                     <Text style={styles.forgotPassword}>Recover password</Text>
                 </TouchableOpacity>
-                <View style={{flex:1, justifyContent:'flex-end',}}>
+                <View style={{ flex: 1, justifyContent: 'flex-end', }}>
                     <Text style={styles.faq}>FAQ</Text>
                 </View>
             </View>
@@ -74,52 +96,52 @@ export default class Login extends Component{
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        width:'100%',
-        alignItems:'center',
-        backgroundColor:'#F3F4F6',
+    container: {
+        flex: 1,
+        width: '100%',
+        alignItems: 'center',
+        backgroundColor: '#F3F4F6',
     },
-    title:{
-        marginTop:50,
-        marginBottom:30,
-        color:'gray',
+    title: {
+        marginTop: 50,
+        marginBottom: 30,
+        color: 'gray',
 
     },
-    line:{
+    line: {
         borderBottomColor: 'gray',
-        borderBottomWidth: 0.5, 
-        alignSelf:'stretch'
+        borderBottomWidth: 0.5,
+        alignSelf: 'stretch'
     },
-    rowField:{
-        backgroundColor:'white',
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignSelf:'stretch',
-        padding:15,
+    rowField: {
+        backgroundColor: 'white',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignSelf: 'stretch',
+        padding: 15,
     },
-    keyboardTypeButton:{
-        backgroundColor:'white',
+    keyboardTypeButton: {
+        backgroundColor: 'white',
     },
 
-    buttonLayout:{
+    buttonLayout: {
 
     },
-    loginButton:{
+    loginButton: {
         marginTop: 20,
-        marginLeft:80,
-        marginRight:80,
+        marginLeft: 80,
+        marginRight: 80,
         alignSelf: 'stretch',
         justifyContent: 'center',
     },
-    forgotPassword:{
+    forgotPassword: {
         marginTop: 20,
-        color:'#007BF9',
-        alignSelf:'center',
-        fontWeight:'bold'
+        color: '#007BF9',
+        alignSelf: 'center',
+        fontWeight: 'bold'
     },
-    faq:{
+    faq: {
         marginBottom: 20,
-        textDecorationLine:'underline'
+        textDecorationLine: 'underline'
     },
 })

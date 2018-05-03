@@ -3,4 +3,4 @@ import App from './App';
 import Intro from './src/scenes/Intro'
 import Login from './src/scenes/Login'
 
-AppRegistry.registerComponent('ZaloApp', () => Intro);
+AppRegistry.registerComponent('ZaloApp', () => App);

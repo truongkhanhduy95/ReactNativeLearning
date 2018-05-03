@@ -1,11 +1,13 @@
 import React,{Component} from 'react'
 import {View, Image, Text, StyleSheet } from 'react-native'
 import { Button } from 'native-base';
+import { NavigationActions } from 'react-navigation';
 
 export default class Intro extends Component{
 
     onLoginButtonPressed(){
-        console.log('Login pressed');
+        let action = NavigationActions.navigate({ routeName: 'login' })
+        this.props.navigation.dispatch(action);
     }
 
     onRegisterButtonPresses(){
