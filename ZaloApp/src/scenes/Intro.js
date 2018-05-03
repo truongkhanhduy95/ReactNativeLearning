@@ -11,7 +11,8 @@ export default class Intro extends Component{
     }
 
     onRegisterButtonPresses(){
-        console.log('Register pressed');
+        let action = NavigationActions.navigate({ routeName: 'registerName' })
+        this.props.navigation.dispatch(action);
     }
 
     render(){
@@ -72,6 +73,7 @@ const styles = StyleSheet.create({
         resizeMode:'contain',
     },
     textLayout:{
+        backgroundColor:'white',
         justifyContent:'center',
         alignItems:'center',
         flexDirection: 'row',

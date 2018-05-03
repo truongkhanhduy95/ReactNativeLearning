@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, StatusBar } from 'react-native'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, StatusBar, AlertIOS } from 'react-native'
 import { Button } from 'native-base';
 import { BackHandler } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 
 export default class Login extends Component {
     state = {
+        isShowPassword: false,
         username: '',
         password: ''
     }
@@ -15,19 +16,20 @@ export default class Login extends Component {
         // this.goBack=this.goBack.bind(this);
     }
 
-
-    handleUsername = (text) => {
-        this.setState({ username: text })
-    }
-
-    handlePassword = (text) => {
-        this.setState({ password: text })
-    }
-
     onLoginButtonPressed() {
-        BackHandler.removeEventListener('hardwareBackPress', this.goBack);
-        let action = NavigationActions.navigate({ routeName: 'tabBar' })
-        this.props.navigation.dispatch(action);
+        if(this.canLogin()) {
+			BackHandler.removeEventListener('hardwareBackPress', this.goBack);
+        	let action = NavigationActions.navigate({ routeName: 'tabBar' })
+        	this.props.navigation.dispatch(action);
+        }
+    }
+
+    onShowPasswordPressed(){
+        this.setState({ isShowPassword: !this.state.isShowPassword })
+    }
+
+    canLogin(){
+        return this.state.username && this.state.password;
     }
 
     goBack = () => {
@@ -57,13 +59,13 @@ export default class Login extends Component {
                     <TextInput
                         placeholder={username}
                         placeholderTextColor='gray'
-                        onChangeText={this.handleUsername}
+                        onChange={(event)=> this.setState({username: event.nativeEvent.text})}
                     />
                     <Button
                         bordered
                         dark
                         small
-                        onPress={this.onLoginButtonPressed.bind(this)}>
+                        onPress={null}>
                         <Text style={{ color: 'gray', fontWeight: 'bold' }}> ABC </Text>
                     </Button>
                 </View>
@@ -72,17 +74,19 @@ export default class Login extends Component {
                     <TextInput
                         placeholder={password}
                         placeholderTextColor='gray'
-                        onChangeText={this.handleUsername}
+                        secureTextEntry = {!this.state.isShowPassword}
+                        onChange={(event)=> this.setState({password: event.nativeEvent.text})}
                     />
-                    <TouchableOpacity>
-                        <Text style={{ color: 'gray' }}>SHOW</Text>
+                    <TouchableOpacity
+                        onPress = {this.onShowPasswordPressed.bind(this)}>
+                        <Text style={{ color: 'gray' }}>{this.state.isShowPassword ? 'HIDE': 'SHOW'}</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.line} />
                 <Button
                     style={styles.loginButton}
                     rounded
-                    info
+                    info = {!this.canLogin()}
                     onPress={this.onLoginButtonPressed.bind(this)}>
                     <Text style={{ color: 'white', fontWeight: 'bold' }}>{loginText.toUpperCase()}</Text>
                 </Button>

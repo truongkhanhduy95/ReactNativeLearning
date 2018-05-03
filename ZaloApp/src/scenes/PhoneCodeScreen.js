@@ -70,8 +70,12 @@ export default class PhoneCodeScreen extends Component {
                           dialingCode: '+81'
                   }]
               }
-          ])
+          ].filter(item => item.data.some(e => e.name.toLowerCase().includes(this.state.countryName.toLowerCase()))));
       }
+      goBack = () => {
+        this.props.navigation.dispatch({ type: 'Navigation/BACK' });
+        return true;
+    }
     render() {
         return (
           <View style={styles.container}>
@@ -82,30 +86,23 @@ export default class PhoneCodeScreen extends Component {
                 backgroundColor:'#F3F3F3',
                 height: 46
             }}>
-                <TouchableHighlight
+                <TouchableOpacity
                       style={{ 
                         flex:1,
                       paddingLeft:10 }}
-                      underlayColor='blue'
-                      onPress={(event) => {
-                          if (!this.state.newTaskName.trim()) {
-                              return;
-                          } 
-                          //Call click event => use "Container"
-                      }}
+                      onPress={this.goBack.bind(this)}
                   >
                     <Image
                         style={{ width: 24, height: 24 }}
                         source={require('../../public/ic_back.png')}
                     />
-                </TouchableHighlight>
+                </TouchableOpacity>
                 <TextInput style={{
                    flex: 9,
                     height: 32,
                     margin: 10,
                     borderBottomWidth: 1,
-                    borderColor: '#007aff',
-                    color: 'white'
+                    borderColor: '#007aff'
                 }}
                     keyboardType='default'
                     placeholderTextColor='gray'
@@ -122,27 +119,27 @@ export default class PhoneCodeScreen extends Component {
             <SectionList
                 sections={this.selectionList()}
                 renderItem={({item}) =>
-                <TouchableOpacity onPress={this.GetItem.bind(this, item)}>
-                    <View style={{flex:1, flexDirection: 'row'}}>
+                    <TouchableOpacity onPress={this.GetItem.bind(this, item)}>
+                        <View style={{flex:1, flexDirection: 'row'}}>
+        
+                            <Text 
+                            
+                            style={{
+                                padding: 10,
+                                fontSize: 18,
+                                height: 44,
+                                flex: 4
+                            }}>{item.name}</Text>}
+                    
+                            <Text style={{
+                                padding: 10,
+                                fontSize: 18,
+                                height: 44,
+                                flex: 1,
+                                textAlign: 'right'
+                            }} >{item.dialingCode}</Text>
     
-                        <Text 
-                        
-                        style={{
-                            padding: 10,
-                            fontSize: 18,
-                            height: 44,
-                            flex: 4
-                        }}>{item.name}</Text>}
-                
-                        <Text style={{
-                            padding: 10,
-                            fontSize: 18,
-                            height: 44,
-                            flex: 1,
-                            textAlign: 'right'
-                        }} >{item.dialingCode}</Text>
- 
-                    </View>
+                        </View>
                     </TouchableOpacity>
                 }
                 renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.key}</Text>}

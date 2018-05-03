@@ -8,20 +8,28 @@ import {
   
 } from 'react-native';
 
+import { NavigationActions } from 'react-navigation';
 import { Button } from 'native-base';
 
 export default class RegisterNameScreen extends Component
 {
     state = {
-        fullname:''
+        fullname:'',
+        isDisable:true
     }
 
     handleFullname = (text) => {
         this.setState({fullname:text})
+        if(text === '')
+            this.setState({isDisable:true})
+        else
+            this.setState({isDisable:false})
+
     }
 
     onRegisterButtonPressed(){
-        console.log('Register pressed');
+        let action = NavigationActions.navigate({ routeName: 'registerPhone' })
+        this.props.navigation.dispatch(action);
     }
     render() {
         return (
@@ -38,7 +46,8 @@ export default class RegisterNameScreen extends Component
                         style={styles.registerButton}
                         rounded
                         info
-                        onPress={this.onRegisterButtonPressed.bind(this)}>
+                        onPress={this.onRegisterButtonPressed.bind(this)}
+                        disabled={this.state.isDisable}>
                         <Text style={{color:'white',fontWeight:'bold'}}>{'next'.toUpperCase()}</Text>
                 </Button>
             </View>
