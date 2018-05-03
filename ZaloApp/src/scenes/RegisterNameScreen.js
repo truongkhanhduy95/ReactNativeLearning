@@ -8,6 +8,7 @@ import {
   
 } from 'react-native';
 
+import { NavigationActions } from 'react-navigation';
 import { Button } from 'native-base';
 
 export default class RegisterNameScreen extends Component
@@ -21,7 +22,8 @@ export default class RegisterNameScreen extends Component
     }
 
     onRegisterButtonPressed(){
-        console.log('Register pressed');
+        let action = NavigationActions.navigate({ routeName: 'registerPhone' })
+        this.props.navigation.dispatch(action);
     }
     render() {
         return (

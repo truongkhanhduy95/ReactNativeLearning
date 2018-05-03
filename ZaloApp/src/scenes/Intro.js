@@ -11,7 +11,8 @@ export default class Intro extends Component{
     }
 
     onRegisterButtonPresses(){
-        console.log('Register pressed');
+        let action = NavigationActions.navigate({ routeName: 'registerName' })
+        this.props.navigation.dispatch(action);
     }
 
     render(){

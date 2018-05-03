@@ -11,6 +11,8 @@ import {
 import { Button } from 'native-base';
 import  ConfirmDialog  from '../components/ConfirmDialog';
 
+import { NavigationActions } from 'react-navigation';
+
 export default class RegisterPhoneScreen extends Component
 {
     state = {
@@ -24,6 +26,10 @@ export default class RegisterPhoneScreen extends Component
         if(this.state.phonenumber.length >= 10)
             this.refs.addModal.showAddModal();
     }
+    onSelectPhoneCode(){
+        let action = NavigationActions.navigate({ routeName: 'phoneCode' })
+        this.props.navigation.dispatch(action);
+    }
     render() {
         let confirmMsg = `You will recive an automatic call from Zalo to activate your account. Please confirm your phone number is correct. Continue?`
         
@@ -32,7 +38,8 @@ export default class RegisterPhoneScreen extends Component
                 <Text style={styles.header}>What's Your Phone Number?</Text>
                 <Text style={styles.body}>This number could be used to log in and reset your password.</Text>
                 <View style = {styles.phoneInput}>
-                    <TouchableOpacity style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.buttonContainer}
+                    onPress={this.onSelectPhoneCode.bind(this)}>
                             <Text style={{ textAlign: 'center', color: '#007aff', fontSize: 20 }}>VN</Text>
                     </TouchableOpacity>
                     <TextInput style={styles.textInput}

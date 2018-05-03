@@ -72,6 +72,10 @@ export default class PhoneCodeScreen extends Component {
               }
           ])
       }
+      goBack = () => {
+        this.props.navigation.dispatch({ type: 'Navigation/BACK' });
+        return true;
+    }
     render() {
         return (
           <View style={styles.container}>
@@ -82,30 +86,23 @@ export default class PhoneCodeScreen extends Component {
                 backgroundColor:'#F3F3F3',
                 height: 46
             }}>
-                <TouchableHighlight
+                <TouchableOpacity
                       style={{ 
                         flex:1,
                       paddingLeft:10 }}
-                      underlayColor='blue'
-                      onPress={(event) => {
-                          if (!this.state.newTaskName.trim()) {
-                              return;
-                          } 
-                          //Call click event => use "Container"
-                      }}
+                      onPress={this.goBack.bind(this)}
                   >
                     <Image
                         style={{ width: 24, height: 24 }}
                         source={require('../../public/ic_back.png')}
                     />
-                </TouchableHighlight>
+                </TouchableOpacity>
                 <TextInput style={{
                    flex: 9,
                     height: 32,
                     margin: 10,
                     borderBottomWidth: 1,
-                    borderColor: '#007aff',
-                    color: 'white'
+                    borderColor: '#007aff'
                 }}
                     keyboardType='default'
                     placeholderTextColor='gray'
