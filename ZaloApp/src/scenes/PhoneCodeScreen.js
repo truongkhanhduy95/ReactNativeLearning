@@ -70,7 +70,7 @@ export default class PhoneCodeScreen extends Component {
                           dialingCode: '+81'
                   }]
               }
-          ])
+          ].filter(item => item.data.some(e => e.name.toLowerCase().includes(this.state.countryName.toLowerCase()))));
       }
       goBack = () => {
         this.props.navigation.dispatch({ type: 'Navigation/BACK' });
