@@ -3,6 +3,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity, StatusBar, AlertIO
 import { Button } from 'native-base';
 import { BackHandler } from 'react-native';
 import { NavigationActions } from 'react-navigation';
+import  Header  from '../components/Header';
 
 export default class Login extends Component {
     state = {
@@ -32,9 +33,7 @@ export default class Login extends Component {
     }
 
     goBack = () => {
-        let action = NavigationActions.back({ key: 'intro' })
         this.props.navigation.dispatch({ type: 'Navigation/BACK' });
-        return true;
     }
 
     componentDidMount() {
@@ -52,6 +51,9 @@ export default class Login extends Component {
         let password = 'Password'
         return (
             <View style={styles.container}>
+                <Header 
+                    title = 'Login'
+                    onBack = {()=>this.goBack()} />
                 <Text style={styles.title}>{title}</Text>
                 <View style={styles.line} />
                 <View style={styles.rowField}>
@@ -110,7 +112,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F3F4F6',
     },
     title: {
-        marginTop: 50,
+        marginTop: 30,
         marginBottom: 30,
         color: 'gray',
 

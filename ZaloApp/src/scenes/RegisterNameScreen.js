@@ -10,11 +10,16 @@ import {
 
 import { NavigationActions } from 'react-navigation';
 import { Button } from 'native-base';
+import  Header  from '../components/Header';
 
 export default class RegisterNameScreen extends Component
 {
     state = {
         fullname:''
+    }
+
+    goBack = () => {
+        this.props.navigation.dispatch({ type: 'Navigation/BACK' });
     }
 
     handleFullname = (text) => {
@@ -28,6 +33,9 @@ export default class RegisterNameScreen extends Component
     render() {
         return (
             <View style= {styles.container}>
+                <Header 
+                    title = 'Name'
+                    onBack = {()=>this.goBack()} />
                 <Text style={styles.header}>What's Your Full Name?</Text>
                 <Text style={styles.body}>Using real name make you more recognizable.</Text>
                 <TextInput style={styles.textInput}
@@ -59,7 +67,7 @@ const styles = StyleSheet.create({
     header: {
       fontWeight:'bold',  
       textAlign: 'center',
-      marginTop:50,
+      marginTop:30,
       marginBottom:30,
     },
     body: {
@@ -74,7 +82,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         height: 50,
         paddingLeft:10,
-        textAlign: 'left'
+        textAlign: 'left',
+        backgroundColor:'white',
     },
     phoneInput: {
         flexDirection: 'row',

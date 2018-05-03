@@ -12,6 +12,7 @@ import { Button } from 'native-base';
 import  ConfirmDialog  from '../components/ConfirmDialog';
 
 import { NavigationActions } from 'react-navigation';
+import  Header  from '../components/Header';
 
 export default class RegisterPhoneScreen extends Component
 {
@@ -20,6 +21,10 @@ export default class RegisterPhoneScreen extends Component
     }
     handlePhonenumber = (text) => {
         this.setState({phonenumber:text})
+    }
+
+    goBack = () => {
+        this.props.navigation.dispatch({ type: 'Navigation/BACK' });
     }
 
     onRegisterButtonPressed(){
@@ -35,6 +40,9 @@ export default class RegisterPhoneScreen extends Component
         
         return (
             <View style= {styles.container}>
+                <Header 
+                    title = 'Phone number'
+                    onBack = {()=>this.goBack()} />
                 <Text style={styles.header}>What's Your Phone Number?</Text>
                 <Text style={styles.body}>This number could be used to log in and reset your password.</Text>
                 <View style = {styles.phoneInput}>
@@ -82,7 +90,7 @@ const styles = StyleSheet.create({
     header: {
       fontWeight:'bold',  
       textAlign: 'center',
-      marginTop:50,
+      marginTop:30,
       marginBottom:30,
     },
     body: {
@@ -104,7 +112,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         height: 50,
         paddingLeft:5,
-        textAlign: 'left'
+        textAlign: 'left',
+        backgroundColor:'white',
     },
     buttonContainer: {
         flex:1,
