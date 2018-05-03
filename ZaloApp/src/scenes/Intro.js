@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
         resizeMode:'contain',
     },
     textLayout:{
+        backgroundColor:'white',
         justifyContent:'center',
         alignItems:'center',
         flexDirection: 'row',
