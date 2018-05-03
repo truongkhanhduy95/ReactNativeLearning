@@ -6,4 +6,5 @@ import PhoneCodeScreen from './src/scenes/PhoneCodeScreen';
 import RegisterNameScreen from './src/scenes/RegisterNameScreen';
 import RegisterPhoneScreen from './src/scenes/RegisterPhoneScreen';
 
-AppRegistry.registerComponent('ZaloApp', () => RegisterNameScreen);
+AppRegistry.registerComponent('ZaloApp', () => RegisterPhoneScreen);
+
