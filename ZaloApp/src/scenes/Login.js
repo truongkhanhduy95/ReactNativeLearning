@@ -25,7 +25,9 @@ export default class Login extends Component {
     }
 
     onLoginButtonPressed() {
-        console.log('Login pressed');
+        BackHandler.removeEventListener('hardwareBackPress', this.goBack);
+        let action = NavigationActions.navigate({ routeName: 'tabBar' })
+        this.props.navigation.dispatch(action);
     }
 
     goBack = () => {
