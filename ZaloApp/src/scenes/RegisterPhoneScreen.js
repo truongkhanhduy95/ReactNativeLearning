@@ -17,10 +17,15 @@ import  Header  from '../components/Header';
 export default class RegisterPhoneScreen extends Component
 {
     state = {
-        phonenumber:''
+        phonenumber:'',
+        isDisable:true
     }
     handlePhonenumber = (text) => {
-        this.setState({phonenumber:text})
+        this.setState({phonenumber:text});
+        if(text.length >= 10)
+            this.setState({isDisable:false});
+        else
+            this.setState({isDisable:true});
     }
 
     goBack = () => {
@@ -29,7 +34,9 @@ export default class RegisterPhoneScreen extends Component
 
     onRegisterButtonPressed(){
         if(this.state.phonenumber.length >= 10)
+        {
             this.refs.addModal.showAddModal();
+        }
     }
     onSelectPhoneCode(){
         let action = NavigationActions.navigate({ routeName: 'phoneCode' })
@@ -61,7 +68,9 @@ export default class RegisterPhoneScreen extends Component
                         style={styles.registerButton}
                         rounded
                         info
-                        onPress={this.onRegisterButtonPressed.bind(this)}>
+                        onPress={this.onRegisterButtonPressed.bind(this)}
+                        disabled={this.state.isDisable}
+                        >
                         <Text style={{color:'white',fontWeight:'bold'}}>{'register'.toUpperCase()}</Text>
                 </Button>
                 <ConfirmDialog ref={'addModal'} title='confirm' message={confirmMsg} phoneNumber={this.state.phonenumber} >

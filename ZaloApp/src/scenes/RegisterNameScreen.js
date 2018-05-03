@@ -15,7 +15,8 @@ import  Header  from '../components/Header';
 export default class RegisterNameScreen extends Component
 {
     state = {
-        fullname:''
+        fullname:'',
+        isDisable:true
     }
 
     goBack = () => {
@@ -24,6 +25,11 @@ export default class RegisterNameScreen extends Component
 
     handleFullname = (text) => {
         this.setState({fullname:text})
+        if(text === '')
+            this.setState({isDisable:true})
+        else
+            this.setState({isDisable:false})
+
     }
 
     onRegisterButtonPressed(){
@@ -48,7 +54,8 @@ export default class RegisterNameScreen extends Component
                         style={styles.registerButton}
                         rounded
                         info
-                        onPress={this.onRegisterButtonPressed.bind(this)}>
+                        onPress={this.onRegisterButtonPressed.bind(this)}
+                        disabled={this.state.isDisable}>
                         <Text style={{color:'white',fontWeight:'bold'}}>{'next'.toUpperCase()}</Text>
                 </Button>
             </View>

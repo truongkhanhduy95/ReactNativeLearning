@@ -70,7 +70,7 @@ export default class PhoneCodeScreen extends Component {
                           dialingCode: '+81'
                   }]
               }
-          ])
+          ].filter(item => item.data.some(e => e.name.toLowerCase().includes(this.state.countryName.toLowerCase()))));
       }
       goBack = () => {
         this.props.navigation.dispatch({ type: 'Navigation/BACK' });
@@ -119,27 +119,27 @@ export default class PhoneCodeScreen extends Component {
             <SectionList
                 sections={this.selectionList()}
                 renderItem={({item}) =>
-                <TouchableOpacity onPress={this.GetItem.bind(this, item)}>
-                    <View style={{flex:1, flexDirection: 'row'}}>
+                    <TouchableOpacity onPress={this.GetItem.bind(this, item)}>
+                        <View style={{flex:1, flexDirection: 'row'}}>
+        
+                            <Text 
+                            
+                            style={{
+                                padding: 10,
+                                fontSize: 18,
+                                height: 44,
+                                flex: 4
+                            }}>{item.name}</Text>}
+                    
+                            <Text style={{
+                                padding: 10,
+                                fontSize: 18,
+                                height: 44,
+                                flex: 1,
+                                textAlign: 'right'
+                            }} >{item.dialingCode}</Text>
     
-                        <Text 
-                        
-                        style={{
-                            padding: 10,
-                            fontSize: 18,
-                            height: 44,
-                            flex: 4
-                        }}>{item.name}</Text>}
-                
-                        <Text style={{
-                            padding: 10,
-                            fontSize: 18,
-                            height: 44,
-                            flex: 1,
-                            textAlign: 'right'
-                        }} >{item.dialingCode}</Text>
- 
-                    </View>
+                        </View>
                     </TouchableOpacity>
                 }
                 renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.key}</Text>}

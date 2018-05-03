@@ -18,9 +18,10 @@ export default class Login extends Component {
     }
 
     onLoginButtonPressed() {
-        if(this.canLogin()){
-            console.log('Login pressed');
-            AlertIOS.alert("username: " + this.state.username + "\npassword: "+ this.state.password);
+        if(this.canLogin()) {
+			BackHandler.removeEventListener('hardwareBackPress', this.goBack);
+        	let action = NavigationActions.navigate({ routeName: 'tabBar' })
+        	this.props.navigation.dispatch(action);
         }
     }
 
