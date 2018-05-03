@@ -4,8 +4,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
-  TouchableOpacity
+  TextInput
+  
 } from 'react-native';
 
 import { Button } from 'native-base';
@@ -28,17 +28,12 @@ export default class RegisterNameScreen extends Component
             <View style= {styles.container}>
                 <Text style={styles.header}>What's Your Full Name?</Text>
                 <Text style={styles.body}>Using real name make you more recognizable.</Text>
-                <View style = {styles.phoneInput}>
-                    <TouchableOpacity style={styles.buttonContainer}>
-                        <Text style={{ textAlign: 'center', color: '#007aff', fontSize: 20 }}>VN</Text>
-                    </TouchableOpacity>
-                    <TextInput style={styles.textInput}
-                        placeholder='Enter your full name'
-                        onChangeText={this.handleFullname}
-                        clearButtonMode="always"
-                        keyboardType='default'
-                    />
-                </View>
+                <TextInput style={styles.textInput}
+                    placeholder='Enter your full name'
+                    onChangeText={this.handleFullname}
+                    clearButtonMode="always"
+                    keyboardType='default'
+                />
                 <Button
                         style={styles.registerButton}
                         rounded
@@ -71,10 +66,12 @@ const styles = StyleSheet.create({
       marginBottom: 40,
     },
     textInput: {
-        flex:9,
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+        borderColor: 'gray',
         fontSize: 20,
         height: 50,
-        paddingLeft:5,
+        paddingLeft:10,
         textAlign: 'left'
     },
     phoneInput: {
