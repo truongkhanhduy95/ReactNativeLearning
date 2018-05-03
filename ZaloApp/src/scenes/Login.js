@@ -88,7 +88,9 @@ export default class Login extends Component {
                     <Text style={styles.forgotPassword}>Recover password</Text>
                 </TouchableOpacity>
                 <View style={{ flex: 1, justifyContent: 'flex-end', }}>
-                    <Text style={styles.faq}>FAQ</Text>
+                    <TouchableOpacity>
+                        <Text style={styles.faq}>FAQ</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );
