@@ -12,24 +12,25 @@ import { Button } from 'native-base';
 import  ConfirmDialog  from '../components/ConfirmDialog';
 
 import { NavigationActions } from 'react-navigation';
-import  Header  from '../components/Header';
+import BaseHeaderComponent from '../components/BaseHeaderComponent';
 
-export default class RegisterPhoneScreen extends Component
-{
+
+export default class RegisterPhoneScreen extends BaseHeaderComponent{
     state = {
         phonenumber:'',
         isDisable:true
     }
+
+    getTitle(){
+        return 'Phone number';
+    }
+
     handlePhonenumber = (text) => {
         this.setState({phonenumber:text});
         if(text.length >= 10)
             this.setState({isDisable:false});
         else
             this.setState({isDisable:true});
-    }
-
-    goBack = () => {
-        this.props.navigation.dispatch({ type: 'Navigation/BACK' });
     }
 
     onRegisterButtonPressed(){
@@ -42,14 +43,13 @@ export default class RegisterPhoneScreen extends Component
         let action = NavigationActions.navigate({ routeName: 'phoneCode' })
         this.props.navigation.dispatch(action);
     }
-    render() {
+    renderContent() {
         let confirmMsg = `You will recive an automatic call from Zalo to activate your account. Please confirm your phone number is correct. Continue?`
         
         return (
             <View style= {styles.container}>
-                <Header 
-                    title = 'Phone number'
-                    onBack = {()=>this.goBack()} />
+                <ConfirmDialog ref={'addModal'} title='confirm' message={confirmMsg} phoneNumber={this.state.phonenumber} >
+                </ConfirmDialog>
                 <Text style={styles.header}>What's Your Phone Number?</Text>
                 <Text style={styles.body}>This number could be used to log in and reset your password.</Text>
                 <View style = {styles.phoneInput}>
@@ -62,7 +62,8 @@ export default class RegisterPhoneScreen extends Component
                         keyboardType='phone-pad'
                         clearButtonMode="always"
                         onChangeText={this.handlePhonenumber}
-                        maxLength={10}></TextInput>
+                        maxLength={10}
+                        underlineColorAndroid='transparent'></TextInput>
                 </View>
                  <Button
                         style={styles.registerButton}
@@ -73,9 +74,7 @@ export default class RegisterPhoneScreen extends Component
                         >
                         <Text style={{color:'white',fontWeight:'bold'}}>{'register'.toUpperCase()}</Text>
                 </Button>
-                <ConfirmDialog ref={'addModal'} title='confirm' message={confirmMsg} phoneNumber={this.state.phonenumber} >
-
-                </ConfirmDialog>
+                
             </View>
             
         );
@@ -88,7 +87,8 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderBottomWidth: 1,
         borderColor: 'gray',
-        height: 50
+        height: 55,
+        backgroundColor:'white'
     },
     container: {
       flex: 1,
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
         marginLeft:80,
         marginRight:80,
         alignSelf: 'stretch',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     
     textInput: {
@@ -121,8 +121,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         height: 50,
         paddingLeft:5,
-        textAlign: 'left',
-        backgroundColor:'white',
+        textAlign: 'left'
     },
     buttonContainer: {
         flex:1,

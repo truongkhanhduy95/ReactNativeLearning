@@ -3,6 +3,8 @@ import {View, Image, Text, StyleSheet } from 'react-native'
 import { Button } from 'native-base';
 import { NavigationActions } from 'react-navigation';
 
+import MyStatusBar from '../components/MyStatusBar';
+
 export default class Intro extends Component{
 
     onLoginButtonPressed(){
@@ -20,6 +22,7 @@ export default class Intro extends Component{
         let registerText = 'Register'
         return (
             <View style={styles.container}>
+                <MyStatusBar backgroundColor="white" barStyle="dark-content"/>
                 <View style={styles.imageLayout}>
                     <Image
                         style={styles.imageLogo}
