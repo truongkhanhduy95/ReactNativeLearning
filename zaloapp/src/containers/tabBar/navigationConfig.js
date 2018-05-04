@@ -35,7 +35,7 @@ const tabbarConfiguration = {
         },
         iconStyle: {
             padding:0,
-            margin: 0,       //Padding 0 here
+            margin: 0,
         },
     },
     lazyLoad: true,
