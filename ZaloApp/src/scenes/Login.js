@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, StatusBar, AlertIOS } from 'react-native'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, StatusBar, AlertIOS,Platform } from 'react-native'
 import { Button } from 'native-base';
 import { BackHandler } from 'react-native';
 import { NavigationActions } from 'react-navigation';
@@ -55,27 +55,33 @@ export default class Login extends BaseHeaderComponent {
                 <View style={styles.line} />
                 <View style={styles.rowField}>
                     <TextInput
+                        style={{flex:13}}
                         placeholder={username}
                         placeholderTextColor='gray'
                         onChange={(event)=> this.setState({username: event.nativeEvent.text})}
+                        underlineColorAndroid='transparent'
                     />
                     <Button
+                        style={{flex:2,justifyContent: 'center',}}
                         bordered
                         dark
                         small
                         onPress={null}>
-                        <Text style={{ color: 'gray', fontWeight: 'bold' }}> ABC </Text>
+                        <Text style={{ color: 'gray', fontWeight: 'bold' }}>ABC</Text>
                     </Button>
                 </View>
                 <View style={styles.line} />
                 <View style={styles.rowField}>
                     <TextInput
+                        style={{flex:13}}
                         placeholder={password}
                         placeholderTextColor='gray'
                         secureTextEntry = {!this.state.isShowPassword}
                         onChange={(event)=> this.setState({password: event.nativeEvent.text})}
+                        underlineColorAndroid='transparent'
                     />
                     <TouchableOpacity
+                        style={{flex:2}}
                         onPress = {this.onShowPasswordPressed.bind(this)}>
                         <Text style={{ color: 'gray' }}>{this.state.isShowPassword ? 'HIDE': 'SHOW'}</Text>
                     </TouchableOpacity>
@@ -122,9 +128,9 @@ const styles = StyleSheet.create({
     rowField: {
         backgroundColor: 'white',
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignSelf: 'stretch',
-        padding: 15,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        padding: Platform.OS === 'ios' ? 15 : 5
     },
     keyboardTypeButton: {
         backgroundColor: 'white',
