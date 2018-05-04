@@ -3,9 +3,9 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity, StatusBar, AlertIO
 import { Button } from 'native-base';
 import { BackHandler } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-import  Header  from '../components/Header';
+import BaseHeaderComponent from '../components/BaseHeaderComponent';
 
-export default class Login extends Component {
+export default class Login extends BaseHeaderComponent {
     state = {
         isShowPassword: false,
         username: '',
@@ -14,7 +14,10 @@ export default class Login extends Component {
 
     constructor(props) {
         super(props);
-        // this.goBack=this.goBack.bind(this);
+    }
+
+    getTitle(){
+        return 'Login';
     }
 
     onLoginButtonPressed() {
@@ -33,10 +36,6 @@ export default class Login extends Component {
         return this.state.username && this.state.password;
     }
 
-    goBack = () => {
-        this.props.navigation.dispatch({ type: 'Navigation/BACK' });
-    }
-
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.goBack);
     }
@@ -45,16 +44,13 @@ export default class Login extends Component {
         BackHandler.removeEventListener('hardwareBackPress', this.goBack);
     }
 
-    render() {
+    renderContent() {
         let title = 'You can login with your phone number or username'
         let loginText = 'Login'
         let username = 'Username'
         let password = 'Password'
         return (
             <View style={styles.container}>
-                <Header 
-                    title = 'Login'
-                    onBack = {()=>this.goBack()} />
                 <Text style={styles.title}>{title}</Text>
                 <View style={styles.line} />
                 <View style={styles.rowField}>

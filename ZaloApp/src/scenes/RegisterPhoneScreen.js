@@ -12,24 +12,25 @@ import { Button } from 'native-base';
 import  ConfirmDialog  from '../components/ConfirmDialog';
 
 import { NavigationActions } from 'react-navigation';
-import  Header  from '../components/Header';
+import BaseHeaderComponent from '../components/BaseHeaderComponent';
 
-export default class RegisterPhoneScreen extends Component
-{
+
+export default class RegisterPhoneScreen extends BaseHeaderComponent{
     state = {
         phonenumber:'',
         isDisable:true
     }
+
+    getTitle(){
+        return 'Phone number';
+    }
+
     handlePhonenumber = (text) => {
         this.setState({phonenumber:text});
         if(text.length >= 10)
             this.setState({isDisable:false});
         else
             this.setState({isDisable:true});
-    }
-
-    goBack = () => {
-        this.props.navigation.dispatch({ type: 'Navigation/BACK' });
     }
 
     onRegisterButtonPressed(){
@@ -42,14 +43,11 @@ export default class RegisterPhoneScreen extends Component
         let action = NavigationActions.navigate({ routeName: 'phoneCode' })
         this.props.navigation.dispatch(action);
     }
-    render() {
+    renderContent() {
         let confirmMsg = `You will recive an automatic call from Zalo to activate your account. Please confirm your phone number is correct. Continue?`
         
         return (
             <View style= {styles.container}>
-                <Header 
-                    title = 'Phone number'
-                    onBack = {()=>this.goBack()} />
                 <Text style={styles.header}>What's Your Phone Number?</Text>
                 <Text style={styles.body}>This number could be used to log in and reset your password.</Text>
                 <View style = {styles.phoneInput}>

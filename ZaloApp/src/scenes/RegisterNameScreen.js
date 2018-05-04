@@ -10,18 +10,19 @@ import {
 
 import { NavigationActions } from 'react-navigation';
 import { Button } from 'native-base';
-import  Header  from '../components/Header';
+import BaseHeaderComponent from '../components/BaseHeaderComponent';
 
-export default class RegisterNameScreen extends Component
+export default class RegisterNameScreen extends BaseHeaderComponent
 {
     state = {
         fullname:'',
         isDisable:true
     }
-
-    goBack = () => {
-        this.props.navigation.dispatch({ type: 'Navigation/BACK' });
+    
+    getTitle(){
+        return 'Name';
     }
+
 
     handleFullname = (text) => {
         this.setState({fullname:text})
@@ -36,12 +37,9 @@ export default class RegisterNameScreen extends Component
         let action = NavigationActions.navigate({ routeName: 'registerPhone' })
         this.props.navigation.dispatch(action);
     }
-    render() {
+    renderContent() {
         return (
             <View style= {styles.container}>
-                <Header 
-                    title = 'Name'
-                    onBack = {()=>this.goBack()} />
                 <Text style={styles.header}>What's Your Full Name?</Text>
                 <Text style={styles.body}>Using real name make you more recognizable.</Text>
                 <TextInput style={styles.textInput}

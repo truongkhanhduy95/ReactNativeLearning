@@ -6,6 +6,12 @@ import PhoneCodeScreen from '../../scenes/PhoneCodeScreen';
 import RegisterNameScreen from '../../scenes/RegisterNameScreen';
 import RegisterPhoneScreen from '../../scenes/RegisterPhoneScreen';
 
+// import BaseHeader from '../../components/BaseHeaderComponent';
+
+// const EnhancedLoginScreen = BaseHeader(Login, 'Login');
+// const EnhancedRegisterName = BaseHeader(RegisterNameScreen, 'Name');
+// const EnhancedRegisterPhone = BaseHeader(RegisterPhoneScreen, 'Phone number');
+
 const Router = StackNavigator({
     intro: { screen: Intro },
     login: { screen: Login },
