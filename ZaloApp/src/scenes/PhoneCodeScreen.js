@@ -4,7 +4,8 @@ import {
     StyleSheet, Text, View, Image, Alert, Platform,
     TouchableHighlight,TouchableOpacity,
     RefreshControl, TextInput,
-    SectionList
+    SectionList,
+    StatusBar
 } from 'react-native';
 
 
@@ -84,7 +85,7 @@ export default class PhoneCodeScreen extends Component {
                 justifyContent: 'flex-start',
                 alignItems: 'center',
                 backgroundColor:'#F3F3F3',
-                height: 46
+                height: APPBAR_HEIGHT
             }}>
                 <TouchableOpacity
                       style={{ 
@@ -99,8 +100,8 @@ export default class PhoneCodeScreen extends Component {
                 </TouchableOpacity>
                 <TextInput style={{
                    flex: 9,
-                    height: 32,
-                    margin: 10,
+                    height: 40,
+                    margin: 8,
                     borderBottomWidth: 1,
                     borderColor: '#007aff'
                 }}
@@ -129,7 +130,7 @@ export default class PhoneCodeScreen extends Component {
                                 fontSize: 18,
                                 height: 44,
                                 flex: 4
-                            }}>{item.name}</Text>}
+                            }}>{item.name}</Text>
                     
                             <Text style={{
                                 padding: 10,
@@ -148,11 +149,12 @@ export default class PhoneCodeScreen extends Component {
           </View>);
     }
 }
-
+const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
+const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 const styles = StyleSheet.create({
   container: {
    flex: 1,
-   paddingTop: 22
+   paddingTop: STATUSBAR_HEIGHT
   },
   sectionHeader: {
     paddingTop: 2,

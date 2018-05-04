@@ -47,6 +47,7 @@ export default class RegisterNameScreen extends BaseHeaderComponent
                     onChangeText={this.handleFullname}
                     clearButtonMode="always"
                     keyboardType='default'
+                    underlineColorAndroid='transparent'
                 />
                 <Button
                         style={styles.registerButton}

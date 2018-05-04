@@ -48,6 +48,8 @@ export default class RegisterPhoneScreen extends BaseHeaderComponent{
         
         return (
             <View style= {styles.container}>
+                <ConfirmDialog ref={'addModal'} title='confirm' message={confirmMsg} phoneNumber={this.state.phonenumber} >
+                </ConfirmDialog>
                 <Text style={styles.header}>What's Your Phone Number?</Text>
                 <Text style={styles.body}>This number could be used to log in and reset your password.</Text>
                 <View style = {styles.phoneInput}>
@@ -60,7 +62,8 @@ export default class RegisterPhoneScreen extends BaseHeaderComponent{
                         keyboardType='phone-pad'
                         clearButtonMode="always"
                         onChangeText={this.handlePhonenumber}
-                        maxLength={10}></TextInput>
+                        maxLength={10}
+                        underlineColorAndroid='transparent'></TextInput>
                 </View>
                  <Button
                         style={styles.registerButton}
@@ -71,9 +74,7 @@ export default class RegisterPhoneScreen extends BaseHeaderComponent{
                         >
                         <Text style={{color:'white',fontWeight:'bold'}}>{'register'.toUpperCase()}</Text>
                 </Button>
-                <ConfirmDialog ref={'addModal'} title='confirm' message={confirmMsg} phoneNumber={this.state.phonenumber} >
-
-                </ConfirmDialog>
+                
             </View>
             
         );
@@ -86,7 +87,8 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderBottomWidth: 1,
         borderColor: 'gray',
-        height: 50
+        height: 55,
+        backgroundColor:'white'
     },
     container: {
       flex: 1,
@@ -111,7 +113,7 @@ const styles = StyleSheet.create({
         marginLeft:80,
         marginRight:80,
         alignSelf: 'stretch',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     
     textInput: {
@@ -119,8 +121,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         height: 50,
         paddingLeft:5,
-        textAlign: 'left',
-        backgroundColor:'white',
+        textAlign: 'left'
     },
     buttonContainer: {
         flex:1,
