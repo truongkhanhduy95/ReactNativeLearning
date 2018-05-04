@@ -11,9 +11,9 @@ import { Container, Content, Header, List, ListItem, Thumbnail, Left, Right, Bod
 export default class Dummy extends Component {
     static navigationOptions = {
         title: "Aniamtion",
-        tabBarIcon: () => (
-            <Icon style={styles.icon} name='beer' />
-        )
+        // tabBarIcon: () => (
+        //     <Icon style={styles.icon} name='beer' />
+        // )
     }
 
     render() {

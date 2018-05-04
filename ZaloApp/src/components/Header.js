@@ -7,6 +7,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 
 import MyStatusBar from './MyStatusBar';
+import Icon from 'react-native-vector-icons/Ionicons';
 export default class Header extends Component {
 
     constructor(props) {
@@ -27,12 +28,7 @@ export default class Header extends Component {
                     style = { styles.container}>
                      <MyStatusBar backgroundColor="#006FFD" barStyle="light-content"/>
                     <View style={styles.layout}>
-
-                        <TouchableOpacity
-                            onPress = {this.props.onBack}>
-                            <Image style={styles.back}
-                            source={require('../../public/images/back.png')}/>
-                        </TouchableOpacity>
+                        <Icon.Button onPress = {this.props.onBack} backgroundColor='transparent' size={26} color='#fff' name='ios-arrow-back'/>
                         <Text style={styles.title}>
                             {this.props.title}
                         </Text>

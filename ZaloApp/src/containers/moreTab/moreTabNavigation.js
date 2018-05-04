@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text } from 'react-native'
-import { Container, Icon } from 'native-base'
+import Icon from 'react-native-vector-icons/Ionicons';
 import MessageTab from './navigationConfig';
 import { connect } from 'react-redux'
 import { addNavigationHelpers } from 'react-navigation'
 
 const mapStateToProps = (state) => {
     return {
-        navigationState: state.tabMessage,
+        navigationState: state.tabMore,
     }
 }
 
-class MessageTabNavigation extends Component {
+class MoreTabNavigation extends Component {
     static navigationOptions = {
-        title: "Tin nhắn",
-        // tabBarIcon: () => (
-        //     <Icon style={styles.icon} name='home' />
-        // )
+        title: "Thêm",
+        tabBarIcon: () => (
+            <Icon size={30} name='ios-more-outline' />
+        )
     }
 
     render() {
@@ -32,7 +32,7 @@ class MessageTabNavigation extends Component {
     }
 };
 
-export default connect(mapStateToProps)(MessageTabNavigation)
+export default connect(mapStateToProps)(MoreTabNavigation)
 
 const styles = StyleSheet.create({
     icon: {
