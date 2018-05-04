@@ -65,7 +65,6 @@ export default class Login extends BaseHeaderComponent {
                         style={{flex:2,justifyContent: 'center',}}
                         bordered
                         dark
-                        small
                         onPress={null}>
                         <Text style={{ color: 'gray', fontWeight: 'bold' }}>ABC</Text>
                     </Button>
@@ -89,6 +88,7 @@ export default class Login extends BaseHeaderComponent {
                 <View style={styles.line} />
                 <Button
                     style={styles.loginButton}
+                    full
                     rounded
                     info = {!this.canLogin()}
                     onPress={this.onLoginButtonPressed.bind(this)}>

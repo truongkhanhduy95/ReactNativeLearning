@@ -67,6 +67,7 @@ export default class RegisterPhoneScreen extends BaseHeaderComponent{
                 </View>
                  <Button
                         style={styles.registerButton}
+                        full
                         rounded
                         info
                         onPress={this.onRegisterButtonPressed.bind(this)}

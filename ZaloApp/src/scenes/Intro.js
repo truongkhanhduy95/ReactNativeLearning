@@ -31,12 +31,14 @@ export default class Intro extends Component{
                 <View style={styles.buttonLayout}>
                     <Button
                         style={styles.loginButton}
+                        full
                         rounded
                         onPress={this.onLoginButtonPressed.bind(this)}>
                         <Text style={{color:'white',fontWeight:'bold'}}>{loginText.toUpperCase()}</Text>
                     </Button>
                     <Button
                         style={styles.registerButton}
+                        full
                         rounded
                         bordered
                         dark
@@ -83,6 +85,7 @@ const styles = StyleSheet.create({
         flex:1
     },
     loginButton:{
+
         marginLeft:80,
         marginRight:80,
         alignSelf: 'stretch',
