@@ -51,6 +51,7 @@ export default class RegisterNameScreen extends BaseHeaderComponent
                 />
                 <Button
                         style={styles.registerButton}
+                        full
                         rounded
                         info
                         onPress={this.onRegisterButtonPressed.bind(this)}
