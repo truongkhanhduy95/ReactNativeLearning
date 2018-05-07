@@ -4,12 +4,16 @@ import { Button } from 'native-base';
 import { BackHandler } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import BaseHeaderComponent from '../components/BaseHeaderComponent';
+import { userActions } from '../actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export default class Login extends BaseHeaderComponent {
+class Login extends BaseHeaderComponent {
     state = {
         isShowPassword: false,
         username: '',
-        password: ''
+        password: '',
+        isLogged: false,
     }
 
     constructor(props) {
@@ -22,9 +26,8 @@ export default class Login extends BaseHeaderComponent {
 
     onLoginButtonPressed() {
         if(this.canLogin()) {
-			BackHandler.removeEventListener('hardwareBackPress', this.goBack);
-        	let action = NavigationActions.navigate({ routeName: 'tabBar' })
-        	this.props.navigation.dispatch(action);
+			// BackHandler.removeEventListener('hardwareBackPress', this.goBack);
+            this.props.login(this.state.username, this.state.password);
         }
     }
 
@@ -36,6 +39,14 @@ export default class Login extends BaseHeaderComponent {
         return this.state.username && this.state.password;
     }
 
+    componentDidUpdate(){
+        if (this.props.isLogged){
+            let action = NavigationActions.navigate({ routeName: 'tabBar' });
+            this.props.navigation.dispatch(action);
+		}
+
+    }
+
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.goBack);
     }
@@ -45,10 +56,10 @@ export default class Login extends BaseHeaderComponent {
     }
 
     renderContent() {
-        let title = 'You can login with your phone number or username'
-        let loginText = 'Login'
-        let username = 'Username'
-        let password = 'Password'
+        let title = 'You can login with your phone number or username';
+        let loginText = 'Login';
+        let username = 'Username';
+        let password = 'Password';
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>{title}</Text>
@@ -106,6 +117,17 @@ export default class Login extends BaseHeaderComponent {
         );
     }
 }
+
+const mapStateToProps = state => ({
+    isLogged: state.login.isLogged
+});
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators( userActions , dispatch);
+}  
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
 
 const styles = StyleSheet.create({
     container: {
