@@ -11,8 +11,8 @@ import { bindActionCreators } from 'redux';
 class Login extends BaseHeaderComponent {
     state = {
         isShowPassword: false,
-        username: '',
-        password: '',
+        username: 'Test',
+        password: '1234',
         isLogged: false,
     }
 
@@ -68,6 +68,7 @@ class Login extends BaseHeaderComponent {
                     <TextInput
                         style={{flex:13}}
                         placeholder={username}
+                        value={this.state.username}
                         placeholderTextColor='gray'
                         onChange={(event)=> this.setState({username: event.nativeEvent.text})}
                         underlineColorAndroid='transparent'
@@ -85,6 +86,7 @@ class Login extends BaseHeaderComponent {
                     <TextInput
                         style={{flex:13}}
                         placeholder={password}
+                        value={this.state.password}
                         placeholderTextColor='gray'
                         secureTextEntry = {!this.state.isShowPassword}
                         onChange={(event)=> this.setState({password: event.nativeEvent.text})}
