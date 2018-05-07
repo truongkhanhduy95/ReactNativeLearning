@@ -1,13 +1,21 @@
 
 export const userService = {
-    login,
+    login: login,
 }
 
 function login(username, password) {
-    setTimeout(() => {
-    if(username == 'Test' && password == '123')
-        return username;
-    else
-        return Error('wrong');
-    }, 2000);
-};
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (username == 'Test' && password == '1234')
+                resolve({
+                    username: 'Test',
+                    age: 11,
+                    sex: 'Male',
+                });
+            else
+                reject('Wrong username or password');
+        }, 2000)
+    });
+
+    
+}
