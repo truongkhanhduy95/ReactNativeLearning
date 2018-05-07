@@ -5,7 +5,8 @@ import {
   Text,
   View,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  BackHandler
 } from 'react-native';
 
 import { Button } from 'native-base';
@@ -13,14 +14,20 @@ import  ConfirmDialog  from '../components/ConfirmDialog';
 
 import { NavigationActions } from 'react-navigation';
 import BaseHeaderComponent from '../components/BaseHeaderComponent';
+import { userActions } from '../actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 
-export default class RegisterPhoneScreen extends BaseHeaderComponent{
+class RegisterPhoneScreen extends BaseHeaderComponent{
     state = {
         phonenumber:'',
-        isDisable:true
+        isDisable:true,
+        isRegistered:false
     }
-
+    constructor(props) {
+        super(props);
+    }
     getTitle(){
         return 'Phone number';
     }
@@ -34,15 +41,31 @@ export default class RegisterPhoneScreen extends BaseHeaderComponent{
     }
 
     onRegisterButtonPressed(){
-        if(this.state.phonenumber.length >= 10)
-        {
-            this.refs.addModal.showAddModal();
-        }
+        console.log(this.state.phonenumber);
+        this.props.register(this.state.phonenumber);
+        console.log(this.props.isRegistered);
     }
     onSelectPhoneCode(){
         let action = NavigationActions.navigate({ routeName: 'phoneCode' })
         this.props.navigation.dispatch(action);
     }
+
+    componentDidUpdate(){
+        if (this.props.isRegistered){
+            let action = NavigationActions.navigate({ routeName: 'tabBar' });
+            this.props.navigation.dispatch(action);
+		}
+
+    }
+
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.goBack);
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.goBack);
+    }
+
     renderContent() {
         let confirmMsg = `You will recive an automatic call from Zalo to activate your account. Please confirm your phone number is correct. Continue?`
         
@@ -80,7 +103,17 @@ export default class RegisterPhoneScreen extends BaseHeaderComponent{
             
         );
     }
+
 }
+const mapStateToProps = state => ({
+    isRegistered: state.register.isRegistered
+});
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators( userActions , dispatch);
+}  
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterPhoneScreen);
 
 const styles = StyleSheet.create({
     phoneInput: {
