@@ -1,10 +1,10 @@
-import {userConstants} from '../constants';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, StatusBar, AlertIOS,Platform } from 'react-native'
+import { userConstants } from '../constants';
 
 const initialState = {
     userData: {},
     isLoading: false,
     isLogged: false,
+    error:'',
 };
 
 export default function (state = initialState, action) {
@@ -18,6 +18,7 @@ export default function (state = initialState, action) {
     case userConstants.LOGIN_SUCCESS:
         return {
             ...state,
+            userData : action.user,
             isLoading :false,
             isLogged: true,
         };
@@ -26,6 +27,7 @@ export default function (state = initialState, action) {
         return {
             ...state,
             isLoading :false,
+            error: action.error,
         };
 
     default:
