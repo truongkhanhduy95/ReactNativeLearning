@@ -1,39 +1,52 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, StatusBar, AlertIOS } from 'react-native'
+import { View, ActivityIndicator, Text, TextInput, StyleSheet, TouchableOpacity, StatusBar, AlertIOS, Platform } from 'react-native'
 import { Button } from 'native-base';
 import { BackHandler } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import BaseHeaderComponent from '../components/BaseHeaderComponent';
+import { userActions } from '../actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export default class Login extends BaseHeaderComponent {
+class Login extends BaseHeaderComponent {
     state = {
         isShowPassword: false,
-        username: '',
-        password: ''
+        username: 'Test',
+        password: '1234',
     }
 
     constructor(props) {
         super(props);
     }
 
-    getTitle(){
+    getTitle() {
         return 'Login';
     }
 
     onLoginButtonPressed() {
-        if(this.canLogin()) {
-			BackHandler.removeEventListener('hardwareBackPress', this.goBack);
-        	let action = NavigationActions.navigate({ routeName: 'tabBar' })
-        	this.props.navigation.dispatch(action);
+        if (this.canLogin()) {
+            // BackHandler.removeEventListener('hardwareBackPress', this.goBack);
+            this.props.login(this.state.username, this.state.password);
         }
     }
 
-    onShowPasswordPressed(){
+    onShowPasswordPressed() {
         this.setState({ isShowPassword: !this.state.isShowPassword })
     }
 
-    canLogin(){
+    canLogin() {
         return this.state.username && this.state.password;
+    }
+
+    componentDidUpdate() {
+        if (this.props.isLogged) {
+            let action = NavigationActions.navigate({ routeName: 'tabBar' });
+            this.props.navigation.dispatch(action);
+        }
+
+        if (this.props.error) {
+            AlertIOS.alert(this.props.error);
+        }
     }
 
     componentDidMount() {
@@ -45,46 +58,61 @@ export default class Login extends BaseHeaderComponent {
     }
 
     renderContent() {
-        let title = 'You can login with your phone number or username'
-        let loginText = 'Login'
-        let username = 'Username'
-        let password = 'Password'
+        let title = 'You can login with your phone number or username';
+        let loginText = 'Login';
+        let username = 'Username';
+        let password = 'Password';
+        if(this.props.isLoading)
+        return (
+            <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+                <ActivityIndicator size="large" color="#25b8f7" />
+            </View>
+        )
+        else 
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>{title}</Text>
                 <View style={styles.line} />
                 <View style={styles.rowField}>
                     <TextInput
+                        style={{ flex: 13 }}
                         placeholder={username}
+                        value={this.state.username}
                         placeholderTextColor='gray'
-                        onChange={(event)=> this.setState({username: event.nativeEvent.text})}
+                        onChange={(event) => this.setState({ username: event.nativeEvent.text })}
+                        underlineColorAndroid='transparent'
                     />
                     <Button
+                        style={{ flex: 2, justifyContent: 'center', }}
                         bordered
                         dark
-                        small
                         onPress={null}>
-                        <Text style={{ color: 'gray', fontWeight: 'bold' }}> ABC </Text>
+                        <Text style={{ color: 'gray', fontWeight: 'bold' }}>ABC</Text>
                     </Button>
                 </View>
                 <View style={styles.line} />
                 <View style={styles.rowField}>
                     <TextInput
+                        style={{ flex: 13 }}
                         placeholder={password}
+                        value={this.state.password}
                         placeholderTextColor='gray'
-                        secureTextEntry = {!this.state.isShowPassword}
-                        onChange={(event)=> this.setState({password: event.nativeEvent.text})}
+                        secureTextEntry={!this.state.isShowPassword}
+                        onChange={(event) => this.setState({ password: event.nativeEvent.text })}
+                        underlineColorAndroid='transparent'
                     />
                     <TouchableOpacity
-                        onPress = {this.onShowPasswordPressed.bind(this)}>
-                        <Text style={{ color: 'gray' }}>{this.state.isShowPassword ? 'HIDE': 'SHOW'}</Text>
+                        style={{ flex: 2 }}
+                        onPress={this.onShowPasswordPressed.bind(this)}>
+                        <Text style={{ color: 'gray' }}>{this.state.isShowPassword ? 'HIDE' : 'SHOW'}</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.line} />
                 <Button
                     style={styles.loginButton}
+                    full
                     rounded
-                    info = {!this.canLogin()}
+                    info={!this.canLogin()}
                     onPress={this.onLoginButtonPressed.bind(this)}>
                     <Text style={{ color: 'white', fontWeight: 'bold' }}>{loginText.toUpperCase()}</Text>
                 </Button>
@@ -100,6 +128,19 @@ export default class Login extends BaseHeaderComponent {
         );
     }
 }
+
+const mapStateToProps = state => ({
+    isLogged: state.login.isLogged,
+    error: state.login.error,
+    isLoading: state.login.isLoading,
+});
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(userActions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
 
 const styles = StyleSheet.create({
     container: {
@@ -122,9 +163,9 @@ const styles = StyleSheet.create({
     rowField: {
         backgroundColor: 'white',
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignSelf: 'stretch',
-        padding: 15,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        padding: Platform.OS === 'ios' ? 15 : 5
     },
     keyboardTypeButton: {
         backgroundColor: 'white',

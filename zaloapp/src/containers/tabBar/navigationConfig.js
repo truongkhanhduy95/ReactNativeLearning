@@ -3,6 +3,7 @@ import React from 'react';
 import Login from '../../scenes/Login';
 import Dummy from '../../scenes/dummyScreen';
 import MessageTabNavigation from '../messageTab/messageTabNavigation';
+import MoreTabNavigation from '../moreTab/moreTabNavigation';
 
 const routeConfiguration = {
     messageNavigation: {
@@ -14,6 +15,9 @@ const routeConfiguration = {
     CustomerNaviagtion: {
         screen: Dummy,
     },
+    moreNavigation: {
+        screen: MoreTabNavigation,
+    },
 }
 
 const tabbarConfiguration = {
@@ -22,9 +26,17 @@ const tabbarConfiguration = {
         upperCaseLabel: false,
         showIcon: true,
         showLabel: true,
+        style:{
+            height: 50
+        },
         labelStyle: {
             fontSize: 10,
-        }
+            marginTop: 0,
+        },
+        iconStyle: {
+            padding:0,
+            margin: 0,
+        },
     },
     lazyLoad: true,
 }
