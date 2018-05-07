@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons';
-import MessageTab from './navigationConfig';
+import MoreTab from './navigationConfig';
 import { connect } from 'react-redux'
 import { addNavigationHelpers } from 'react-navigation'
 
@@ -22,7 +22,7 @@ class MoreTabNavigation extends Component {
     render() {
         const { dispatch, navigationState } = this.props
         return (
-            <MessageTab navigation={
+            <MoreTab navigation={
                 addNavigationHelpers({
                     dispatch: dispatch,
                     state: navigationState,
