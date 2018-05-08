@@ -5,6 +5,7 @@ import TabBarNavigation from '../tabBar/tabBarNavigation';
 import PhoneCodeScreen from '../../scenes/PhoneCodeScreen';
 import RegisterNameScreen from '../../scenes/RegisterNameScreen';
 import RegisterPhoneScreen from '../../scenes/RegisterPhoneScreen';
+import NotificationComponent from '../../components/notification/notificationComponent';
 
 // import BaseHeader from '../../components/BaseHeaderComponent';
 
@@ -18,7 +19,8 @@ const Router = StackNavigator({
     tabBar: { screen: TabBarNavigation },
     phoneCode: { screen: PhoneCodeScreen},
     registerName: { screen: RegisterNameScreen},
-    registerPhone: { screen: RegisterPhoneScreen}
+    registerPhone: { screen: RegisterPhoneScreen},
+    notification: { screen: NotificationComponent }
 },
     {
         headerMode: 'none',

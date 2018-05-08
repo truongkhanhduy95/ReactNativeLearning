@@ -40,7 +40,7 @@ class Login extends BaseHeaderComponent {
 
     componentDidUpdate() {
         if (this.props.isLogged) {
-            let action = NavigationActions.navigate({ routeName: 'tabBar' });
+            let action = NavigationActions.navigate({ routeName: 'notification' });
             this.props.navigation.dispatch(action);
         }
 

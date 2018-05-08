@@ -13,15 +13,12 @@ export default class Header extends Component {
     constructor(props) {
         super(props);
     }
-    
-    goBack = () => {
-        this.props.navigation.dispatch({ type: 'Navigation/BACK' });
-    }
-    
 
     render() {
+        const emptyButton = <TouchableOpacity><View style={styles.back}/></TouchableOpacity>;
+        const settingButton = <Icon.Button onPress = {this.props.onSettingsClicked} backgroundColor='transparent' size={26} color='#fff' name='ios-settings-outline'/>;
+
         return (
-           
             <LinearGradient 
                     start={{x: 1.0, y: 0.0}} end={{x: 0, y: 1}}
                     colors={['#25b8f7','#006FFD']}
@@ -32,10 +29,7 @@ export default class Header extends Component {
                         <Text style={styles.title}>
                             {this.props.title}
                         </Text>
-                        <TouchableOpacity>
-                            <View style={styles.back}
-                            />
-                        </TouchableOpacity>
+                        {this.props.showSettings ? settingButton : emptyButton}
                     </View> 
             </LinearGradient>
         )
