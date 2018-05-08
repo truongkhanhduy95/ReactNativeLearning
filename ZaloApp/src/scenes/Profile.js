@@ -5,80 +5,16 @@ import { BackHandler } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import BaseComponent from '../components/BaseComponent';
 import MyStatusBar from '../components/MyStatusBar';
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    listView: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-    },
-    row: {
-      padding: 2,
-      paddingLeft: 12,
-    },
-    content: {
-      marginLeft: 40,
-      marginRight:20
-    },
-    timeline: {
-      position: 'absolute',
-      top: 0,
-      bottom: 0,
-      left: 0,
-      width: 40,
-      justifyContent: 'flex-start', // center the dot
-      alignItems: 'center',
-    },
-    line: {
-      position: 'absolute',
-      top: 0,
-      width: 4,
-      bottom: 0,
-      alignItems: 'center',
-    },
-    topLine: {
-      flex: 1,
-      width: 1,
-      backgroundColor: 'black',
-    },
-    bottomLine: {
-      flex: 1,
-      width: 1,
-      backgroundColor: 'black',
-    },
-    hiddenLine: {
-      width: 0,
-    },
-    bigDot: {
-      width: 32,
-      height: 32,
-      borderRadius: 30,
-      backgroundColor: 'black',
-    },
-    dot: {
-        marginTop:8,
-        width: 8,
-        height: 8,
-        borderRadius: 4,
-        backgroundColor: 'black',
-      },
-    eventDate: {
-        fontSize: 18,
-        color: 'red',
-        fontWeight: 'bold'
-    },
-  });
+import ImagePicker from 'react-native-image-picker';
+
 
 export default class Profile extends BaseComponent {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            avatarSource: null,
+        };
+
         this.renderRow = this.renderRow.bind(this);
     
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -91,7 +27,42 @@ export default class Profile extends BaseComponent {
             {Title:'Birthday 6/5', Content:'Suspendisse potenti. Proin varius risus ac venenatis elementum. Morbi fringilla ante et nibh accumsan, ultricies tempor est porta. Nunc molestie neque a efficitur posuere. Nunc egestas, massa vitae hendrerit feugiat, ligula sem ullamcorper ante, quis ultricies quam turpis ac lectus. Praesent luctus, sapien imperdiet sagittis iaculis, nibh lacus convallis velit, sed placerat enim justo ornare tortor. Phasellus sed dui id odio lobortis imperdiet. Duis sollicitudin tellus sed eros commodo ultrices. Donec auctor nunc id quam suscipit, tempus tincidunt elit placerat. Sed nec odio vel ligula maximus varius. Nullam vulputate augue non gravida lacinia. Nam ac lobortis libero, id sollicitudin nulla.'}]),
         };
       }
+      
+      selectPhotoTapped() {
+        const options = {
+          quality: 1.0,
+          maxWidth: 500,
+          maxHeight: 500,
+          storageOptions: {
+            skipBackup: true
+          }
+        };
     
+        ImagePicker.showImagePicker(options, (response) => {
+          console.log('Response = ', response);
+    
+          if (response.didCancel) {
+            console.log('User cancelled photo picker');
+          }
+          else if (response.error) {
+            console.log('ImagePicker Error: ', response.error);
+          }
+          else if (response.customButton) {
+            console.log('User tapped custom button: ', response.customButton);
+          }
+          else {
+            let source = { uri: response.uri };
+    
+            // You can also display the image using data:
+            // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+    
+            this.setState({
+              avatarSource: source
+            });
+          }
+        });
+      }
+            
       renderRow(rowData, section, row) {
         const total = this.state.dataSource.getRowCount();
         const topLineStyle =  styles.topLine;
@@ -184,7 +155,7 @@ export default class Profile extends BaseComponent {
                     </TouchableOpacity>
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'transparent', margin: 15 }}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
                         <Image style={{ borderRadius: 30, margin:5, width: 60, height: 60 }} 
                         source={{ uri: 'https://reactjs.org/logo-og.png' }} />
                     </TouchableOpacity>
@@ -201,4 +172,73 @@ export default class Profile extends BaseComponent {
         </View>);
     }
 }
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    listView: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+    },
+    row: {
+      padding: 2,
+      paddingLeft: 12,
+    },
+    content: {
+      marginLeft: 40,
+      marginRight:20
+    },
+    timeline: {
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      left: 0,
+      width: 40,
+      justifyContent: 'flex-start', // center the dot
+      alignItems: 'center',
+    },
+    line: {
+      position: 'absolute',
+      top: 0,
+      width: 4,
+      bottom: 0,
+      alignItems: 'center',
+    },
+    topLine: {
+      flex: 1,
+      width: 1,
+      backgroundColor: 'black',
+    },
+    bottomLine: {
+      flex: 1,
+      width: 1,
+      backgroundColor: 'black',
+    },
+    hiddenLine: {
+      width: 0,
+    },
+    bigDot: {
+      width: 32,
+      height: 32,
+      borderRadius: 30,
+      backgroundColor: 'black',
+    },
+    dot: {
+        marginTop:8,
+        width: 8,
+        height: 8,
+        borderRadius: 4,
+        backgroundColor: 'black',
+      },
+    eventDate: {
+        fontSize: 18,
+        color: 'red',
+        fontWeight: 'bold'
+    },
+  });
 
