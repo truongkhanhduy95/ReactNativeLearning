@@ -4,10 +4,11 @@ import Login from '../../scenes/Login';
 import Dummy from '../../scenes/dummyScreen';
 import MessageTabNavigation from '../messageTab/messageTabNavigation';
 import MoreTabNavigation from '../moreTab/moreTabNavigation';
+import NotificationComponent from '../../components/notification/notificationComponent';
 
 const routeConfiguration = {
     messageNavigation: {
-        screen: MessageTabNavigation,
+        screen: NotificationComponent,
     },
     AnimationNavigation: {
         screen: Dummy, 
