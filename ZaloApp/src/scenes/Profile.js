@@ -74,10 +74,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
   });
+
 export default class Profile extends BaseComponent {
-    constructor() {
-        super();
-    
+    constructor(props) {
+        super(props);
+        this.state = {};
         this.renderRow = this.renderRow.bind(this);
     
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -183,9 +184,10 @@ export default class Profile extends BaseComponent {
                     </TouchableOpacity>
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'transparent', margin: 15 }}>
-                    
-                    <Image style={{ borderRadius: 30, margin:5, width: 60, height: 60 }} 
-                    source={{ uri: 'https://reactjs.org/logo-og.png' }} />
+                    <TouchableOpacity>
+                        <Image style={{ borderRadius: 30, margin:5, width: 60, height: 60 }} 
+                        source={{ uri: 'https://reactjs.org/logo-og.png' }} />
+                    </TouchableOpacity>
                     <View style={{ flexDirection: 'column' }}>
                         <Text style={{ flex: 1, textAlignVertical: 'center', fontSize:24, color:'white', margin:10 }}>Andy Ngo</Text>
                     </View>
