@@ -33,6 +33,10 @@ export default class BaseHeaderComponent extends BaseComponent{
         super(props);
     }
 
+    goBack(){
+        this.props.navigation.dispatch({ type: 'Navigation/BACK' });
+    }
+
     getTitle(){
     }
 
