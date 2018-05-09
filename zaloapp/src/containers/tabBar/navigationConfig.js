@@ -5,13 +5,14 @@ import Dummy from '../../scenes/dummyScreen';
 import MessageTabNavigation from '../messageTab/messageTabNavigation';
 import MoreTabNavigation from '../moreTab/moreTabNavigation';
 import NotificationComponent from '../../components/notification/notificationComponent';
+import ContactTabNavigation from '../contactTab/contactTabNavigation';
 
 const routeConfiguration = {
     messageNavigation: {
         screen: NotificationComponent,
     },
     AnimationNavigation: {
-        screen: Dummy, 
+        screen: ContactTabNavigation, 
     },
     CustomerNaviagtion: {
         screen: Dummy,
