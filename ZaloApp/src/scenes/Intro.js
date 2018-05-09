@@ -2,7 +2,6 @@ import React,{Component} from 'react'
 import {View, Image, Text, StyleSheet } from 'react-native'
 import { Button } from 'native-base';
 import { NavigationActions } from 'react-navigation';
-
 import MyStatusBar from '../components/MyStatusBar';
 
 export default class Intro extends Component{

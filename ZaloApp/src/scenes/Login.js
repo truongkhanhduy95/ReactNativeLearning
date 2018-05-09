@@ -25,7 +25,7 @@ class Login extends BaseHeaderComponent {
 
     onLoginButtonPressed() {
         if (this.canLogin()) {
-            // BackHandler.removeEventListener('hardwareBackPress', this.goBack);
+            BackHandler.removeEventListener('hardwareBackPress', this.goBack);
             this.props.login(this.state.username, this.state.password);
         }
     }
@@ -49,83 +49,75 @@ class Login extends BaseHeaderComponent {
         }
     }
 
-    componentDidMount() {
-        BackHandler.addEventListener('hardwareBackPress', this.goBack);
-    }
-
-    componentWillUnmount() {
-        BackHandler.removeEventListener('hardwareBackPress', this.goBack);
-    }
-
     renderContent() {
         let title = 'You can login with your phone number or username';
         let loginText = 'Login';
         let username = 'Username';
         let password = 'Password';
-        if(this.props.isLoading)
-        return (
-            <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
-                <ActivityIndicator size="large" color="#25b8f7" />
-            </View>
-        )
-        else 
-        return (
-            <View style={styles.container}>
-                <Text style={styles.title}>{title}</Text>
-                <View style={styles.line} />
-                <View style={styles.rowField}>
-                    <TextInput
-                        style={{ flex: 13 }}
-                        placeholder={username}
-                        value={this.state.username}
-                        placeholderTextColor='gray'
-                        onChange={(event) => this.setState({ username: event.nativeEvent.text })}
-                        underlineColorAndroid='transparent'
-                    />
+        if (this.props.isLoading)
+            return (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <ActivityIndicator size="large" color="#25b8f7" />
+                </View>
+            )
+        else
+            return (
+                <View style={styles.container}>
+                    <Text style={styles.title}>{title}</Text>
+                    <View style={styles.line} />
+                    <View style={styles.rowField}>
+                        <TextInput
+                            style={{ flex: 13 }}
+                            placeholder={username}
+                            value={this.state.username}
+                            placeholderTextColor='gray'
+                            onChange={(event) => this.setState({ username: event.nativeEvent.text })}
+                            underlineColorAndroid='transparent'
+                        />
+                        <Button
+                            style={{ flex: 2, justifyContent: 'center', }}
+                            bordered
+                            dark
+                            onPress={null}>
+                            <Text style={{ color: 'gray', fontWeight: 'bold' }}>ABC</Text>
+                        </Button>
+                    </View>
+                    <View style={styles.line} />
+                    <View style={styles.rowField}>
+                        <TextInput
+                            style={{ flex: 13 }}
+                            placeholder={password}
+                            value={this.state.password}
+                            placeholderTextColor='gray'
+                            secureTextEntry={!this.state.isShowPassword}
+                            onChange={(event) => this.setState({ password: event.nativeEvent.text })}
+                            underlineColorAndroid='transparent'
+                        />
+                        <TouchableOpacity
+                            style={{ flex: 2 }}
+                            onPress={this.onShowPasswordPressed.bind(this)}>
+                            <Text style={{ color: 'gray' }}>{this.state.isShowPassword ? 'HIDE' : 'SHOW'}</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.line} />
                     <Button
-                        style={{ flex: 2, justifyContent: 'center', }}
-                        bordered
-                        dark
-                        onPress={null}>
-                        <Text style={{ color: 'gray', fontWeight: 'bold' }}>ABC</Text>
+                        style={styles.loginButton}
+                        full
+                        rounded
+                        info={!this.canLogin()}
+                        onPress={this.onLoginButtonPressed.bind(this)}>
+                        <Text style={{ color: 'white', fontWeight: 'bold' }}>{loginText.toUpperCase()}</Text>
                     </Button>
-                </View>
-                <View style={styles.line} />
-                <View style={styles.rowField}>
-                    <TextInput
-                        style={{ flex: 13 }}
-                        placeholder={password}
-                        value={this.state.password}
-                        placeholderTextColor='gray'
-                        secureTextEntry={!this.state.isShowPassword}
-                        onChange={(event) => this.setState({ password: event.nativeEvent.text })}
-                        underlineColorAndroid='transparent'
-                    />
-                    <TouchableOpacity
-                        style={{ flex: 2 }}
-                        onPress={this.onShowPasswordPressed.bind(this)}>
-                        <Text style={{ color: 'gray' }}>{this.state.isShowPassword ? 'HIDE' : 'SHOW'}</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.line} />
-                <Button
-                    style={styles.loginButton}
-                    full
-                    rounded
-                    info={!this.canLogin()}
-                    onPress={this.onLoginButtonPressed.bind(this)}>
-                    <Text style={{ color: 'white', fontWeight: 'bold' }}>{loginText.toUpperCase()}</Text>
-                </Button>
-                <TouchableOpacity>
-                    <Text style={styles.forgotPassword}>Recover password</Text>
-                </TouchableOpacity>
-                <View style={{ flex: 1, justifyContent: 'flex-end', }}>
                     <TouchableOpacity>
-                        <Text style={styles.faq}>FAQ</Text>
+                        <Text style={styles.forgotPassword}>Recover password</Text>
                     </TouchableOpacity>
+                    <View style={{ flex: 1, justifyContent: 'flex-end', }}>
+                        <TouchableOpacity>
+                            <Text style={styles.faq}>FAQ</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
-        );
+            );
     }
 }
 
