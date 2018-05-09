@@ -3,6 +3,7 @@ import Router from '../containers/navigation/navigationConfig';
 import { tabBarReducer } from '../containers/tabBar/navigationConfig';
 import MessageTab from "../containers/messageTab/navigationConfig";
 import MoreTab from "../containers/moreTab/navigationConfig";
+import ContactTab from '../containers/contactTab/navigationConfig';
 import LoginReducer from './loginReducer';
 import registerReducer from './registerReducer';
 import { navigationReducer } from '../containers/navigation/navigationConfig';
@@ -15,4 +16,5 @@ export default combineReducers({
     register: registerReducer,
     tabMessage: reducerStackNavigator(MessageTab),
     tabMore: reducerStackNavigator(MoreTab),
+    tabContact: reducerStackNavigator(ContactTab),
 })
