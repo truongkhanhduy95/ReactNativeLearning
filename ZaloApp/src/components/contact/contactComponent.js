@@ -3,7 +3,7 @@ import { View, StyleSheet, Image, Text } from 'react-native';
 import ContactList from './contactList';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import IconIO from 'react-native-vector-icons/Ionicons';
-import HeaderTab from '../headerTab'
+import HeaderTab from './headerTab'
 import LinearGradient from 'react-native-linear-gradient';
 
 export default class ContactComponent extends Component{

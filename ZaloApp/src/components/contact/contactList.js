@@ -52,7 +52,9 @@ export default class ContactList extends Component {
                 <View style ={[styles.rowLayout,{paddingTop:0,}]}>
                     <TextInput
                         style={{backgroundColor:'#f4f6f7',width:'100%',height:50,}}
+                        fontSize={18}
                         placeholder={changeStatus}
+                        paddingLeft={10}
                         //value={this.state.username}
                         placeholderTextColor='gray'
                         underlineColorAndroid='transparent'
