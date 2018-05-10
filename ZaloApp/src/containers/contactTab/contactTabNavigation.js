@@ -16,7 +16,7 @@ class ContactTabNavigation extends Component {
         title: "Danh bạ",
         tabBarIcon: ({tintColor,focused}) => (
             <View style={{ flex: 1, justifyContent:'center', alignItems:'center' }}>
-                <Icon style={{ width:30,height: 30,
+                <Icon style={{ width:25,height: 25,
                     // fontSize: 24,
                     color: tintColor
                     }}

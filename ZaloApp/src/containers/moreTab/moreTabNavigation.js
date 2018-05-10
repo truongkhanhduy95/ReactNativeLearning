@@ -16,7 +16,7 @@ class MoreTabNavigation extends Component {
     static navigationOptions = {
         title: "Thêm",
         tabBarIcon: ({tintColor,focused} ) => (
-            <Icon style={{ width:30,height: 30,
+            <Icon style={{ width:25,height: 25,
                 // fontSize: 24,
                 color: tintColor,
                 fontSize: 24,
