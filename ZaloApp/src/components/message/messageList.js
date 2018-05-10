@@ -29,7 +29,10 @@ export default class MessageList extends Component {
         const total = this.state.dataSource.getRowCount();
         const topLineStyle =  styles.topLine;
         const bottomLineStyle = row == total - 1 ? [styles.bottomLine, styles.hiddenLine] : styles.bottomLine;
-        
+        const activeDot = 
+        <View style={styles.whiteDot}>
+            <View style={styles.blueDot} />
+        </View>  
         if(row == 0)
             return (<View style={{ marginRight:15}}>
                 <TouchableOpacity style={{ flexDirection:'column',justifyContent:'flex-start', alignItems:'center'}}>
@@ -40,7 +43,12 @@ export default class MessageList extends Component {
         else
             return (<View style={{marginRight:15}}>
                     <TouchableOpacity style={{ flexDirection:'column',justifyContent:'flex-start', alignItems:'center'}}>
+                    <View style= {{ justifyContent:'center', alignItems:'center'}}> 
                         <Image source={{uri: rowData.image}} style={styles.avatar} />
+                        <View style={{position:'absolute',alignSelf:'flex-end',top:34}}>
+                            {activeDot}
+                        </View>
+                    </View>
                         <Text style={{marginTop:5}}>{rowData.username}</Text>
                     </TouchableOpacity>
             </View>);
@@ -117,5 +125,19 @@ const styles = StyleSheet.create({
         height: 50,
         width: 50,
         borderRadius: 25,
+    },
+    whiteDot:{
+        height:16,
+        width:16,
+        borderRadius:8,
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor:'white',
+    },
+    blueDot:{
+        height:12,
+        width:12,
+        borderRadius:6,
+        backgroundColor:'green',
     }
 });
