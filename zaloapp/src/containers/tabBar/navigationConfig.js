@@ -33,10 +33,10 @@ const tabbarConfiguration = {
         showIcon: true,
         showLabel: true,
         style:{
-            height: 50
+            height: 56
         },
         labelStyle: {
-            fontSize: 12,
+            fontSize: 11,
             marginBottom: 4,
         },
         iconStyle: {
