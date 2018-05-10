@@ -32,8 +32,8 @@ const tabbarConfiguration = {
             height: 50
         },
         labelStyle: {
-            fontSize: 10,
-            marginTop: 0,
+            fontSize: 12,
+            marginBottom: 4,
         },
         iconStyle: {
             padding:0,
