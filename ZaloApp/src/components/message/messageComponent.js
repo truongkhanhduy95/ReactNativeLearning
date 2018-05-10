@@ -21,7 +21,7 @@ export default class MessageComponent extends Component {
                 <HeaderTab/>
             
                 <MessageList
-                 onPress={this.navigate}/>
+                 onPress={()=>this.navigate()}/>
             </View>
         );
     }
