@@ -1,9 +1,9 @@
 import React, {Component } from 'react';
 import { View, } from 'react-native';
-import { GiftedChat, Composer  } from 'react-native-gifted-chat';
+import { GiftedChat, Composer, Send } from 'react-native-gifted-chat';
 import Header from './header';
 import Icon from 'react-native-vector-icons/Feather';
-import FontAwesome from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class ChatComponent extends Component {
   state = {
@@ -46,8 +46,13 @@ export default class ChatComponent extends Component {
         <Composer
           {...props}
         />
-        <FontAwesome.Button  onPress = {this.props.onSettingsClicked} backgroundColor='transparent' size={26} color='black' name='emoticon'/>        
+        <MaterialCommunityIcons.Button  onPress = {this.props.onSettingsClicked} backgroundColor='transparent' size={26} color='black' name='emoticon'/>        
         <Icon.Button  onPress = {this.props.onSettingsClicked} backgroundColor='transparent' size={26} color='black' name='plus'/>
+        <Send {...props}>
+            <View style={{marginRight: 10, marginBottom: 5}}>
+                <MaterialCommunityIcons backgroundColor='transparent' size={26} color='#006FFD' name='send'/>
+                </View>
+            </Send>
       </View>
       
     );
