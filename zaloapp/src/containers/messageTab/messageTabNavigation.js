@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import { Container, Icon } from 'native-base'
 import MessageTab from './navigationConfig';
 import { connect } from 'react-redux'
@@ -14,9 +14,17 @@ const mapStateToProps = (state) => {
 class MessageTabNavigation extends Component {
     static navigationOptions = {
         title: "Tin nhắn",
-        // tabBarIcon: () => (
-        //     <Icon style={styles.icon} name='home' />
-        // )
+        tabBarIcon: ({tintColor,focused}) => {
+            var name = focused ? <Text style={{color: tintColor, fontSize: 12}}>{"Tin nhắn"}</Text> : null;
+            return <View style={{ flex: 1, backgroundColor:'yellow',justifyContent:'center', alignItems:'center' }}>
+                <Icon style={{ width:30,height: 30,
+                    // fontSize: 24,
+                    color: tintColor
+                    }}
+                    size={26}
+                    name={focused? 'ios-chatbubbles' :'ios-chatbubbles-outline'} />
+            </View>
+        },
     }
 
     render() {

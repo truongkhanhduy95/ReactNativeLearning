@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View} from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons';
-import MoreTab from './navigationConfig';
+import { StyleSheet, Text } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux'
 import { addNavigationHelpers } from 'react-navigation'
+import NewsFeedTab from './navigationConfig';
 
 const mapStateToProps = (state) => {
     return {
@@ -11,26 +11,18 @@ const mapStateToProps = (state) => {
     }
 }
 
-class MoreTabNavigation extends Component {
-    
+class NewsFeedTabNavigation extends Component {
     static navigationOptions = {
-        title: "Thêm",
-        tabBarIcon: ({tintColor,focused} ) => (
-            <Icon style={{ width:30,height: 30,
-                // fontSize: 24,
-                color: tintColor,
-                fontSize: 24,
-                }}
-                
-                //size={20}
-                name={focused ? 'ios-more' : 'ios-more-outline'} />
+        title: "Nhật ký",
+        tabBarIcon: () => (
+            <Icon size={20} name='clock' />
         )
     }
 
     render() {
         const { dispatch, navigationState } = this.props
         return (
-            <MoreTab navigation={
+            <NewsFeedTab navigation={
                 addNavigationHelpers({
                     dispatch: dispatch,
                     state: navigationState,
@@ -40,7 +32,7 @@ class MoreTabNavigation extends Component {
     }
 };
 
-export default connect(mapStateToProps)(MoreTabNavigation)
+export default connect(mapStateToProps)(NewsFeedTabNavigation)
 
 const styles = StyleSheet.create({
     icon: {

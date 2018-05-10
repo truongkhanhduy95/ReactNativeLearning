@@ -68,6 +68,7 @@ export default class ContactList extends Component {
                         username={`${item.name.first} ${item.name.last}`}
                         subtitle={'status'}
                         avatar={item.picture.thumbnail }
+                        onItemClick = {()=>this.props.onItemClick()}
                         containerStyle={{ borderBottomWidth: 0 }}/>)}
                 />
             </View>

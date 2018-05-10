@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons';
 import ContactTab from './navigationConfig';
 import { connect } from 'react-redux'
@@ -14,13 +14,20 @@ const mapStateToProps = (state) => {
 class ContactTabNavigation extends Component {
     static navigationOptions = {
         title: "Danh bạ",
-        tabBarIcon: () => (
-            <Icon size={30} name='ios-more-outline' />
+        tabBarIcon: ({tintColor,focused}) => (
+            <View style={{ flex: 1, justifyContent:'center', alignItems:'center' }}>
+                <Icon style={{ width:30,height: 30,
+                    // fontSize: 24,
+                    color: tintColor
+                    }}
+                    size={26}
+                    name={focused? 'ios-contacts' :'ios-contacts-outline'} />
+            </View>
         )
     }
 
     render() {
-        const { dispatch, navigationState } = this.props
+        const { dispatch, navigationState } = this.props;
         return (
             <ContactTab navigation={
                 addNavigationHelpers({

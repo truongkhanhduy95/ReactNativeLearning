@@ -6,16 +6,20 @@ import MessageTabNavigation from '../messageTab/messageTabNavigation';
 import MoreTabNavigation from '../moreTab/moreTabNavigation';
 import NotificationComponent from '../../components/notification/notificationComponent';
 import ContactTabNavigation from '../contactTab/contactTabNavigation';
+import NewsFeedNavigation from '../newsFeedTab/newsFeedTabNavigation';
 
 const routeConfiguration = {
     messageNavigation: {
-        screen: NotificationComponent,
+        screen: MessageTabNavigation,
     },
     AnimationNavigation: {
         screen: ContactTabNavigation, 
     },
     CustomerNaviagtion: {
         screen: Dummy,
+    },
+    NewsFeedNavigation: {
+        screen: NewsFeedNavigation,
     },
     moreNavigation: {
         screen: MoreTabNavigation,
@@ -29,11 +33,11 @@ const tabbarConfiguration = {
         showIcon: true,
         showLabel: true,
         style:{
-            height: 50
+            height: 56
         },
         labelStyle: {
-            fontSize: 10,
-            marginTop: 0,
+            fontSize: 11,
+            marginBottom: 4,
         },
         iconStyle: {
             padding:0,
