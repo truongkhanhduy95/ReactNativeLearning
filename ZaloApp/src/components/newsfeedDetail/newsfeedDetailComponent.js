@@ -46,7 +46,7 @@ export default class NewsFeedDetailComponent extends BaseHeaderComponent {
                         </View>
                     </View>
                     <Text style={{ flex: 1, margin: 10, color: '#000' }} >Hôm nay tôi buồn</Text>
-                    <Image style={{ width: width, height: width }} source={{ uri: 'https://facebook.github.io/react/logo-og.png' }} />
+                    <Image style={{ width: width, height: width }} source={{ uri: 'https://reactjs.org/logo-og.png' }} />
                     <View style={{ marginLeft: 10, marginRight: 10, height: 1, backgroundColor: '#DEDEDE', marginTop: 10 }}></View>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <EvilIcons.Button onPress={this.props.onBack} backgroundColor='transparent' size={26} color='#000' name='heart' />
