@@ -6,6 +6,7 @@ import PhoneCodeScreen from '../../scenes/PhoneCodeScreen';
 import RegisterNameScreen from '../../scenes/RegisterNameScreen';
 import RegisterPhoneScreen from '../../scenes/RegisterPhoneScreen';
 import NotificationComponent from '../../components/notification/notificationComponent';
+import NewsFeedDetailComponent from '../../components/newsfeedDetail/newsfeedDetailComponent';
 
 // import BaseHeader from '../../components/BaseHeaderComponent';
 
@@ -17,10 +18,11 @@ const Router = StackNavigator({
     intro: { screen: Intro },
     login: { screen: Login },
     tabBar: { screen: TabBarNavigation },
-    phoneCode: { screen: PhoneCodeScreen},
-    registerName: { screen: RegisterNameScreen},
-    registerPhone: { screen: RegisterPhoneScreen},
-    notification: { screen: NotificationComponent }
+    phoneCode: { screen: PhoneCodeScreen },
+    registerName: { screen: RegisterNameScreen },
+    registerPhone: { screen: RegisterPhoneScreen },
+    notification: { screen: NotificationComponent },
+    newsfeedDetail: { screen: NewsFeedDetailComponent }
 },
     {
         headerMode: 'none',

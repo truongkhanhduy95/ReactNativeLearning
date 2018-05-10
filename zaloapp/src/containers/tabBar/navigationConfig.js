@@ -6,6 +6,7 @@ import MessageTabNavigation from '../messageTab/messageTabNavigation';
 import MoreTabNavigation from '../moreTab/moreTabNavigation';
 import NotificationComponent from '../../components/notification/notificationComponent';
 import ContactTabNavigation from '../contactTab/contactTabNavigation';
+import NewsFeedNavigation from '../newsFeedTab/newsFeedTabNavigation';
 
 const routeConfiguration = {
     messageNavigation: {
@@ -16,6 +17,9 @@ const routeConfiguration = {
     },
     CustomerNaviagtion: {
         screen: Dummy,
+    },
+    NewsFeedNavigation: {
+        screen: NewsFeedNavigation,
     },
     moreNavigation: {
         screen: MoreTabNavigation,

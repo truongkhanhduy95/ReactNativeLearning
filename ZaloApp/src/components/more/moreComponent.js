@@ -13,7 +13,7 @@ class MoreComponent extends Component {
         <HeaderTab />
         <View style={{ flex: 1, backgroundColor: '#F2F4F5' }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff' }}>
-            <Image style={{ borderRadius: 15, margin: 15, width: 40, height: 40 }} source={{ uri: 'https://facebook.github.io/react/logo-og.png' }} />
+            <Image style={{ borderRadius: 20, margin: 15, width: 40, height: 40 }} source={{ uri: 'https://facebook.github.io/react/logo-og.png' }} />
             <View style={{ flex: 1, flexDirection: 'column' }}>
               <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end' }} >
                 <Text style={{ flex: 1, color: '#000' }}>Kris Nguyen</Text>

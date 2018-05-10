@@ -9,7 +9,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import MyStatusBar from '../MyStatusBar';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 export default class HeaderTab extends Component {
 
     constructor(props) {
@@ -37,7 +37,6 @@ export default class HeaderTab extends Component {
                         placeholder={findPlaceholder}
                         paddingLeft={10}
                         opacity={0.7}
-                        // color='white'
                         placeholderTextColor='white'
                         fontWeight='bold'
                         underlineColorAndroid='transparent'
@@ -46,8 +45,8 @@ export default class HeaderTab extends Component {
                         <View style={styles.back}
                         />
                     </TouchableOpacity>
-                    <Ionicons.Button onPress={this.props.onBack} backgroundColor='transparent' size={26} color='#fff' name='md-person-add'/>
-                    
+                    <MaterialIcons.Button onPress={this.props.onBack} backgroundColor='transparent' size={26} color='#fff' name='photo-filter'/>
+                    <SimpleLineIcons.Button onPress={this.props.onBack} backgroundColor='transparent' size={26} color='#fff' name='bell'/>
                 </View>
             </LinearGradient>
         )
