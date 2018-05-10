@@ -14,17 +14,17 @@ const mapStateToProps = (state) => {
 class MessageTabNavigation extends Component {
     static navigationOptions = {
         title: "Tin nhắn",
-        tabBarIcon: ({tintColor,focus}) => (
-            <View style={{ flex: 1, justifyContent:'center', alignItems:'center' }}>
-                <Icon style={{ width:30,height: 30,
+        tabBarIcon: ({tintColor,focused}) => {
+            var name = focused ? <Text style={{color: tintColor, fontSize: 12}}>{"Tin nhắn"}</Text> : null;
+            return <View style={{ flex: 1,justifyContent:'center', alignItems:'center' }}>
+                <Icon style={{ width:25,height: 25,
                     // fontSize: 24,
                     color: tintColor
                     }}
                     size={26}
-                    name='ios-chatbubbles-outline' />
-                <Text style={{flex:1,color: 'black', fontSize: 20}}>{"Thêm"}</Text>
+                    name={focused? 'ios-chatbubbles' :'ios-chatbubbles-outline'} />
             </View>
-        )
+        },
     }
 
     render() {

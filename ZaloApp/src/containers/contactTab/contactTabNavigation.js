@@ -14,21 +14,20 @@ const mapStateToProps = (state) => {
 class ContactTabNavigation extends Component {
     static navigationOptions = {
         title: "Danh bạ",
-        tabBarIcon: ({tintColor,focus}) => (
+        tabBarIcon: ({tintColor,focused}) => (
             <View style={{ flex: 1, justifyContent:'center', alignItems:'center' }}>
-                <Icon style={{ width:30,height: 30,
+                <Icon style={{ width:25,height: 25,
                     // fontSize: 24,
                     color: tintColor
                     }}
                     size={26}
-                    name='ios-contacts' />
-                <Text style={{flex:1,color: 'black', fontSize: 20}}>{"Thêm"}</Text>
+                    name={focused? 'ios-contacts' :'ios-contacts-outline'} />
             </View>
         )
     }
 
     render() {
-        const { dispatch, navigationState } = this.props
+        const { dispatch, navigationState } = this.props;
         return (
             <ContactTab navigation={
                 addNavigationHelpers({
