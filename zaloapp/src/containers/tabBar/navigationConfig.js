@@ -9,7 +9,7 @@ import ContactTabNavigation from '../contactTab/contactTabNavigation';
 
 const routeConfiguration = {
     messageNavigation: {
-        screen: NotificationComponent,
+        screen: MessageTabNavigation,
     },
     AnimationNavigation: {
         screen: ContactTabNavigation, 

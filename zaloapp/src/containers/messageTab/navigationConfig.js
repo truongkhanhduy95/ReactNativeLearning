@@ -1,8 +1,8 @@
 import { StackNavigator } from 'react-navigation';
-import Dummy from '../../scenes/dummyScreen';
+import MessageComponent from '../../components/message/messageComponent';
 
 const MessageTab = StackNavigator({
-    message: { screen: Dummy }
+    message: { screen: MessageComponent }
 }, {
         headerMode: 'none',
         navigationOptions: {
