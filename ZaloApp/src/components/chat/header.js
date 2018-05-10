@@ -26,9 +26,12 @@ export default class Header extends Component {
                      <MyStatusBar backgroundColor="#006FFD" barStyle="light-content"/>
                     <View style={styles.layout}>
                         <Icon.Button onPress = {this.props.onBack} backgroundColor='transparent' size={26} color='#fff' name='ios-arrow-back'/>
-                        <Text style={styles.title}>
-                            {this.props.title}
-                        </Text>
+                        <View style={styles.textLayout}>
+                            <Text style={styles.title}>
+                                {this.props.title}
+                            </Text>
+                            <Text style={{color:'white',fontSize:12}}>{'Vừa mới truy cập'}</Text>
+                        </View>
                         <IconF.Button  onPress = {this.props.onBack} backgroundColor='transparent' size={26} color='white' name='phone'/>                
                         <IconF.Button  onPress = {this.props.onBack} backgroundColor='transparent' size={26} color='white' name='video'/>
                         <Icon.Button  onPress = {this.props.onSettingsClicked} backgroundColor='transparent' size={26} color='#fff' name='ios-more-outline'/>
@@ -68,10 +71,12 @@ const styles = StyleSheet.create({
         alignSelf:'center',
     },
     title:{
-        flex:1,
-        fontSize:19,
+        fontSize:17,
         justifyContent:'center',
         fontWeight:'bold',
         color:'white'
+    },
+    textLayout:{
+        flex:1,
     }
   });

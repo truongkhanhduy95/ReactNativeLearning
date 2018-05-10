@@ -1,11 +1,19 @@
 import React, {Component } from 'react';
 import { View, } from 'react-native';
-import { GiftedChat } from 'react-native-gifted-chat';
+import { GiftedChat, Composer  } from 'react-native-gifted-chat';
 import Header from './header';
+import Icon from 'react-native-vector-icons/Feather';
+import FontAwesome from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class ChatComponent extends Component {
   state = {
     messages: [],
+  }
+
+  constructor(props){
+      super(props);
+
+      this.renderComposer   = this.renderComposer.bind(this);
   }
 
   componentWillMount() {
@@ -31,6 +39,20 @@ export default class ChatComponent extends Component {
     }))
   }
 
+  renderComposer(props) {
+    return (
+      <View style = {{flexDirection:'row'}}>
+        <Icon.Button  onPress = {this.props.onSettingsClicked} backgroundColor='transparent' size={26} color='black' name='camera'/>
+        <Composer
+          {...props}
+        />
+        <FontAwesome.Button  onPress = {this.props.onSettingsClicked} backgroundColor='transparent' size={26} color='black' name='emoticon'/>        
+        <Icon.Button  onPress = {this.props.onSettingsClicked} backgroundColor='transparent' size={26} color='black' name='plus'/>
+      </View>
+      
+    );
+  }
+
   render() {
     return (
         <View style={{flex:1}}>
@@ -42,6 +64,7 @@ export default class ChatComponent extends Component {
                 style={{flex:1}}
                 messages={this.state.messages}
                 onSend={messages => this.onSend(messages)}
+                renderComposer  = {this.renderComposer}
                 user={{
                     _id: 1,
                 }}
