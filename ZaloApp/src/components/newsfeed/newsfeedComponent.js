@@ -5,13 +5,22 @@ import IconIO from 'react-native-vector-icons/Ionicons';
 import HeaderTab from './headerTab'
 import LinearGradient from 'react-native-linear-gradient';
 import NewsFeedList from './newsfeedList';
+import { NavigationActions } from 'react-navigation';
+
 
 export default class NewsFeedComponent extends Component {
-    render() {
 
+    navigateToNoti()
+    {
+        let action = NavigationActions.navigate({ routeName: 'notification' });
+        this.props.navigation.dispatch(action);
+    }
+
+    render() {
         return (
             <View style={styles.container}>
-                <HeaderTab />
+                <HeaderTab 
+                    onNotificationClicked = {()=>this.navigateToNoti()}/>
                 <NewsFeedList {...this.props} />
             </View>
         )

@@ -46,7 +46,7 @@ export default class HeaderTab extends Component {
                         />
                     </TouchableOpacity>
                     <MaterialIcons.Button onPress={this.props.onBack} backgroundColor='transparent' size={26} color='#fff' name='photo-filter'/>
-                    <SimpleLineIcons.Button onPress={this.props.onBack} backgroundColor='transparent' size={26} color='#fff' name='bell'/>
+                    <SimpleLineIcons.Button onPress={this.props.onNotificationClicked} backgroundColor='transparent' size={26} color='#fff' name='bell'/>
                 </View>
             </LinearGradient>
         )
