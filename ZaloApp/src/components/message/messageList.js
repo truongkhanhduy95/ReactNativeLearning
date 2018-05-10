@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet, Switch,TextInput } from 'react-native'; 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { List, ListItem } from "react-native-elements";
-import ContactRow from '../contact/contactRow';
+import MessageRow from '../message/messageRow';
 
-export default class ContactList extends Component {
+export default class MessageList extends Component {
     constructor(props){
-        super(props);        
+        super(props);     
         this.state = {
             loading: false,
             data: [],
@@ -21,6 +21,10 @@ export default class ContactList extends Component {
         this.makeRemoteRequest();
       }
 
+      
+    onItemClick = () => {
+        this.props.onPress();
+    }
     makeRemoteRequest = () => {
         const { page, seed } = this.state;
         const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
@@ -41,35 +45,18 @@ export default class ContactList extends Component {
     };
 
     render() {
-        const title ='Bạn mới cập nhật';
-        const changeStatus = ' "Thay đổi trạng thái?"';
         return (
             <View style={styles.container}>
-                <View style ={styles.rowLayout}>
-                    <Text style={{fontWeight:'bold',fontSize:15}}>{title}</Text>
-                    <Switch style={{marginRight:10}} value tintColor={'#25b8f7'} onTintColor={'#25b8f7'}  />
-                </View>
-                <View style ={[styles.rowLayout,{paddingTop:0,}]}>
-                    <TextInput
-                        style={{backgroundColor:'#f4f6f7',width:'100%',height:50,}}
-                        fontSize={18}
-                        placeholder={changeStatus}
-                        paddingLeft={10}
-                        //value={this.state.username}
-                        placeholderTextColor='gray'
-                        underlineColorAndroid='transparent'
-                    />
-                </View>
                 <FlatList
                     data={this.state.data}
                     keyExtractor={item => item.email}
                     renderItem={({ item }) => (
-                    <ContactRow
+                    <MessageRow
                         username={`${item.name.first} ${item.name.last}`}
-                        subtitle={'status'}
+                        subtitle={item.location.street}
                         avatar={item.picture.thumbnail }
-                        onItemClick = {()=>this.props.onItemClick()}
-                        containerStyle={{ borderBottomWidth: 0 }}/>)}
+                        containerStyle={{ borderBottomWidth: 0 }}
+                        onPress={this.onItemClick}/>)}
                 />
             </View>
         );

@@ -20,7 +20,14 @@ export default class HeaderTab extends Component {
         this.props.navigation.dispatch({ type: 'Navigation/BACK' });
     }
 
+    addMessage = () => {
+        console.log('Press Add Message');
 
+    }
+
+    onCamera = () => {
+        console.log('Press Camera');
+    }
     render() {
         const findPlaceholder = 'Tìm bạn bè,tin nhắn...';
         return (
@@ -45,7 +52,9 @@ export default class HeaderTab extends Component {
                         <View style={styles.back}
                         />
                     </TouchableOpacity>
-                    <Ionicons.Button onPress={this.props.onBack} backgroundColor='transparent' size={26} color='#fff' name='md-person-add'/>
+
+                    <Ionicons.Button onPress={()=>this.onCamera()} backgroundColor='transparent' size={26} color='#fff' name='md-camera'/>
+                    <Ionicons.Button onPress={()=>this.addMessage()} backgroundColor='transparent' size={26} color='#fff' name='md-add'/>
                     
                 </View>
             </LinearGradient>

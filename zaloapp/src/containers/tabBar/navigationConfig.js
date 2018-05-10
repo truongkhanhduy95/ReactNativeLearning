@@ -10,7 +10,7 @@ import NewsFeedNavigation from '../newsFeedTab/newsFeedTabNavigation';
 
 const routeConfiguration = {
     messageNavigation: {
-        screen: NotificationComponent,
+        screen: MessageTabNavigation,
     },
     AnimationNavigation: {
         screen: ContactTabNavigation, 
@@ -36,8 +36,8 @@ const tabbarConfiguration = {
             height: 50
         },
         labelStyle: {
-            fontSize: 10,
-            marginTop: 0,
+            fontSize: 12,
+            marginBottom: 4,
         },
         iconStyle: {
             padding:0,
