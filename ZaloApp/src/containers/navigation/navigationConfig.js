@@ -7,7 +7,7 @@ import RegisterNameScreen from '../../scenes/RegisterNameScreen';
 import RegisterPhoneScreen from '../../scenes/RegisterPhoneScreen';
 import NotificationComponent from '../../components/notification/notificationComponent';
 import ChatComponent from '../../components/chat/chatComponent';
-
+import ProfileScreen from '../../scenes/Profile';
 // import BaseHeader from '../../components/BaseHeaderComponent';
 
 // const EnhancedLoginScreen = BaseHeader(Login, 'Login');
@@ -22,7 +22,8 @@ const Router = StackNavigator({
     chat: { screen: ChatComponent },
     registerName: { screen: RegisterNameScreen},
     registerPhone: { screen: RegisterPhoneScreen},
-    notification: { screen: NotificationComponent }
+    notification: { screen: NotificationComponent },
+    profile: { screen: ProfileScreen },
 },
     {
         headerMode: 'none',

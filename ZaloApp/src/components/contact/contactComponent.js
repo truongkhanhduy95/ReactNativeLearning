@@ -8,8 +8,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { NavigationActions } from 'react-navigation';
 
 export default class ContactComponent extends Component{
-
-    navigate(){
+    navigateToChat(){
         let action = NavigationActions.navigate({ routeName: 'chat' });
         this.props.navigation.dispatch(action);
     }
@@ -21,8 +20,6 @@ export default class ContactComponent extends Component{
         return(
             <View style = {styles.container}>
                 <HeaderTab/>
-                <TouchableOpacity
-                onPress={()=>this.navigate()}>
                 <View style = {styles.suggestLayout}>
                     <View style= {{ justifyContent:'center', alignItems:'center'}}> 
                         <LinearGradient
@@ -36,8 +33,6 @@ export default class ContactComponent extends Component{
                     </View>
                     <Icon name='angle-right' style={{}} size = {26} color='gray'/>
                 </View>
-                </TouchableOpacity>
-
                 <View style = {styles.bestFriendLayout}> 
                     <Text style={{fontSize:15,fontWeight:'bold', marginBottom: 10}} >{bestFriend}</Text>
                     <View style = {{flexDirection:'row', alignItems:'center',}}>
@@ -53,7 +48,9 @@ export default class ContactComponent extends Component{
                     </View>
                 </View>
             
-                <ContactList/>
+                <ContactList
+                    onItemClick={()=>this.navigateToChat()}
+                />
             </View>
         );
     }

@@ -9,6 +9,10 @@ export default class BaseComponent extends Component{
         super(props);
     }
 
+    goBack(){
+        this.props.navigation.dispatch({ type: 'Navigation/BACK' });
+    }
+
     renderContent(){
     }
 

@@ -7,13 +7,17 @@ export default class ContactRow extends Component {
         super(props);
     }
 
+    
+
     render() {
         const activeDot = 
         <View style={styles.whiteDot}>
             <View style={styles.blueDot} />
         </View>   
         return (
-            <View style={[styles.container, {backgroundColor: 'transparent'}]} >
+        <View style={[styles.container, {backgroundColor: 'transparent'}]} >
+            <TouchableOpacity
+                onPress={()=>this.props.onItemClick()}>
             <View style={{padding: 12,flexDirection: 'row',alignItems: 'center',}}>
                 <View style= {{flex:1.2, justifyContent:'center', alignItems:'center'}}> 
                     <Image source={{ uri: this.props.avatar}} style={styles.avatar} />
@@ -31,6 +35,7 @@ export default class ContactRow extends Component {
                 <Icon.Button style={{flex:1}} onPress = {this.props.onBack} backgroundColor='transparent' size={26} color='gray' name='phone'/>                
                 <Icon.Button style={{flex:1}} onPress = {this.props.onBack} backgroundColor='transparent' size={26} color='gray' name='video'/>
             </View>
+            </TouchableOpacity>
         </View>
         );
     }

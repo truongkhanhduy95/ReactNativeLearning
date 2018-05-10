@@ -114,9 +114,7 @@ export default class Profile extends BaseComponent {
         return (
             <View
              style={{flex:1}}>
-             
-             <MyStatusBar backgroundColor="#006FFD" barStyle="light-content"/>
-
+             <MyStatusBar backgroundColor="#006FFD" barStyle="light-content" opacity={0.5}/>
             <View
                 style={{
                 width: '100%',
@@ -145,7 +143,8 @@ export default class Profile extends BaseComponent {
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'transparent', margin: 15 }}>
                     
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={()=>this.goBack()}>
                         <Icon name='arrow-back'
                         style={{fontSize: 32,color:'white'}} />
                     </TouchableOpacity>
