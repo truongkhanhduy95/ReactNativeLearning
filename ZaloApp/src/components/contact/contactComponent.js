@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import ContactList from './contactList';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import IconIO from 'react-native-vector-icons/Ionicons';
 import HeaderTab from './headerTab'
 import LinearGradient from 'react-native-linear-gradient';
+import { NavigationActions } from 'react-navigation';
 
 export default class ContactComponent extends Component{
+
+    navigate(){
+        let action = NavigationActions.navigate({ routeName: 'chat' });
+        this.props.navigation.dispatch(action);
+    }
+
     render(){
         const friendSuggest = 'Gợi ý kết bạn';
         const bestFriend = 'Bạn thân';
@@ -14,6 +21,8 @@ export default class ContactComponent extends Component{
         return(
             <View style = {styles.container}>
                 <HeaderTab/>
+                <TouchableOpacity
+                onPress={()=>this.navigate()}>
                 <View style = {styles.suggestLayout}>
                     <View style= {{ justifyContent:'center', alignItems:'center'}}> 
                         <LinearGradient
@@ -27,6 +36,7 @@ export default class ContactComponent extends Component{
                     </View>
                     <Icon name='angle-right' style={{}} size = {26} color='gray'/>
                 </View>
+                </TouchableOpacity>
 
                 <View style = {styles.bestFriendLayout}> 
                     <Text style={{fontSize:15,fontWeight:'bold', marginBottom: 10}} >{bestFriend}</Text>
