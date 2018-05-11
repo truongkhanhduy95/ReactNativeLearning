@@ -53,7 +53,8 @@ export const TabBar = TabNavigator(routeConfiguration, tabbarConfiguration)
 export const tabBarReducer = (state, action) => {
     console.log("Action : " + action.type);
     if (action.type === 'JUMP_TO_TAB') {
-        return { ...state, index: 0 };
+        //return { ...state, index: 0 };
+        return state;
     } else {
         if (action.type === 'Navigation/BACK') {
             console.log("Back Tabbar");
