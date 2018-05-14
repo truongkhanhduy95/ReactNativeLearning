@@ -30,11 +30,14 @@ const tabbarConfiguration = {
     initialRouteName: 'messageNavigation',
     tabBarPosition: 'bottom',
     tabBarOptions: {
+        activeTintColor: '#006FFD',
+        inactiveTintColor: 'gray',
         upperCaseLabel: false,
         showIcon: true,
         showLabel: true,
         style:{
             height: 56,
+            backgroundColor:'white'
         },
         labelStyle: {
             fontSize: 11,
