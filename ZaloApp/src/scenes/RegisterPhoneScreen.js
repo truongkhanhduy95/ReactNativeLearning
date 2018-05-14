@@ -22,6 +22,8 @@ import { bindActionCreators } from 'redux';
 class RegisterPhoneScreen extends BaseHeaderComponent{
     state = {
         phonenumber:'',
+        countryCode:'',
+        dialingCode:'',
         isDisable:true,
         isRegistered:false
     }
@@ -46,7 +48,7 @@ class RegisterPhoneScreen extends BaseHeaderComponent{
         console.log(this.props.isRegistered);
     }
     onSelectPhoneCode(){
-        let action = NavigationActions.navigate({ routeName: 'phoneCode' })
+        let action = NavigationActions.navigate({ routeName: 'phoneCode', params: {returnData: this.returnData } })
         this.props.navigation.dispatch(action);
     }
 
@@ -66,6 +68,11 @@ class RegisterPhoneScreen extends BaseHeaderComponent{
         BackHandler.removeEventListener('hardwareBackPress', this.goBack);
     }
 
+    returnData = (countryCode, dialingCode) => {
+        this.setState({countryCode: countryCode, dialingCode: dialingCode})
+
+        console.log(this.state.countryCode);
+    }
     renderContent() {
         let confirmMsg = `You will recive an automatic call from Zalo to activate your account. Please confirm your phone number is correct. Continue?`
         
@@ -78,7 +85,7 @@ class RegisterPhoneScreen extends BaseHeaderComponent{
                 <View style = {styles.phoneInput}>
                     <TouchableOpacity style={styles.buttonContainer}
                     onPress={this.onSelectPhoneCode.bind(this)}>
-                            <Text style={{ textAlign: 'center', color: '#007aff', fontSize: 20 }}>VN</Text>
+                            <Text style={{ textAlign: 'center', color: '#007aff', fontSize: 20 }}>{this.state.countryCode != '' ? this.state.countryCode : 'VN'}</Text>
                     </TouchableOpacity>
                     <TextInput style={styles.textInput}
                         placeholder='Enter your phone number'

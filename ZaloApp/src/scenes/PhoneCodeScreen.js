@@ -34,7 +34,9 @@ export default class PhoneCodeScreen extends Component {
     }
     GetItem (item) {
   
-        Alert.alert(item.dialingCode);
+        // Alert.alert(item.dialingCode);
+        this.props.navigation.state.params.returnData(item.shortName, item.dialingCode)
+        this.props.navigation.dispatch({ type: 'Navigation/BACK'});
         
         }
     selectionList = () => {
