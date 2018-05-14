@@ -8,6 +8,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import MyStatusBar from './MyStatusBar';
 import Icon from 'react-native-vector-icons/Ionicons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 export default class Header extends Component {
 
     constructor(props) {
@@ -16,8 +17,8 @@ export default class Header extends Component {
 
     render() {
         const emptyButton = <TouchableOpacity><View style={styles.back}/></TouchableOpacity>;
-        const settingButton = <Icon.Button onPress = {this.props.onSettingsClicked} backgroundColor='transparent' size={26} color='#fff' name='ios-settings-outline'/>;
-
+        const settingButton = <SimpleLineIcons.Button onPress={this.props.onSettingsClicked} backgroundColor='transparent' size={26} color='#fff' name='settings' />;
+        
         return (
             <LinearGradient 
                     start={{x: 1.0, y: 0.0}} end={{x: 0, y: 1}}

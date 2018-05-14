@@ -13,11 +13,18 @@ class MoreComponent extends Component {
     this.props.navigation.dispatch(action);
   }
 
+  navigateToSettings(){
+    let action = NavigationActions.navigate({ routeName: 'settings' });
+    this.props.navigation.dispatch(action);
+  }
+
   render() {
   
     return (
       <View style={{ flex: 1, justifyContent: 'center' }}>
-        <HeaderTab />
+        <HeaderTab 
+          onSettingsClicked = {() => this.navigateToSettings()}
+        />
         <View style={{ flex: 1, backgroundColor: '#F2F4F5' }}>
           <TouchableOpacity
           onPress={()=>this.navigateToProfile()}>
