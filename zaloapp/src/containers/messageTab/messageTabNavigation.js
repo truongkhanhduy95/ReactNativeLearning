@@ -16,8 +16,8 @@ class MessageTabNavigation extends Component {
         title: "Tin nhắn",
         tabBarIcon: ({tintColor,focused}) => {
             var name = focused ? <Text style={{color: tintColor, fontSize: 12}}>{"Tin nhắn"}</Text> : null;
-            return <View style={{ flex: 1, backgroundColor:'yellow',justifyContent:'center', alignItems:'center' }}>
-                <Icon style={{ width:30,height: 30,
+            return <View style={{ flex: 1,justifyContent:'center', alignItems:'center' }}>
+                <Icon style={{ width:25,height: 25,
                     // fontSize: 24,
                     color: tintColor
                     }}

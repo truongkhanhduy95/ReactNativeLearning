@@ -39,7 +39,7 @@ export default class HeaderTab extends Component {
                         />
                     </TouchableOpacity>
                     <FontAwesome.Button onPress={this.props.onBack} backgroundColor='transparent' size={26} color='#fff' name='qrcode' />
-                    <SimpleLineIcons.Button onPress={this.props.onBack} backgroundColor='transparent' size={26} color='#fff' name='settings' />
+                    <SimpleLineIcons.Button onPress={this.props.onSettingsClicked} backgroundColor='transparent' size={26} color='#fff' name='settings' />
                 </View>
             </LinearGradient>
         )

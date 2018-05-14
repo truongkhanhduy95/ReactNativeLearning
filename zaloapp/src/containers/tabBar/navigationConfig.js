@@ -13,7 +13,7 @@ const routeConfiguration = {
         screen: MessageTabNavigation,
     },
     AnimationNavigation: {
-        screen: ContactTabNavigation, 
+        screen: ContactTabNavigation,
     },
     CustomerNaviagtion: {
         screen: Dummy,
@@ -27,6 +27,7 @@ const routeConfiguration = {
 }
 
 const tabbarConfiguration = {
+    initialRouteName: 'messageNavigation',
     tabBarPosition: 'bottom',
     tabBarOptions: {
         upperCaseLabel: false,
@@ -40,7 +41,7 @@ const tabbarConfiguration = {
             marginBottom: 4,
         },
         iconStyle: {
-            padding:0,
+            padding: 0,
             margin: 0,
         },
     },
@@ -50,9 +51,18 @@ const tabbarConfiguration = {
 export const TabBar = TabNavigator(routeConfiguration, tabbarConfiguration)
 
 export const tabBarReducer = (state, action) => {
+    console.log("Action : " + action.type);
     if (action.type === 'JUMP_TO_TAB') {
-      return { ...state, index: 0 };
+        //return { ...state, index: 0 };
+        return state;
     } else {
-      return TabBar.router.getStateForAction(action, state);
+        if (action.type === 'Navigation/BACK') {
+            console.log("Back Tabbar");
+            return state;
+        }
+        else {
+            const newstate = TabBar.router.getStateForAction(action, state);
+            return newstate;
+        }
     }
-  };
+};
