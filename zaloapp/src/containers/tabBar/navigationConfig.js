@@ -27,7 +27,6 @@ const routeConfiguration = {
 }
 
 const tabbarConfiguration = {
-    activeTintColor: '#e91e63',
     initialRouteName: 'messageNavigation',
     tabBarPosition: 'bottom',
     tabBarOptions: {
@@ -36,7 +35,6 @@ const tabbarConfiguration = {
         showLabel: true,
         style:{
             height: 56,
-            backgroundColor: 'white'
         },
         labelStyle: {
             fontSize: 11,
