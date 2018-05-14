@@ -8,7 +8,7 @@ export default class SettingsRow extends Component{
     render(){
         return (
             <View style = {{backgroundColor:'white', paddingLeft: 22}}>
-                <View style = {{flexDirection:'row',alignItems:'center', padding:15}}>
+                <View style = {{flexDirection:'row',alignItems:'center', padding:15, paddingLeft:7}}>
                     <View style= {{ justifyContent:'center', alignItems:'center', }}> 
                         <Icon name={this.props.icon} style={{}} size = {26} color={this.props.color}/>
                     </View>
