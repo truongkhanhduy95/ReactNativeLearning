@@ -3,12 +3,14 @@ import { View, Text, FlatList } from 'react-native';
 import { List, ListItem } from "react-native-elements";
 import NotificationRow from './notiRow';
 import BaseHeaderComponent from '../BaseHeaderComponent';
+import { NavigationActions } from 'react-navigation';
 
 export default class NotificationList extends BaseHeaderComponent {
 
     constructor(props){
         super(props);
         this.isShowSettings = this.isShowSettings.bind(this);
+        this.onSettingsClick = this.onSettingsClick.bind(this);
         
         this.state = {
             loading: false,
@@ -26,6 +28,11 @@ export default class NotificationList extends BaseHeaderComponent {
 
     isShowSettings(){
         return true;
+    }
+
+    onSettingsClick(){
+        let action = NavigationActions.navigate({ routeName: 'settings' });
+        this.props.navigation.dispatch(action);
     }
 
     componentDidMount() {

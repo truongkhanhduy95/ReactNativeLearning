@@ -9,6 +9,7 @@ import NotificationComponent from '../../components/notification/notificationCom
 import NewsFeedDetailComponent from '../../components/newsfeedDetail/newsfeedDetailComponent';
 import ChatComponent from '../../components/chat/chatComponent';
 import ProfileScreen from '../../scenes/Profile';
+import SettingsScreen from '../../components/settings/settingsComponent'
 // import BaseHeader from '../../components/BaseHeaderComponent';
 
 // const EnhancedLoginScreen = BaseHeader(Login, 'Login');
@@ -25,7 +26,8 @@ const Router = StackNavigator({
     registerPhone: { screen: RegisterPhoneScreen},
     notification: { screen: NotificationComponent },
     profile: { screen: ProfileScreen },
-    newsfeedDetail: { screen: NewsFeedDetailComponent }
+    newsfeedDetail: { screen: NewsFeedDetailComponent },
+    settings: { screen: SettingsScreen}
 },
     {
         headerMode: 'none',
