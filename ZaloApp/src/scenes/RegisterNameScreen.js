@@ -34,7 +34,7 @@ export default class RegisterNameScreen extends BaseHeaderComponent
     }
 
     onRegisterButtonPressed(){
-        let action = NavigationActions.navigate({ routeName: 'registerPhone' })
+        let action = NavigationActions.navigate({ routeName: 'registerPhone', params: {'fullname': this.state.fullname} })
         this.props.navigation.dispatch(action);
     }
     renderContent() {

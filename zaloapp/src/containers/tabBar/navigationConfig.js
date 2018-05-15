@@ -30,11 +30,14 @@ const tabbarConfiguration = {
     initialRouteName: 'messageNavigation',
     tabBarPosition: 'bottom',
     tabBarOptions: {
+        activeTintColor: '#006FFD',
+        inactiveTintColor: 'gray',
         upperCaseLabel: false,
         showIcon: true,
         showLabel: true,
         style:{
-            height: 56
+            height: 56,
+            backgroundColor:'white'
         },
         labelStyle: {
             fontSize: 11,
@@ -53,8 +56,9 @@ export const TabBar = TabNavigator(routeConfiguration, tabbarConfiguration)
 export const tabBarReducer = (state, action) => {
     console.log("Action : " + action.type);
     if (action.type === 'JUMP_TO_TAB') {
-        //return { ...state, index: 0 };
-        return state;
+        console.log("Back Tabbar 123");
+        return { ...state, index: 0 };
+        //return state;
     } else {
         if (action.type === 'Navigation/BACK') {
             console.log("Back Tabbar");
