@@ -1,6 +1,7 @@
 import { StackNavigator } from 'react-navigation';
 import Intro from '../../scenes/Intro';
 import Login from '../../scenes/Login';
+import ShareStatus from '../../scenes/ShareStatus';
 import TabBarNavigation from '../tabBar/tabBarNavigation';
 import PhoneCodeScreen from '../../scenes/PhoneCodeScreen';
 import RegisterNameScreen from '../../scenes/RegisterNameScreen';
@@ -27,7 +28,8 @@ const Router = StackNavigator({
     notification: { screen: NotificationComponent },
     profile: { screen: ProfileScreen },
     newsfeedDetail: { screen: NewsFeedDetailComponent },
-    settings: { screen: SettingsScreen}
+    settings: { screen: SettingsScreen},
+    shareStatus: { screen: ShareStatus},
 },
     {
         headerMode: 'none',
