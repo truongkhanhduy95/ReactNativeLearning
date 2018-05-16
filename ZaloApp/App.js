@@ -18,14 +18,14 @@ import thunk from 'redux-thunk';
 import rootReducer from './src/reducers';
 import AppNavigation from './src/containers/navigation/appNavigation';
 
-import Firebase from 'react-native-firebase';
+import firebase from 'react-native-firebase';
 import { registerAppListener} from './src/notification/FirebaseListener';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default class App extends Component {
 
-  componentDidMount(){
+  async componentDidMount(){
     // Build a channel
     const channel = new firebase.notifications.Android.Channel('test-channel', 'Test Channel', firebase.notifications.Android.Importance.Max)
     .setDescription('My apps test channel');
@@ -43,7 +43,7 @@ export default class App extends Component {
     }
 
     firebase.messaging().getToken().then(token => {
-      alert("TOKEN (getFCMToken)", token);
+      alert("TOKEN: "+token);
     });
   }
 
