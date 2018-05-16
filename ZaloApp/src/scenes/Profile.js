@@ -171,20 +171,20 @@ export default class Profile extends BaseComponent {
         });
         const avatarTranslateX = asd.interpolate({
             inputRange: [0, 0.5, 1],
-            outputRange: [0, 0, WIDTH_AVATAR / 2 ],
+            outputRange: [0, 0, WIDTH_AVATAR / 2],
             extrapolate: 'clamp',
         });
 
         const titleTranslateX = asd.interpolate({
             inputRange: [0, 0.5, 1],
-            outputRange: [0, 0, 0.5*WIDTH_AVATAR  ],
+            outputRange: [0, 0, 0.5 * WIDTH_AVATAR],
             extrapolate: 'clamp',
         });
-        // const avatarTranslate = scrollY.interpolate({
-        //     inputRange: [0, HEADER_SCROLL_DISTANCE],
-        //     outputRange: [0, -(HEADER_SCROLL_DISTANCE )],
-        //     extrapolate: 'clamp',
-        // });
+        const avatarBorderRadius = scrollY.interpolate({
+            inputRange: [0, HEADER_SCROLL_DISTANCE],
+            outputRange: [WIDTH_AVATAR / 2, WIDTH_AVATAR * 0.8 / 2],
+            extrapolate: 'clamp',
+        });
         const avatarScale = asd.interpolate({
             inputRange: [0, 1],
             outputRange: [1, 0.8],
@@ -206,6 +206,12 @@ export default class Profile extends BaseComponent {
                         [{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }],
                         { useNativeDriver: true },
                     )}
+                    contentInset={{
+                        top: HEADER_MAX_HEIGHT,
+                    }}
+                    contentOffset={{
+                        y: -HEADER_MAX_HEIGHT,
+                    }}
                 >
                     {this._renderScrollViewContent()}
                 </Animated.ScrollView>
@@ -235,7 +241,8 @@ export default class Profile extends BaseComponent {
                     }
                     ]}
                 >
-                    <Animated.Image style={[styles.avatarImage,
+                    <Animated.Image style={[styles.avatarImage, 
+                    // { borderRadius: avatarBorderRadius },
                     {
                         transform: [
                             { scale: avatarScale },
@@ -359,7 +366,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0,
-        borderRadius: 50,
+        borderRadius:25,
         resizeMode: 'cover',
     },
     line: {
