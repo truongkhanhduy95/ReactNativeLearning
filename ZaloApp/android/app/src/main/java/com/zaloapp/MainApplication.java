@@ -5,11 +5,6 @@ import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage; // <-
 
 import com.facebook.react.ReactApplication;
 import io.invertase.firebase.RNFirebasePackage;
-import io.invertase.firebase.RNFirebasePackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.BV.LinearGradient.LinearGradientPackage;
-import com.imagepicker.ImagePickerPackage;
-import io.invertase.firebase.RNFirebasePackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.imagepicker.ImagePickerPackage;
@@ -34,16 +29,11 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new RNFirebasePackage(),
-            new RNFirebasePackage(),
             new VectorIconsPackage(),
             new LinearGradientPackage(),
             new ImagePickerPackage(),
-            new RNFirebasePackage(),
-            new VectorIconsPackage(),
-            new LinearGradientPackage(),
-            new ImagePickerPackage()
 
-            new RNFirebaseNotificationsPackage(), // <-- Add this line
+            new RNFirebaseNotificationsPackage() // <-- Add this line
       );
     }
 
