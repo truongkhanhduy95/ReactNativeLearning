@@ -38,7 +38,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Need Camera to Capture Images</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Access Gallery to Pick Images</string>
 	<key>UIAppFonts</key>

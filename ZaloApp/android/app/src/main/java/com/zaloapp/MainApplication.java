@@ -1,8 +1,10 @@
 package com.zaloapp;
 
 import android.app.Application;
+import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage; // <-- Add this line
 
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.RNFirebasePackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.imagepicker.ImagePickerPackage;
@@ -26,9 +28,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFirebasePackage(),
             new VectorIconsPackage(),
             new LinearGradientPackage(),
-            new ImagePickerPackage()
+            new ImagePickerPackage(),
+
+            new RNFirebaseNotificationsPackage() // <-- Add this line
       );
     }
 

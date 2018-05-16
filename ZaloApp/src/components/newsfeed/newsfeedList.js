@@ -20,7 +20,10 @@ export default class NewsFeedList extends Component {
     componentDidMount() {
         this.makeRemoteRequest();
     }
-
+    navigateToProfile(){
+        let action = NavigationActions.navigate({ routeName: 'profile' });
+        this.props.navigation.dispatch(action);
+      }
     makeRemoteRequest = () => {
         const { page, seed } = this.state;
         const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
@@ -41,31 +44,9 @@ export default class NewsFeedList extends Component {
     };
 
     render() {
-        const title = 'Bạn mới cập nhật';
-        const changeStatus = ' "Thay đổi trạng thái?"';
+        
         return (
-            <View style={styles.container}>
-                <TouchableOpacity>
-                    <View style={{ flexDirection: 'row', backgroundColor: '#fff', margin: 15, alignItems: 'center', borderRadius: 5 }}>
-                        <Image style={{ borderRadius: 20, margin: 10, width: 40, height: 40 }} source={{ uri: 'https://facebook.github.io/react/logo-og.png' }} />
-                        <Text style={{ color: '#838B92' }}>Hôm nay bạn thế nào</Text>
-                    </View>
-                </TouchableOpacity>
-                <View style={{ flexDirection: 'row', marginBottom: 15, marginLeft: 15, marginRight: 15, }}>
-                    <TouchableOpacity >
-                        <View style={{ flexDirection: 'row', backgroundColor: '#fff', justifyContent: 'center', marginRight: 15, alignItems: 'center', borderRadius: 5 }}>
-                            <EvilIcons.Button onPress={this.props.onBack} backgroundColor='transparent' size={26} color='#000' name='heart' />
-                            <Text style={{ color: '#000' }}>Đăng hình</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity >
-                        <View style={{ flexDirection: 'row', backgroundColor: '#fff', alignItems: 'center', borderRadius: 5 }}>
-                            <EvilIcons.Button onPress={this.props.onBack} backgroundColor='transparent' size={26} color='#000' name='heart' />
-                            <Text style={{ color: '#000' }}>Đăng video</Text>
-                        </View>
-                    </TouchableOpacity>
-                </View>
-                <FlatList
+            <FlatList
                     data={this.state.data}
                     keyExtractor={item => item.email}
                     renderItem={({ item }) => (
@@ -77,7 +58,6 @@ export default class NewsFeedList extends Component {
                             avatar={item.picture.thumbnail}
                             containerStyle={{ borderBottomWidth: 0 }} />)}
                 />
-            </View >
         );
     }
 }
