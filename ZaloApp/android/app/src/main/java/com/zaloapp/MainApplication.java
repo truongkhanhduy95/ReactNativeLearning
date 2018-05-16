@@ -2,9 +2,11 @@ package com.zaloapp;
 
 import android.app.Application;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage; // <-- Add this line
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage; // <-- Add this line
 
 import com.facebook.react.ReactApplication;
 import io.invertase.firebase.RNFirebasePackage;
+
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.imagepicker.ImagePickerPackage;
@@ -32,7 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
             new VectorIconsPackage(),
             new LinearGradientPackage(),
             new ImagePickerPackage(),
-
+             new RNFirebaseMessagingPackage(),
             new RNFirebaseNotificationsPackage() // <-- Add this line
       );
     }
