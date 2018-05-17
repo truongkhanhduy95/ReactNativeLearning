@@ -47,10 +47,10 @@ export default class ContactComponent extends Component{
                         </View>
                     </View>
                 </View>
-            
+
                 <ContactList
-                    onItemClick={()=>this.navigateToChat()}
-                />
+                        onItemClick={()=>this.navigateToChat()}
+                    />
             </View>
         );
     }
@@ -59,6 +59,7 @@ export default class ContactComponent extends Component{
 
 const styles = StyleSheet.create({
     container:{
+        flex:1,
         backgroundColor:"#f4f6f7",
     },
     icon:{

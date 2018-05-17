@@ -47,11 +47,10 @@ export default class MessageComponent extends Component {
         const friendSuggest = 'Gợi ý kết bạn';
         const bestFriend = 'Bạn thân';
         const selectFriend = 'Chọn bạn thường liên lạc';
-        return(
+        
+        return (
             <View style = {styles.container}>
                 <HeaderTab/>
-
-                
                 <MessageList
                     onPress={()=>this.navigate()}/>
             </View>
@@ -62,6 +61,7 @@ export default class MessageComponent extends Component {
 
 const styles = StyleSheet.create({
     container:{
+        flex:1,
         backgroundColor:"#f4f6f7",
     },
     icon:{

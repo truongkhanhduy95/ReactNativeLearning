@@ -29,7 +29,7 @@ export default class NewsFeedComponent extends Component {
             <View style={styles.container}>
                 <HeaderTab 
                     onNotificationClicked = {()=>this.navigateToNoti()}/>
-                <View style={{backgroundColor: '#F2F4F5'}}>
+                <View style={{flex:1,backgroundColor: '#F2F4F5'}}>
                 <TouchableOpacity onPress={()=>this.navigateToShareStatus()}>
                     <View style={{ flexDirection: 'row', backgroundColor: '#fff', margin: 15, alignItems: 'center', borderRadius: 5 }}>
                         <Image style={{ borderRadius: 20, margin: 10, width: 40, height: 40 }} source={{ uri: 'https://facebook.github.io/react/logo-og.png' }} />
@@ -59,6 +59,7 @@ export default class NewsFeedComponent extends Component {
 
 const styles = StyleSheet.create({
     container: {
+        flex:1,
         backgroundColor: "#f4f6f7",
     },
     icon: {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, StyleSheet, Switch,TextInput, Image, ListView, TouchableOpacity } from 'react-native'; 
+import { View, Text, FlatList, StyleSheet, Switch,TextInput, Image, ListView, TouchableOpacity,ActivityIndicator } from 'react-native'; 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { List, ListItem } from "react-native-elements";
 import MessageRow from '../message/messageRow';
@@ -11,7 +11,7 @@ export default class MessageList extends Component {
     
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});     
         this.state = {
-            loading: false,
+            loading: true,
             data: [],
             page: 1,
             seed: 1,
@@ -80,33 +80,42 @@ export default class MessageList extends Component {
           });
     };
 
+
     render() {
-        return (
-            <View style={styles.container}>
-                <FlatList
-                    data={this.state.data}
-                    keyExtractor={item => item.email}
-                    ListHeaderComponent = {() =>  (<View style={{marginRight:10,marginLeft:10,width:'100%', height:100}}>
-                    <ListView
-                        horizontal={true}
-                        style={{ height:60,width:'100%',marginTop:10, marginBottom:10 }}
-                        dataSource={this.state.dataSource}
-                        renderRow={this.renderRow}/>
-                </View>)}
-                    renderItem={({ item,index }) => (<MessageRow
-                        username={`${item.name.first} ${item.name.last}`}
-                        subtitle={item.location.street}
-                        avatar={item.picture.thumbnail }
-                        containerStyle={{ borderBottomWidth: 0 }}
-                        onPress={this.onItemClick}/>)}
-                />
-            </View>
+        if (this.state.loading)
+            return (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <ActivityIndicator size="large" color="#25b8f7" />
+                </View>
+            )
+        else
+            return (
+                <View style={styles.container}>
+                    <FlatList
+                        data={this.state.data}
+                        keyExtractor={item => item.email}
+                        ListHeaderComponent = {() =>  (<View style={{marginRight:10,marginLeft:10,width:'100%', height:100}}>
+                        <ListView
+                            horizontal={true}
+                            style={{ height:60,width:'100%',marginTop:10, marginBottom:10 }}
+                            dataSource={this.state.dataSource}
+                            renderRow={this.renderRow}/>
+                    </View>)}
+                        renderItem={({ item,index }) => (<MessageRow
+                            username={`${item.name.first} ${item.name.last}`}
+                            subtitle={item.location.street}
+                            avatar={item.picture.thumbnail }
+                            containerStyle={{ borderBottomWidth: 0 }}
+                            onPress={this.onItemClick}/>)}
+                    />
+                </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
     container:{
+        flex:1,
         backgroundColor:'white',
     },
     rowLayout:{
