@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -52,6 +53,7 @@
 		A4877DCE87E343488D395534 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AA677EC7E854208A2CACAFE /* libRNImagePicker.a */; };
 		A835275B24103DFD533B6767 /* libPods-ZaloApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2793CAD36660B796F2E90AAA /* libPods-ZaloApp.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		BC71BD5F20AD3B6B00D2E75A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC71BD3420AD3B6B00D2E75A /* GoogleService-Info.plist */; };
 		CACC73427E0847D8A32B5780 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E18E2A5B8496F89C148B8 /* Feather.ttf */; };
 		D0F571D7886177D4A6C0077A /* libPods-ZaloAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3367F86A19C0369CE04F03C5 /* libPods-ZaloAppTests.a */; };
 		DD38DF99113B47B8ADB92A58 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E978308A51994F1CA61EC947 /* libBVLinearGradient.a */; };
@@ -423,6 +425,7 @@
 		B2376A7FC87B49C395A1CB09 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		B63AC353FA6742C2825AD41F /* libPods-ZaloApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZaloApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC5DE13B1C1245D3BB7AEAAA /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		BC71BD3420AD3B6B00D2E75A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "ZaloApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BEB55A5ADB75615B61B043C1 /* Pods-ZaloAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZaloAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZaloAppTests/Pods-ZaloAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		C56D3AB3939D4F04B4AB39B3 /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
 		CAE8B87DD28C40499B7C7D65 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
@@ -578,6 +581,7 @@
 		13B07FAE1A68108700A75B9A /* ZaloApp */ = {
 			isa = PBXGroup;
 			children = (
+				BC71BD3420AD3B6B00D2E75A /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1302,6 +1306,7 @@
 				7688C1AA794848538154017F /* Ionicons.ttf in Resources */,
 				F673BDF3A9C14A69A8211222 /* MaterialIcons.ttf in Resources */,
 				1E49CE7B3F734D6081F76D43 /* Octicons.ttf in Resources */,
+				BC71BD5F20AD3B6B00D2E75A /* GoogleService-Info.plist in Resources */,
 				9B1783E291354439BECC2E2B /* Roboto_medium.ttf in Resources */,
 				E9358B46D5384EDDBBA2771A /* Roboto.ttf in Resources */,
 				39EA229798714579926B4F0E /* SimpleLineIcons.ttf in Resources */,
