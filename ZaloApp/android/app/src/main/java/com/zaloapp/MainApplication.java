@@ -5,6 +5,7 @@ import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage; // <-
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage; // <-- Add this line
 
 import com.facebook.react.ReactApplication;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import io.invertase.firebase.RNFirebasePackage;
 
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -30,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new SplashScreenReactPackage(),
             new RNFirebasePackage(),
             new VectorIconsPackage(),
             new LinearGradientPackage(),
