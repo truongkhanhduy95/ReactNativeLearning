@@ -4,10 +4,5 @@
     <item
         android:drawable="@color/zaloColor"/>
 
-    <item
-        android:width="wrap_content"
-        android:height="wrap_content"
-        android:text="ZaloApp"
-        android:gravity="center" />
 
 </layer-list>

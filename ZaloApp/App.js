@@ -28,7 +28,7 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 export default class App extends Component {
 
   async componentDidMount(){
-    SplashScreen.hide()
+    //SplashScreen.hide()
     
     // Build a channel
     const channel = new firebase.notifications.Android.Channel('test-channel', 'Test Channel', firebase.notifications.Android.Importance.Max)
