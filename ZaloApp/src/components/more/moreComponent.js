@@ -5,8 +5,7 @@ import BaseHeaderComponent from '../BaseHeaderComponent';
 import ItemMoreComponent from './itemMoreComponent';
 import { NavigationActions } from 'react-navigation';
 import HeaderTab from '../headerTab';
-
-class MoreComponent extends Component {
+class MoreComponent extends BaseHeaderComponent {
 
   navigateToProfile(){
     let action = NavigationActions.navigate({ routeName: 'profile' });
@@ -18,14 +17,16 @@ class MoreComponent extends Component {
     this.props.navigation.dispatch(action);
   }
 
-  render() {
+  renderHeader() {
+    return(<HeaderTab 
+          onSettingsClicked = {() => this.navigateToSettings()}
+        />)
+  }
+
+  renderContent() {
   
     return (
-      <View style={{ flex: 1, justifyContent: 'center' }}>
-        <HeaderTab 
-          onSettingsClicked = {() => this.navigateToSettings()}
-        />
-        <View style={{ flex: 1, backgroundColor: '#F2F4F5' }}>
+      <View style={{ flex: 1, backgroundColor: '#F2F4F5' }}>
           <TouchableOpacity
           onPress={()=>this.navigateToProfile()}>
           <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff' }}>
@@ -48,7 +49,6 @@ class MoreComponent extends Component {
           <ItemMoreComponent title="Game" icon='map-marker-outline' backgroundColor='#EB6261' />
           <ItemMoreComponent title="Channel" icon='map-marker-outline' backgroundColor='#9F70CE' />
         </View>
-      </View>
     );
   }
 }

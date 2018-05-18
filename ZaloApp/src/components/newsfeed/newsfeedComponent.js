@@ -7,9 +7,9 @@ import LinearGradient from 'react-native-linear-gradient';
 import NewsFeedList from './newsfeedList';
 import { NavigationActions } from 'react-navigation';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import BaseHeaderComponent from '../BaseHeaderComponent';
 
-
-export default class NewsFeedComponent extends Component {
+export default class NewsFeedComponent extends BaseHeaderComponent {
 
     navigateToNoti()
     {
@@ -21,15 +21,16 @@ export default class NewsFeedComponent extends Component {
         let action = NavigationActions.navigate({ routeName: 'shareStatus' });
         this.props.navigation.dispatch(action);
     }
-
-    render() {
+    renderHeader() {
+        return (                
+        <HeaderTab 
+            onNotificationClicked = {()=>this.navigateToNoti()}/>)
+    }
+    renderContent() {
         const title = 'Bạn mới cập nhật';
         const changeStatus = ' "Thay đổi trạng thái?"';
         return (
-            <View style={styles.container}>
-                <HeaderTab 
-                    onNotificationClicked = {()=>this.navigateToNoti()}/>
-                <View style={{flex:1,backgroundColor: '#F2F4F5'}}>
+            <View style={{flex:1,backgroundColor: '#F2F4F5'}}>
                 <TouchableOpacity onPress={()=>this.navigateToShareStatus()}>
                     <View style={{ flexDirection: 'row', backgroundColor: '#fff', margin: 15, alignItems: 'center', borderRadius: 5 }}>
                         <Image style={{ borderRadius: 20, margin: 10, width: 40, height: 40 }} source={{ uri: 'https://facebook.github.io/react/logo-og.png' }} />
@@ -52,7 +53,6 @@ export default class NewsFeedComponent extends Component {
                 </View>
                 <NewsFeedList {...this.props} />
             </View >
-            </View>
         )
     }
 }
