@@ -6,8 +6,9 @@ import IconIO from 'react-native-vector-icons/Ionicons';
 import HeaderTab from './headerTab'
 import LinearGradient from 'react-native-linear-gradient';
 import { NavigationActions } from 'react-navigation';
+import BaseHeaderComponent from '../BaseHeaderComponent';
 
-export default class MessageComponent extends Component {
+export default class MessageComponent extends BaseHeaderComponent {
     constructor(props) {
         super(props);
         this.renderRow = this.renderRow.bind(this);
@@ -43,18 +44,19 @@ export default class MessageComponent extends Component {
                     </TouchableOpacity>
             </View>);
       }
-    render(){
+    renderHeader() {
+        return (
+            <HeaderTab/>
+        );
+    }
+    renderContent(){
         const friendSuggest = 'Gợi ý kết bạn';
         const bestFriend = 'Bạn thân';
         const selectFriend = 'Chọn bạn thường liên lạc';
-        return(
-            <View style = {styles.container}>
-                <HeaderTab/>
-
-                
-                <MessageList
+        
+        return (
+            <MessageList
                     onPress={()=>this.navigate()}/>
-            </View>
         );
     }
     //{borderStyle: 'dashed',borderColor: '#006FFD',backgroundColor:'#25b8f7'}
@@ -62,6 +64,7 @@ export default class MessageComponent extends Component {
 
 const styles = StyleSheet.create({
     container:{
+        flex:1,
         backgroundColor:"#f4f6f7",
     },
     icon:{

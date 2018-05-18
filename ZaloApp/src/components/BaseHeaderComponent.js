@@ -43,15 +43,19 @@ export default class BaseHeaderComponent extends BaseComponent{
     onSettingsClick(){
 
     }
+    renderHeader() {
+        return(
+            <Header
+                title = {this.getTitle()}
+                onBack = {() => this.goBack()}
+                showSettings = {this.isShowSettings()}
+                onSettingsClicked = {()=>this.onSettingsClick()} />);
+    }
 
     render(){
         return (
             <View style={{flex:1,justifyContent:'center'}}>
-                <Header
-                    title = {this.getTitle()}
-                    onBack = {() => this.goBack()}
-                    showSettings = {this.isShowSettings()}
-                    onSettingsClicked = {()=>this.onSettingsClick()} />
+                {this.renderHeader()}
                 {this.renderContent()}
             </View>
         ) 

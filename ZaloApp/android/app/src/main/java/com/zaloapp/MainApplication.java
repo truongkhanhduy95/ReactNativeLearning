@@ -1,8 +1,14 @@
 package com.zaloapp;
 
 import android.app.Application;
+import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage; // <-- Add this line
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage; // <-- Add this line
 
 import com.facebook.react.ReactApplication;
+import com.dylanvann.fastimage.FastImageViewPackage;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import io.invertase.firebase.RNFirebasePackage;
+
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.imagepicker.ImagePickerPackage;
@@ -26,9 +32,14 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new FastImageViewPackage(),
+            new SplashScreenReactPackage(),
+            new RNFirebasePackage(),
             new VectorIconsPackage(),
             new LinearGradientPackage(),
-            new ImagePickerPackage()
+            new ImagePickerPackage(),
+             new RNFirebaseMessagingPackage(),
+            new RNFirebaseNotificationsPackage() // <-- Add this line
       );
     }
 

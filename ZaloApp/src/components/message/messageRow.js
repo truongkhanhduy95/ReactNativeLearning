@@ -1,5 +1,6 @@
 import React , { Component } from 'react'
-import { View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity} from 'react-native'
+import FastImage from 'react-native-fast-image'
 
 export default class MessageRow extends Component {
     constructor(props) {
@@ -25,7 +26,7 @@ export default class MessageRow extends Component {
                 onPress = {this.onItemClick}>
             <View style={{padding: 12,flexDirection: 'row',alignItems: 'center',}}>
                 <View style= {{flex:1.2, justifyContent:'center', alignItems:'center'}}> 
-                    <Image source={{ uri: this.props.avatar}} style={styles.avatar} />
+                    <FastImage source={{ uri: this.props.avatar}} style={styles.avatar} resizeMode='contain'/>
                 </View>
                 <View style={styles.textLayout}>
                     <Text>

@@ -4,8 +4,9 @@ import { GiftedChat, Composer, Send } from 'react-native-gifted-chat';
 import Header from './header';
 import Icon from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import BaseHeaderComponent from '../BaseHeaderComponent';
 
-export default class ChatComponent extends Component {
+export default class ChatComponent extends BaseHeaderComponent {
   state = {
     messages: [],
   }
@@ -58,13 +59,17 @@ export default class ChatComponent extends Component {
     );
   }
 
-  render() {
+  renderHeader() {
+    return (
+      <Header
+          title='Phuong'
+          onBack={()=>this.props.navigation.dispatch({ type: 'Navigation/BACK' })}
+        />
+    );
+  }
+  renderContent() {
     return (
         <View style={{flex:1}}>
-            <Header
-              title='Phuong'
-              onBack={()=>this.props.navigation.dispatch({ type: 'Navigation/BACK' })}
-            />
             <GiftedChat
                 style={{flex:1}}
                 messages={this.state.messages}
