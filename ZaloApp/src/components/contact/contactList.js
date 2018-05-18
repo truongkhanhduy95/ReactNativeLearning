@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, StyleSheet, Switch,TextInput } from 'react-native'; 
+import { View, Text, FlatList, StyleSheet, Switch,TextInput,ActivityIndicator } from 'react-native'; 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { List, ListItem } from "react-native-elements";
 import ContactRow from '../contact/contactRow';
@@ -8,7 +8,7 @@ export default class ContactList extends Component {
     constructor(props){
         super(props);        
         this.state = {
-            loading: false,
+            loading: true,
             data: [],
             page: 1,
             seed: 1,
@@ -43,41 +43,49 @@ export default class ContactList extends Component {
     render() {
         const title ='Bạn mới cập nhật';
         const changeStatus = ' "Thay đổi trạng thái?"';
-        return (
-            <View style={styles.container}>
-                <View style ={styles.rowLayout}>
-                    <Text style={{fontWeight:'bold',fontSize:15}}>{title}</Text>
-                    <Switch style={{marginRight:10}} value tintColor={'#25b8f7'} onTintColor={'#25b8f7'}  />
+        if (this.state.loading)
+            return (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <ActivityIndicator size="large" color="#25b8f7" />
                 </View>
-                <View style ={[styles.rowLayout,{paddingTop:0,}]}>
-                    <TextInput
-                        style={{backgroundColor:'#f4f6f7',width:'100%',height:50,}}
-                        fontSize={18}
-                        placeholder={changeStatus}
-                        paddingLeft={10}
-                        //value={this.state.username}
-                        placeholderTextColor='gray'
-                        underlineColorAndroid='transparent'
+            )
+        else
+            return (
+                <View style={styles.container}>
+                    <View style ={styles.rowLayout}>
+                        <Text style={{fontWeight:'bold',fontSize:15}}>{title}</Text>
+                        <Switch style={{marginRight:10}} value tintColor={'#25b8f7'} onTintColor={'#25b8f7'}  />
+                    </View>
+                    <View style ={[styles.rowLayout,{paddingTop:0,}]}>
+                        <TextInput
+                            style={{backgroundColor:'#f4f6f7',width:'100%',height:50,}}
+                            fontSize={18}
+                            placeholder={changeStatus}
+                            paddingLeft={10}
+                            //value={this.state.username}
+                            placeholderTextColor='gray'
+                            underlineColorAndroid='transparent'
+                        />
+                    </View>
+                    <FlatList
+                        data={this.state.data}
+                        keyExtractor={item => item.email}
+                        renderItem={({ item }) => (
+                        <ContactRow
+                            username={`${item.name.first} ${item.name.last}`}
+                            subtitle={'status'}
+                            avatar={item.picture.thumbnail }
+                            onItemClick = {()=>this.props.onItemClick()}
+                            containerStyle={{ borderBottomWidth: 0 }}/>)}
                     />
                 </View>
-                <FlatList
-                    data={this.state.data}
-                    keyExtractor={item => item.email}
-                    renderItem={({ item }) => (
-                    <ContactRow
-                        username={`${item.name.first} ${item.name.last}`}
-                        subtitle={'status'}
-                        avatar={item.picture.thumbnail }
-                        onItemClick = {()=>this.props.onItemClick()}
-                        containerStyle={{ borderBottomWidth: 0 }}/>)}
-                />
-            </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
     container:{
+        flex:1,
         backgroundColor:'white',
     },
     rowLayout:{

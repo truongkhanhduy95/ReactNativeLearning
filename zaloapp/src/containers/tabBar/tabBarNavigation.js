@@ -1,5 +1,6 @@
 'use strict'
 import React from 'react'
+import View from 'react-native'
 import { addNavigationHelpers } from 'react-navigation'
 import { TabBar } from './navigationConfig'
 import { connect } from 'react-redux'
@@ -15,7 +16,7 @@ class TabBarNavigation extends React.Component {
   render(){
     const { dispatch, navigationState } = this.props
     return (
-      <TabBar
+        <TabBar
         navigation={
           addNavigationHelpers({
             dispatch: dispatch,
@@ -23,6 +24,7 @@ class TabBarNavigation extends React.Component {
           })
         }
       />
+      
     )
   }
 }

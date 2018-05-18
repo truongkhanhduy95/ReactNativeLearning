@@ -203,19 +203,19 @@ class ImageCell extends Component {
         return (  
                 
             <TouchableOpacity
-            key = {this.props.id}
-            style = {{ flexDirection:'column', justifyContent:'flex-end', alignItems:'flex-end', width: this.props.itemSize, height: this.props.itemSize }}
-            onPress = {()=>this.onItemClick()}>
-            <Image 
-                resizeMode = "cover"
-                style={{ width: this.props.itemSize, height: this.props.itemSize, position: 'absolute', top: 0, left: 0 }}
-                source = {{ uri: this.props.src }}
-                />
-            <View style={ !this.state.isSelected?{opacity: 0}:{opacity: 100}}>
-                <Icon.Button
-                    backgroundColor='transparent' size={26} 
-                    color='white'  name='ios-checkmark-circle-outline'/>
-            </View>
+                key = {this.props.id}
+                style = {{ flexDirection:'column', justifyContent:'flex-end', alignItems:'flex-end', width: this.props.itemSize, height: this.props.itemSize }}
+                onPress = {()=>this.onItemClick()}>
+                <Image 
+                    resizeMode = "cover"
+                    style={{ width: this.props.itemSize, height: this.props.itemSize, position: 'absolute', top: 0, left: 0 }}
+                    source = {{ uri: this.props.src }}
+                    />
+                <View style={ !this.state.isSelected?{opacity: 0}:{opacity: 100}}>
+                    <Icon.Button
+                        backgroundColor='transparent' size={26} 
+                        color='white'  name='ios-checkmark-circle-outline'/>
+                </View>
             
           </TouchableOpacity>
         );
