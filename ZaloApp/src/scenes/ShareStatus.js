@@ -7,6 +7,7 @@ import BaseComponent from '../components/BaseComponent';
 import MyStatusBar from '../components/MyStatusBar';
 import PhotoGrid from 'react-native-photo-grid';
 import Icon from 'react-native-vector-icons/Ionicons';
+import FastImage from 'react-native-fast-image';
 
 export default class ShareStatus extends BaseComponent {
     constructor() {
@@ -206,7 +207,7 @@ class ImageCell extends Component {
                 key = {this.props.id}
                 style = {{ flexDirection:'column', justifyContent:'flex-end', alignItems:'flex-end', width: this.props.itemSize, height: this.props.itemSize }}
                 onPress = {()=>this.onItemClick()}>
-                <Image 
+                <FastImage 
                     resizeMode = "cover"
                     style={{ width: this.props.itemSize, height: this.props.itemSize, position: 'absolute', top: 0, left: 0 }}
                     source = {{ uri: this.props.src }}

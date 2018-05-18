@@ -6,20 +6,24 @@ import IconIO from 'react-native-vector-icons/Ionicons';
 import HeaderTab from './headerTab'
 import LinearGradient from 'react-native-linear-gradient';
 import { NavigationActions } from 'react-navigation';
+import BaseHeaderComponent from '../BaseHeaderComponent';
 
-export default class ContactComponent extends Component{
+export default class ContactComponent extends BaseHeaderComponent{
     navigateToChat(){
         let action = NavigationActions.navigate({ routeName: 'chat' });
         this.props.navigation.dispatch(action);
     }
-
-    render(){
+    renderHeader() {
+        return (
+            <HeaderTab/>
+        );
+    }
+    renderContent(){
         const friendSuggest = 'Gợi ý kết bạn';
         const bestFriend = 'Bạn thân';
         const selectFriend = 'Chọn bạn thường liên lạc';
         return(
             <View style = {styles.container}>
-                <HeaderTab/>
                 <View style = {styles.suggestLayout}>
                     <View style= {{ justifyContent:'center', alignItems:'center'}}> 
                         <LinearGradient
