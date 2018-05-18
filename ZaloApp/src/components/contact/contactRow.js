@@ -1,6 +1,7 @@
 import React , { Component } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import FastImage from 'react-native-fast-image'
 
 export default class ContactRow extends Component {
     constructor(props){
@@ -20,7 +21,7 @@ export default class ContactRow extends Component {
                 onPress={()=>this.props.onItemClick()}>
             <View style={{padding: 12,flexDirection: 'row',alignItems: 'center',}}>
                 <View style= {{flex:1.2, justifyContent:'center', alignItems:'center'}}> 
-                    <Image source={{ uri: this.props.avatar}} style={styles.avatar} />
+                    <FastImage source={{ uri: this.props.avatar}} style={styles.avatar} />
                     <View style={{position:'absolute',alignSelf:'flex-end',top:33,right:5}}>
                         {activeDot}
                     </View>
