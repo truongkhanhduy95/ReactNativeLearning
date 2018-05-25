@@ -11,6 +11,7 @@ import NewsFeedDetailComponent from '../../components/newsfeedDetail/newsfeedDet
 import ChatComponent from '../../components/chat/chatComponent';
 import ProfileScreen from '../../scenes/Profile';
 import SettingsScreen from '../../components/settings/settingsComponent'
+import TabBarCustom from '../../components/tabbar/tabbarCustom';
 // import BaseHeader from '../../components/BaseHeaderComponent';
 
 // const EnhancedLoginScreen = BaseHeader(Login, 'Login');
@@ -20,7 +21,7 @@ import SettingsScreen from '../../components/settings/settingsComponent'
 const Router = StackNavigator({
     intro: { screen: Intro },
     login: { screen: Login },
-    tabBar: { screen: TabBarNavigation },
+    tabBar: { screen: TabBarCustom },
     phoneCode: { screen: PhoneCodeScreen},
     chat: { screen: ChatComponent },
     registerName: { screen: RegisterNameScreen},
