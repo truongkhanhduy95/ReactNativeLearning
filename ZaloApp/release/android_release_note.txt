@@ -1,2 +1,5 @@
 This is release note from android
-12
+- Integrate Firebase
+- Update Notification
+- Restructure Header View
+- Fix some layout bugs

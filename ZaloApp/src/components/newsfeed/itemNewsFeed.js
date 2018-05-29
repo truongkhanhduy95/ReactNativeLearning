@@ -4,6 +4,7 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { NavigationActions } from 'react-navigation';
+import FastImage from 'react-native-fast-image'
 
 const width = Dimensions.get('window').width;
 
@@ -21,7 +22,7 @@ class ItemNewsFeedComponent extends Component {
         return (
             <View style={{ flex: 1, backgroundColor: '#fff' }}>
                 <View style={{ flexDirection: 'row', backgroundColor: '#fff' }}>
-                    <Image style={{ borderRadius: 20, margin: 10, width: 40, height: 40 }} source={{ uri: this.props.avatar }} />
+                    <FastImage style={{ borderRadius: 20, margin: 10, width: 40, height: 40 }} source={{ uri: this.props.avatar }} />
                     <View style={{ flex: 1, flexDirection: 'column' }}>
                         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end' }} >
                             <Text style={{ color: '#000' }}>{this.props.username}</Text>
@@ -35,7 +36,7 @@ class ItemNewsFeedComponent extends Component {
                     </View>
                 </View>
                 <Text style={{ flex: 1, margin: 10, color: '#000' }} >Hôm nay tôi buồn</Text>
-                <Image style={{ width: width, height: width }} source={{ uri: 'https://reactjs.org/logo-og.png' }} />
+                <FastImage style={{ width: width, height: width }} source={{ uri: 'https://reactjs.org/logo-og.png' }} />
                 <View style={{ marginLeft: 10, marginRight: 10, height: 1, backgroundColor: '#DEDEDE', marginTop: 10 }}></View>
                 <TouchableHighlight onPress={this.onNavigateToDetail}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>

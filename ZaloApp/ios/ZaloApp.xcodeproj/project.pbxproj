@@ -53,6 +53,7 @@
 		A4877DCE87E343488D395534 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AA677EC7E854208A2CACAFE /* libRNImagePicker.a */; };
 		A835275B24103DFD533B6767 /* libPods-ZaloApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2793CAD36660B796F2E90AAA /* libPods-ZaloApp.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		BB5D1BCF20AE98FA00EF6FEB /* libFastImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB5D1BA620AE98E000EF6FEB /* libFastImage.a */; };
 		BC71BD5F20AD3B6B00D2E75A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC71BD3420AD3B6B00D2E75A /* GoogleService-Info.plist */; };
 		CACC73427E0847D8A32B5780 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E18E2A5B8496F89C148B8 /* Feather.ttf */; };
 		D0F571D7886177D4A6C0077A /* libPods-ZaloAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3367F86A19C0369CE04F03C5 /* libPods-ZaloAppTests.a */; };
@@ -364,6 +365,13 @@
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
 		};
+		BB5D1BA520AE98E000EF6FEB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BB5D1B9E20AE98E000EF6FEB /* FastImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A287971D1DE0C0A60081BDFA;
+			remoteInfo = FastImage;
+		};
 		BC4BDA1920AAE97700909A31 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 91FDAC0A67584AB7B5AE9F61 /* RNFirebase.xcodeproj */;
@@ -424,6 +432,7 @@
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B2376A7FC87B49C395A1CB09 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		B63AC353FA6742C2825AD41F /* libPods-ZaloApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZaloApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB5D1B9E20AE98E000EF6FEB /* FastImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FastImage.xcodeproj; path = "../node_modules/react-native-fast-image/ios/FastImage.xcodeproj"; sourceTree = "<group>"; };
 		BC5DE13B1C1245D3BB7AEAAA /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		BC71BD3420AD3B6B00D2E75A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "ZaloApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BEB55A5ADB75615B61B043C1 /* Pods-ZaloAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZaloAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZaloAppTests/Pods-ZaloAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -450,6 +459,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB5D1BCF20AE98FA00EF6FEB /* libFastImage.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -649,6 +659,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				BB5D1B9E20AE98E000EF6FEB /* FastImage.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -747,6 +758,14 @@
 			isa = PBXGroup;
 			children = (
 				BB3C0B4920A1B8D9006B80E6 /* libRNImagePicker.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BB5D1B9F20AE98E000EF6FEB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BB5D1BA620AE98E000EF6FEB /* libFastImage.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -916,6 +935,10 @@
 				{
 					ProductGroup = BB3C0B3D20A1B8D9006B80E6 /* Products */;
 					ProjectRef = 37B73E334BFB44E4832936C7 /* BVLinearGradient.xcodeproj */;
+				},
+				{
+					ProductGroup = BB5D1B9F20AE98E000EF6FEB /* Products */;
+					ProjectRef = BB5D1B9E20AE98E000EF6FEB /* FastImage.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
@@ -1274,6 +1297,13 @@
 			fileType = archive.ar;
 			path = libRNVectorIcons.a;
 			remoteRef = BB3C0B4B20A1B8D9006B80E6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BB5D1BA620AE98E000EF6FEB /* libFastImage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libFastImage.a;
+			remoteRef = BB5D1BA520AE98E000EF6FEB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		BC4BDA1A20AAE97700909A31 /* libRNFirebase.a */ = {
