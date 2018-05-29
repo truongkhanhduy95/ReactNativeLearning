@@ -12,8 +12,14 @@ function login(username, password) {
     //dispatch(getDataSuccess(username));
     userService.login(username, password)
       .then(
-        user => {
-          dispatch(getDataSuccess(username));
+        result => {
+          if(result.success)
+          {
+            dispatch(getDataSuccess(result.data));
+          }
+          else{
+            dispatch(getDataFailure(result.message))
+          }
         },
         err => {
           dispatch(getDataFailure(err))

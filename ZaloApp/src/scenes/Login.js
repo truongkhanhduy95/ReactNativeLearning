@@ -11,8 +11,8 @@ import { bindActionCreators } from 'redux';
 class Login extends BaseHeaderComponent {
     state = {
         isShowPassword: false,
-        username: 'Test',
-        password: '1234',
+        username: 'khanhduy',
+        password: 'khanhduy',
     }
 
     constructor(props) {
