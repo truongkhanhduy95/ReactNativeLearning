@@ -6,7 +6,10 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  BackHandler
+  BackHandler,
+  ActivityIndicator,
+  Keyboard,
+  AlertIOS
 } from 'react-native';
 
 import { Button } from 'native-base';
@@ -25,7 +28,9 @@ class RegisterPhoneScreen extends BaseHeaderComponent{
         countryCode:'',
         dialingCode:'',
         isDisable:true,
-        isRegistered:false
+        isRegistered:false,
+        isLoading:false,
+        error: '',
     }
     constructor(props) {
         super(props);
@@ -43,8 +48,11 @@ class RegisterPhoneScreen extends BaseHeaderComponent{
     }
 
     onRegisterButtonPressed(){
+        Keyboard.dismiss();
         console.log(this.state.phonenumber);
-        this.props.register(this.state.phonenumber);
+        var fullname = this.props.navigation.state.params.fullname;
+        var password = this.props.navigation.state.params.password;
+        this.props.register(fullname, fullname, password, this.state.phonenumber);
         console.log(this.props.isRegistered);
     }
     onSelectPhoneCode(){
@@ -56,7 +64,11 @@ class RegisterPhoneScreen extends BaseHeaderComponent{
         if (this.props.isRegistered){
             let action = NavigationActions.navigate({ routeName: 'tabBar' });
             this.props.navigation.dispatch(action);
-		}
+        }
+        
+        if (this.props.error) {
+            AlertIOS.alert(this.props.error);
+        }
 
     }
 
@@ -105,6 +117,11 @@ class RegisterPhoneScreen extends BaseHeaderComponent{
                         >
                         <Text style={{color:'white',fontWeight:'bold'}}>{'register'.toUpperCase()}</Text>
                 </Button>
+                {this.props.isLoading &&
+                    <View style={styles.loading}>
+                        <ActivityIndicator size='large' color="#25b8f7" />
+                    </View>
+                }
                 
             </View>
             
@@ -113,7 +130,9 @@ class RegisterPhoneScreen extends BaseHeaderComponent{
 
 }
 const mapStateToProps = state => ({
-    isRegistered: state.register.isRegistered
+    isRegistered: state.register.isRegistered,
+    isLoading: state.register.isRegistering,
+    error: state.register.error,
 });
 
 function mapDispatchToProps(dispatch) {
@@ -169,6 +188,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 10
-      }
+      },
+    loading: {
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor:'#00000040'
+        }
   });
   
