@@ -36,7 +36,7 @@ function login(username, password) {
         body: JSON.stringify({ username, password })
     }
 
-    return fetch(ServiceConfig + '/login', requestOptions)
+    return fetch('https://zaloapp-service.herokuapp.com/api/users/login', requestOptions)
         .then(response => {
             console.log(response);
             if (!response.ok) {
