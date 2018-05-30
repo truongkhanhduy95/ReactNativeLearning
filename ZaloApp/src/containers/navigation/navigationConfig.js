@@ -11,6 +11,7 @@ import NewsFeedDetailComponent from '../../components/newsfeedDetail/newsfeedDet
 import ChatComponent from '../../components/chat/chatComponent';
 import ProfileScreen from '../../scenes/Profile';
 import SettingsScreen from '../../components/settings/settingsComponent'
+import shareStatusContainer from '../shareStatusContainer';
 // import BaseHeader from '../../components/BaseHeaderComponent';
 
 // const EnhancedLoginScreen = BaseHeader(Login, 'Login');
@@ -29,7 +30,7 @@ const Router = StackNavigator({
     profile: { screen: ProfileScreen },
     newsfeedDetail: { screen: NewsFeedDetailComponent },
     settings: { screen: SettingsScreen},
-    shareStatus: { screen: ShareStatus},
+    shareStatus: { screen: shareStatusContainer},
 },
     {
         headerMode: 'none',
