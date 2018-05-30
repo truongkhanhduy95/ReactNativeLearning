@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, StatusBar, AlertIOS, Platform, Image, ListView, Keyboard } from 'react-native'
+import { View, ActivityIndicator,Text, TextInput, StyleSheet, TouchableOpacity, StatusBar, AlertIOS, Platform, Image, ListView, Keyboard } from 'react-native'
 import { Button } from 'native-base';
 import { BackHandler } from 'react-native';
 import { NavigationActions } from 'react-navigation';
@@ -21,11 +21,13 @@ export default class ShareStatus extends BaseComponent {
         }
     }
 
-    componentDidUpdate() {
-        const {isPostStatusSuccess} =this.props;
-        console.log("componentDidUpdate");
-        if(isPostStatusSuccess){
-            this.props.navigation.dispatch({ type: 'Navigation/BACK' });
+    componentWillReceiveProps(newProps) {
+        const {isPostStatusSuccess, isLoading} =newProps;
+        
+        if(!isLoading){
+            if(isPostStatusSuccess){
+                this.props.navigation.dispatch({ type: 'Navigation/BACK' });
+            }
         }
     }
 
@@ -48,6 +50,18 @@ export default class ShareStatus extends BaseComponent {
     renderContent() {
         return (
             <View style={styles.container}>
+            {this.props.isLoading &&
+                    <View style={{position: 'absolute',
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor:'#00000040'}}>
+                        <ActivityIndicator size='large' color="#25b8f7" />
+                    </View>
+                }
                 <View style={{
                     flexDirection: 'row',
                     justifyContent: 'flex-start',
@@ -72,6 +86,7 @@ export default class ShareStatus extends BaseComponent {
                         <Text style={{ color: '#007AFF', fontWeight: 'bold' }}>Cong khai</Text>
                     </TouchableOpacity>
                     <Icon.Button
+                    
                         onPress={() => this.props.postStatus(this.state.typedStatus)}
                         backgroundColor='transparent' size={26}
                         color='gray' name='md-send' />

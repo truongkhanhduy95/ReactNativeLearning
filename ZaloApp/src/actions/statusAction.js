@@ -1,7 +1,10 @@
 import { StatusService } from '../service/statusService'
 import { statusConstants } from '../constants/statusConstant'
+
 export function postStatusAsync(content) {
+   
     return (dispatch, getState) => {
+        dispatch(getData());
         var user = getState().login.userData;
         var owner = {
             user_avatar: user.avatar,

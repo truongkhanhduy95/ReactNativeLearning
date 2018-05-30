@@ -98,7 +98,7 @@ export class NewsFeedList extends Component {
 const mapStateToProps = state => ({
     loading: state.statusList.isLoading,
     error: state.statusList.error,
-    data: state.statusList.statuses,
+    data: state.statusList.statuses.reverse(),
 });
 
 function mapDispatchToProps(dispatch) {
