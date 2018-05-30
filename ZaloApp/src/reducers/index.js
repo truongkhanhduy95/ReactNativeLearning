@@ -9,6 +9,7 @@ import registerReducer from './registerReducer';
 import { navigationReducer } from '../containers/navigation/navigationConfig';
 import { reducerStackNavigator } from './reducerStackNavigator';
 import contactReducer from './contactReducer';
+import getStatusReducer from './getStatusReducer';
 
 export default combineReducers({
     NavigationReducer: reducerStackNavigator(Router),
@@ -16,6 +17,7 @@ export default combineReducers({
     login: LoginReducer,
     register: registerReducer,
     contact: contactReducer,
+    status: getStatusReducer,
     tabMessage: reducerStackNavigator(MessageTab),
     tabMore: reducerStackNavigator(MoreTab),
     tabContact: reducerStackNavigator(ContactTab),

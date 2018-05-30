@@ -1,2 +1,2 @@
 export * from './userConstant';
-export * from './contactConstant';
+export * from './systemConstant';

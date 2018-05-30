@@ -1,7 +1,7 @@
 import { systemConstants } from '../constants';
 
 const initialState = {
-    contacts: [],
+    statuses: [],
     isLoading: false,
     error:'',
 };
@@ -17,7 +17,7 @@ export default function (state = initialState, action) {
     case systemConstants.GET_INFO_SUCCESS:
         return {
             ...state,
-            contacts : action.contacts,
+            statuses : action.statuses,
             isLoading :false,
         };
 
