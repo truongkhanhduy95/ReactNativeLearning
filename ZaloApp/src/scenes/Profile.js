@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, StyleSheet, Animated, TouchableOpacity, StatusBar, AlertIOS, Platform, Image, ListView,
-    PermissionsAndroid } from 'react-native'
+    PermissionsAndroid,AsyncStorage } from 'react-native'
 import { Button, Icon } from 'native-base';
 import { BackHandler } from 'react-native';
 import { NavigationActions } from 'react-navigation';
@@ -19,7 +19,8 @@ const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
 export default class Profile extends BaseComponent {
 
     _data = {};
-
+    
+    userData= {};
     constructor(props) {
         super(props);
         this.state = {
@@ -29,6 +30,8 @@ export default class Profile extends BaseComponent {
                 Platform.OS === 'ios' ? -HEADER_MAX_HEIGHT : 0,
             ),
             refreshing: false,
+            userData: {}
+
         };
 
         // this.renderRow = this.renderRow.bind(this);
@@ -42,8 +45,30 @@ export default class Profile extends BaseComponent {
                 { Title: "Holidays 30/4 - 1/5", Content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut venenatis felis. Donec at tempus neque. Morbi vitae sem et nisi porta ornare. Cras at venenatis tellus. Curabitur consequat lacinia lacus, et luctus tortor dignissim nec. Suspendisse scelerisque aliquet vehicula. Integer at ante elit.' },
                 { Title: 'Birthday 6/5', Content: 'Suspendisse potenti. Proin varius risus ac venenatis elementum. Morbi fringilla ante et nibh accumsan, ultricies tempor est porta. Nunc molestie neque a efficitur posuere. Nunc egestas, massa vitae hendrerit feugiat, ligula sem ullamcorper ante, quis ultricies quam turpis ac lectus. Praesent luctus, sapien imperdiet sagittis iaculis, nibh lacus convallis velit, sed placerat enim justo ornare tortor. Phasellus sed dui id odio lobortis imperdiet. Duis sollicitudin tellus sed eros commodo ultrices. Donec auctor nunc id quam suscipit, tempus tincidunt elit placerat. Sed nec odio vel ligula maximus varius. Nullam vulputate augue non gravida lacinia. Nam ac lobortis libero, id sollicitudin nulla.' }],
         };
+        this.retrieveItem("USER_DATA").then((user) => {
+            //this callback is executed when your Promise is resolved
+            this.setState({
+                userData: user
+            });
+                console.log(this.state.userData.fullname)
+            }).catch((error) => {
+            //this callback is executed when your Promise is rejected
+            console.log('Promise is rejected with error: ' + error);
+            });
+        console.log(this.userData.fullname)
+         
     }
-    
+    async retrieveItem(key) {
+        try {
+          const retrievedItem =  await AsyncStorage.getItem(key);
+          
+          const item = JSON.parse(retrievedItem);
+          return item;
+        } catch (error) {
+          console.log(error.message);
+        }
+        return
+      }
     selectPhotoTapped() {
         const options = {
             quality: 1.0,
@@ -282,7 +307,7 @@ export default class Profile extends BaseComponent {
                         ]
 
                     }]}
-                        source={{ uri: 'https://reactjs.org/logo-og.png' }} />
+                        source={{ uri: this.state.userData.avatar != null ?  this.state.userData.avatar : 'https://reactjs.org/logo-og.png'}} />
                 </Animated.View>
                 <Animated.View
                     style={[
@@ -295,7 +320,7 @@ export default class Profile extends BaseComponent {
                         },
                     ]}
                 >
-                    <Text style={styles.title}>Kris Nguyễn</Text>
+                    <Text style={styles.title}>{this.state.userData.fullname}</Text>
                 </Animated.View>
                 <View style={{
                     position: 'absolute', top: 0, left: 0, right: 0,
