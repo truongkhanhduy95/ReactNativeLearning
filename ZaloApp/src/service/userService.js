@@ -1,4 +1,4 @@
-import ServiceConfig from './serviceConfig';
+import { ServiceConfig } from './serviceConfig';
 
 export const userService = {
     login: login,
@@ -12,7 +12,7 @@ function register(username, fullname, password, phonenumber){
         body: JSON.stringify({ username, fullname, password, phonenumber})
     }
 
-    return fetch('https://zaloapp-service.herokuapp.com/api/users', requestOptions)
+    return fetch(ServiceConfig.UserService, requestOptions)
         .then(response => {
             if (!response.ok) {
                 return Promise.reject(response.statusText);
@@ -36,7 +36,7 @@ function login(username, password) {
         body: JSON.stringify({ username, password })
     }
 
-    return fetch('https://zaloapp-service.herokuapp.com/api/users/login', requestOptions)
+    return fetch(ServiceConfig.LoginService, requestOptions)
         .then(response => {
             console.log(response);
             if (!response.ok) {

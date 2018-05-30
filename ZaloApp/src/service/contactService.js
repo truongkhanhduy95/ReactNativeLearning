@@ -1,14 +1,15 @@
+import { ServiceConfig } from './serviceConfig';
+
 export const contactService = {
     getContact: getContact,
 }
 
 function getContact() {
-    const url = `https://zaloapp-service.herokuapp.com/api/contacts`;
     const requestOptions = {
         method : 'GET',
         headers: { 'Content-Type': 'application/json' }
     }
-    return fetch(url, requestOptions)
+    return fetch(ServiceConfig.ContactService, requestOptions)
         .then(response => {
             console.log(response);
             if (!response.ok) {
