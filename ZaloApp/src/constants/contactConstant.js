@@ -1,4 +1,3 @@
-
 export const contactConstants = {
     GET_CONTACT_REQUEST : 'GET_CONTACT_REQUEST',
     GET_CONTACT_SUCCESS : 'GET_CONTACT_SUCCESS',

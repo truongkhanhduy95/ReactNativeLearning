@@ -11,6 +11,7 @@ function login(username, password) {
     userService.login(username, password)
       .then(
         result => {
+          console.log("result:" + JSON.stringify(result));
           if(result.success)
           {
             dispatch(getDataSuccess(result.data));

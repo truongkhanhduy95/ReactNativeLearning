@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, StatusBar, AlertIOS,Platform,  Image, ListView, Keyboard  } from 'react-native'
+import { View, ActivityIndicator,Text, TextInput, StyleSheet, TouchableOpacity, StatusBar, AlertIOS, Platform, Image, ListView, Keyboard } from 'react-native'
 import { Button } from 'native-base';
 import { BackHandler } from 'react-native';
 import { NavigationActions } from 'react-navigation';
@@ -12,15 +12,24 @@ import FastImage from 'react-native-fast-image';
 export default class ShareStatus extends BaseComponent {
     constructor() {
         super();
-        this.state = { items: [],
+        this.state = {
+            items: [],
             typedStatus: '',
-            isSelected:false,
+            isSelected: false,
             selectedItems: [],
-            isFocus:false 
+            isFocus: false
         }
-      }
-      
-      
+    }
+
+    componentWillReceiveProps(newProps) {
+        const {isPostStatusSuccess, isLoading} =newProps;
+        
+        if(!isLoading){
+            if(isPostStatusSuccess){
+                this.props.navigation.dispatch({ type: 'Navigation/BACK' });
+            }
+        }
+    }
 
     componentDidMount() {
         // Build an array of 60 photos
@@ -36,214 +45,238 @@ export default class ShareStatus extends BaseComponent {
         })
         var items = this.state.selectedItems;
         items.push(item)
-        this.setState( {selectedItems} )
+        this.setState({ selectedItems })
     }
     renderContent() {
         return (
-          <View style={styles.container}>
-            <View style={{
-                flexDirection: 'row',
-                justifyContent: 'flex-start',
-                alignItems: 'center',
-                backgroundColor:'#F3F3F3',
-                height: APPBAR_HEIGHT
-            }}>
-                
-                <Icon.Button
-                    onPress = {this.goBack.bind(this)} 
-                    backgroundColor='transparent' size={26} 
-                    color='gray' name='ios-arrow-back'/>
-                <TouchableOpacity
-                      style={{ 
-                        flex:1,
-                      flexDirection:'row',
-                      justifyContent:'center',
-                      alignItems:'center'}}
-                      onPress={this.goBack.bind(this)}
-                  >
-                    <Text style={{  color:'#007AFF', fontWeight:'bold'}}>Cong khai</Text>
-                </TouchableOpacity>
-                <Icon.Button
-                    onPress = {this.goBack.bind(this)} 
-                    backgroundColor='transparent' size={26} 
-                    color='gray' name='md-send'/>
+            <View style={styles.container}>
+            {this.props.isLoading &&
+                    <View style={{position: 'absolute',
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor:'#00000040'}}>
+                        <ActivityIndicator size='large' color="#25b8f7" />
+                    </View>
+                }
+                <View style={{
+                    flexDirection: 'row',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                    backgroundColor: '#F3F3F3',
+                    height: APPBAR_HEIGHT
+                }}>
 
-            </View>
-            <TextInput
-                style={{flex:1,
-                        padding: 10,
-                        fontSize:21,
-                        textAlignVertical:'top'
-                      }}
-                multiline={true}
-                placeholder='Ban dang nghi gi?'
-                editable={true}
-                returnKeyType='done'
-                onSubmitEditing={Keyboard.dismiss}
-                onTouchStart={() => {
-                    this.setState(() => {
-                        return {
-                              isFocus: true
-                        };
-                })}}
-                onChangeText={(text) => {this.setState(() => {
-                    return {
-                          typedStatus: text
-                    };
-                })}} />
-            <View style={{
-                flexDirection: 'row',
-                justifyContent: 'flex-start',
-                alignItems: 'center',
-                backgroundColor:'#F3F3F3',
-                height: APPBAR_HEIGHT
-            }}>
-                
-                <Icon.Button
-                    onPress={() => {
-                        this.setState(() => {
-                            return {
-                                  isFocus: true
-                            };
-                    })}}
-                    backgroundColor='transparent' size={26} 
-                    color='gray' name='md-happy'/>
-                <View
-                      style={{ 
-                        flex:1,
-                      flexDirection:'row',
-                      justifyContent:'center',
-                      alignItems:'center'}}
-                      onPress={this.goBack.bind(this)}
-                  >
+                    <Icon.Button
+                        onPress={this.goBack.bind(this)}
+                        backgroundColor='transparent' size={26}
+                        color='gray' name='ios-arrow-back' />
+                    <TouchableOpacity
+                        style={{
+                            flex: 1,
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}
+                        onPress={this.goBack.bind(this)}
+                    >
+                        <Text style={{ color: '#007AFF', fontWeight: 'bold' }}>Cong khai</Text>
+                    </TouchableOpacity>
+                    <Icon.Button
+                    
+                        onPress={() => this.props.postStatus(this.state.typedStatus)}
+                        backgroundColor='transparent' size={26}
+                        color='gray' name='md-send' />
+
                 </View>
-                <Icon.Button
-                    onPress={() => {
-                        Keyboard.dismiss()
+                <TextInput
+                    style={{
+                        flex: 1,
+                        padding: 10,
+                        fontSize: 21,
+                        textAlignVertical: 'top'
+                    }}
+                    multiline={true}
+                    placeholder='Ban dang nghi gi?'
+                    editable={true}
+                    returnKeyType='done'
+                    onSubmitEditing={Keyboard.dismiss}
+                    onTouchStart={() => {
                         this.setState(() => {
                             return {
-                                  isFocus: false
+                                isFocus: true
                             };
-                    })}}
-                    backgroundColor='transparent' size={26} 
-                    color='gray' name='ios-image-outline'/>
-                <Icon.Button
-                    onPress={() => {
-                        Keyboard.dismiss()
+                        })
+                    }}
+                    onChangeText={(text) => {
                         this.setState(() => {
                             return {
-                                  isFocus: false
+                                typedStatus: text
                             };
-                    })}}
-                    backgroundColor='transparent' size={26} 
-                    color='gray' name='ios-film-outline'/>
-                <Icon.Button
-                    onPress={() => {
-                        Keyboard.dismiss()
-                        this.setState(() => {
-                            return {
-                                isFocus: false
-                            };
-                    })}}
-                    backgroundColor='transparent' size={26} 
-                    color='gray' name='ios-mic-outline'/>
-                <Icon.Button
-                    onPress={() => {
-                        this.setState(() => {
-                            Keyboard.dismiss()
-                            return {
-                                  isFocus: false
-                            };
-                    })}}
-                    backgroundColor='transparent' size={26} 
-                    color='gray' name='ios-attach'/>
+                        })
+                    }} />
+                <View style={{
+                    flexDirection: 'row',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                    backgroundColor: '#F3F3F3',
+                    height: APPBAR_HEIGHT
+                }}>
 
-            </View>
-            <View style={!this.state.isFocus ? {flex:1} : {height:0,width:0}}>
-                <PhotoGrid
-                    data = { this.state.items }
-                    itemsPerRow = { 3 }
-                    itemMargin = { 1 }
-                    renderItem = { this.renderItem }
-                />
-            </View>
-            
-          </View>);
+                    <Icon.Button
+                        onPress={() => {
+                            this.setState(() => {
+                                return {
+                                    isFocus: true
+                                };
+                            })
+                        }}
+                        backgroundColor='transparent' size={26}
+                        color='gray' name='md-happy' />
+                    <View
+                        style={{
+                            flex: 1,
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}
+                        onPress={this.goBack.bind(this)}
+                    >
+                    </View>
+                    <Icon.Button
+                        onPress={() => {
+                            Keyboard.dismiss()
+                            this.setState(() => {
+                                return {
+                                    isFocus: false
+                                };
+                            })
+                        }}
+                        backgroundColor='transparent' size={26}
+                        color='gray' name='ios-image-outline' />
+                    <Icon.Button
+                        onPress={() => {
+                            Keyboard.dismiss()
+                            this.setState(() => {
+                                return {
+                                    isFocus: false
+                                };
+                            })
+                        }}
+                        backgroundColor='transparent' size={26}
+                        color='gray' name='ios-film-outline' />
+                    <Icon.Button
+                        onPress={() => {
+                            Keyboard.dismiss()
+                            this.setState(() => {
+                                return {
+                                    isFocus: false
+                                };
+                            })
+                        }}
+                        backgroundColor='transparent' size={26}
+                        color='gray' name='ios-mic-outline' />
+                    <Icon.Button
+                        onPress={() => {
+                            this.setState(() => {
+                                Keyboard.dismiss()
+                                return {
+                                    isFocus: false
+                                };
+                            })
+                        }}
+                        backgroundColor='transparent' size={26}
+                        color='gray' name='ios-attach' />
+
+                </View>
+                <View style={!this.state.isFocus ? { flex: 1 } : { height: 0, width: 0 }}>
+                    <PhotoGrid
+                        data={this.state.items}
+                        itemsPerRow={3}
+                        itemMargin={1}
+                        renderItem={this.renderItem}
+                    />
+                </View>
+
+            </View>);
     }
-      
-    
-      renderItem(item, itemSize) {
-        return(
-          <ImageCell
-          itemSize = {itemSize} 
-            key = {item.id}
-            id = {item.id}
-            src= {item.src} />
+
+
+    renderItem(item, itemSize) {
+        return (
+            <ImageCell
+                itemSize={itemSize}
+                key={item.id}
+                id={item.id}
+                src={item.src} />
         )
-      }
-    
+    }
+
 }
 
 class ImageCell extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            isSelected : false,
+            isSelected: false,
         }
     }
 
     onItemClick() {
         this.setState(prevState => ({
             isSelected: !prevState.isSelected
-          }));
-          console.log(this.props.id)
+        }));
+        console.log(this.props.id)
     }
 
-    render() {   
-        
-        return (  
-                
+    render() {
+
+        return (
+
             <TouchableOpacity
-                key = {this.props.id}
-                style = {{ flexDirection:'column', justifyContent:'flex-end', alignItems:'flex-end', width: this.props.itemSize, height: this.props.itemSize }}
-                onPress = {()=>this.onItemClick()}>
-                <FastImage 
-                    resizeMode = "cover"
+                key={this.props.id}
+                style={{ flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'flex-end', width: this.props.itemSize, height: this.props.itemSize }}
+                onPress={() => this.onItemClick()}>
+                <FastImage
+                    resizeMode="cover"
                     style={{ width: this.props.itemSize, height: this.props.itemSize, position: 'absolute', top: 0, left: 0 }}
-                    source = {{ uri: this.props.src }}
-                    />
-                <View style={ !this.state.isSelected?{opacity: 0}:{opacity: 100}}>
+                    source={{ uri: this.props.src }}
+                />
+                <View style={!this.state.isSelected ? { opacity: 0 } : { opacity: 100 }}>
                     <Icon.Button
-                        backgroundColor='transparent' size={26} 
-                        color='white'  name='ios-checkmark-circle-outline'/>
+                        backgroundColor='transparent' size={26}
+                        color='white' name='ios-checkmark-circle-outline' />
                 </View>
-            
-          </TouchableOpacity>
+
+            </TouchableOpacity>
         );
     }
-  }
+}
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 const styles = StyleSheet.create({
-  container: {
-   flex: 1,
-   paddingTop: STATUSBAR_HEIGHT
-  },
-  sectionHeader: {
-    paddingTop: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 2,
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#000',
-    backgroundColor : '#F5F5F5'
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-    
-  },
+    container: {
+        flex: 1,
+        paddingTop: STATUSBAR_HEIGHT
+    },
+    sectionHeader: {
+        paddingTop: 2,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingBottom: 2,
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: '#000',
+        backgroundColor: '#F5F5F5'
+    },
+    item: {
+        padding: 10,
+        fontSize: 18,
+        height: 44,
+
+    },
 })

@@ -75,7 +75,7 @@ export class ContactList extends Component {
                             username={`${item.contact_name}`}
                             subtitle={'status'}
                             avatar={item.avatar }
-                            onItemClick = {()=>this.props.onItemClick()}
+                            onItemClick = {()=>this.props.onItemClick(item.avatar,item.contact_name,"Hello!!")}
                             containerStyle={{ borderBottomWidth: 0 }}/>)}
                         />
                 </View>

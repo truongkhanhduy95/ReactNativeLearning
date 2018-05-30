@@ -9,8 +9,12 @@ import { NavigationActions } from 'react-navigation';
 import BaseHeaderComponent from '../BaseHeaderComponent';
 import TopBar from '../TopBar'
 export default class ContactComponent extends BaseHeaderComponent{
-    navigateToChat(){
-        let action = NavigationActions.navigate({ routeName: 'chat' });
+    navigateToChat(avatar, username, message){
+        let action = NavigationActions.navigate({ routeName: 'chat',params: {
+            username: username,
+            avatar: avatar,
+            message: message
+        } });
         this.props.navigation.dispatch(action);
     }
     renderHeader() {
@@ -56,7 +60,7 @@ export default class ContactComponent extends BaseHeaderComponent{
                         </View>
 
                         <ContactList
-                                onItemClick={()=>this.navigateToChat()} />
+                                onItemClick={(avatar, username, message)=>this.navigateToChat(avatar, username, message)} />
                     </View>
 
                     {/* Official Account tab */}

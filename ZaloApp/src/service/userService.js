@@ -38,11 +38,11 @@ function login(username, password) {
 
     return fetch(ServiceConfig.LoginService, requestOptions)
         .then(response => {
-            console.log(response);
+            console.log("Response Login:"+JSON.stringify(response));
             if (!response.ok) {
                 return Promise.reject(response.statusText);
             }
-
+            // console.log("Response Login:" + JSON.stringify(response.json()));
             return response.json();
         })
         .then(data => {
