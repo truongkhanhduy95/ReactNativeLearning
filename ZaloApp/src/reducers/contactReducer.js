@@ -1,4 +1,4 @@
-import { systemConstants } from '../constants';
+import { contactConstants } from '../constants';
 
 const initialState = {
     contacts: [],
@@ -8,20 +8,20 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case systemConstants.GET_INFO_REQUEST:
+    case contactConstants.GET_CONTACT_REQUEST:
         return {
             ...state,
             isLoading : true,
         };
 
-    case systemConstants.GET_INFO_SUCCESS:
+    case contactConstants.GET_CONTACT_SUCCESS:
         return {
             ...state,
             contacts : action.contacts,
             isLoading :false,
         };
 
-    case systemConstants.GET_INFO_FAILED:
+    case contactConstants.GET_CONTACT_FAILED:
         return {
             ...state,
             isLoading :false,

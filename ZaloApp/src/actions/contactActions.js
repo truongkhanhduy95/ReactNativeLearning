@@ -1,4 +1,4 @@
-import { systemConstants }  from '../constants';
+import { contactConstants }  from '../constants';
 import { contactService } from '../service';
 
 export const contactActions = {
@@ -16,9 +16,11 @@ function getContact() {
           if(result.success)
           {
             dispatch(getDataSuccess(result.data));
+            console.log(result.data)
           }
           else{
             dispatch(getDataFailure(result.data))
+            console.log(result.data)
           }
         },
         err => {
@@ -27,7 +29,7 @@ function getContact() {
       );
   };
 
-  function getData() { return { type: systemConstants.GET_INFO_REQUEST }}
-  function getDataSuccess(contacts) { return { type: systemConstants.GET_INFO_SUCCESS, contacts }}
-  function getDataFailure(error) { return { type: systemConstants.GET_INFO_FAILED, error }}
+  function getData() { return { type: contactConstants.GET_CONTACT_REQUEST }}
+  function getDataSuccess(contacts) { return { type: contactConstants.GET_CONTACT_SUCCESS, contacts }}
+  function getDataFailure(error) { return { type: contactConstants.GET_CONTACT_FAILED, error }}
 }
