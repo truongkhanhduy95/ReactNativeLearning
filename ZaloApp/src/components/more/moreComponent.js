@@ -1,11 +1,40 @@
 import React, { Component } from 'react';
-import { View, Text, Image , TouchableOpacity} from 'react-native';
+import { View, Text, Image , TouchableOpacity, AsyncStorage} from 'react-native';
 import { Container } from 'native-base';
 import BaseHeaderComponent from '../BaseHeaderComponent';
 import ItemMoreComponent from './itemMoreComponent';
 import { NavigationActions } from 'react-navigation';
 import HeaderTab from '../headerTab';
 class MoreComponent extends BaseHeaderComponent {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+        userData: {}
+    };
+    this.retrieveItem("USER_DATA").then((user) => {
+        this.setState({
+            userData: user
+        });
+            console.log(this.state.userData.fullname)
+        }).catch((error) => {
+      
+        console.log('Promise is rejected with error: ' + error);
+        });
+         
+  }
+  
+  async retrieveItem(key) {
+    try {
+      const retrievedItem =  await AsyncStorage.getItem(key);
+      
+      const item = JSON.parse(retrievedItem);
+      return item;
+    } catch (error) {
+      console.log(error.message);
+    }
+    return
+  }
 
   navigateToProfile(){
     let action = NavigationActions.navigate({ routeName: 'profile' });
@@ -30,10 +59,10 @@ class MoreComponent extends BaseHeaderComponent {
           <TouchableOpacity
           onPress={()=>this.navigateToProfile()}>
           <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff' }}>
-            <Image style={{ borderRadius: 20, margin: 15, width: 40, height: 40 }} source={{ uri: 'https://reactjs.org/logo-og.png' }} />
+            <Image style={{ borderRadius: 20, margin: 15, width: 40, height: 40 }} source={{ uri: this.state.userData.avatar}} />
             <View style={{ flex: 1, flexDirection: 'column' }}>
               <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end' }} >
-                <Text style={{ flex: 1, color: '#000' }}>Kris Nguyen</Text>
+                <Text style={{ flex: 1, color: '#000' }}>{this.state.userData.fullname}</Text>
               </View>
               <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-start' }} >
                 <Text style={{ flex: 1, color: '#000' }} >Trang cá nhân của bạn</Text>
