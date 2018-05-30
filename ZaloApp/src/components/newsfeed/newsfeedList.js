@@ -65,6 +65,10 @@ export class NewsFeedList extends Component {
                             username={item.owner.user_name}
                             subtitle={'status'}
                             avatar={item.owner.user_avatar}
+                            content={item.content}
+                            likes={item.likes}
+                            comments={item.comments}
+                            time_create={item.time_create}
                             containerStyle={{ borderBottomWidth: 0 }} />)}
                 />
         );
