@@ -20,8 +20,13 @@ export default class MessageComponent extends BaseHeaderComponent {
             {username:"Title 1", avatar:'https://reactjs.org/logo-og.png'},
           ])};
     }
-    navigate(){
-        let action = NavigationActions.navigate({ routeName: 'chat' });
+    navigate(avatar, username, message){
+        let action = NavigationActions.navigate({ routeName: 'chat', params: {
+            username: username,
+            avatar: avatar,
+            message: message
+        }
+        });
         this.props.navigation.dispatch(action);
     }
     renderRow(rowData, section, row) {
@@ -56,7 +61,7 @@ export default class MessageComponent extends BaseHeaderComponent {
         
         return (
             <MessageList
-                    onPress={()=>this.navigate()}/>
+                    onPress={(avatar, username, message)=>this.navigate(avatar, username, message)}/>
         );
     }
     //{borderStyle: 'dashed',borderColor: '#006FFD',backgroundColor:'#25b8f7'}
