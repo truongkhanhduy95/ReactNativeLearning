@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, Text, FlatList, StyleSheet, Switch, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
+import { View, Image, Text, FlatList,RefreshControl, StyleSheet, Switch, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { List, ListItem } from "react-native-elements";
 import ItemNewsFeedComponent from './itemNewsFeed';
@@ -17,7 +17,12 @@ export class NewsFeedList extends Component {
             refreshing: false,
             userData: {}
         };
-        this.retrieveItem("USER_DATA").then((user) => {
+       
+
+    }
+
+    loadData =() => {
+         this.retrieveItem("USER_DATA").then((user) => {
             //this callback is executed when your Promise is resolved
             this.setState({
                 userData: user
@@ -28,8 +33,15 @@ export class NewsFeedList extends Component {
             //this callback is executed when your Promise is rejected
             console.log('Promise is rejected with error: ' + error);
         });
-
     }
+
+
+    _onRefresh = () => {
+        if(!this.state.refreshing){
+            this.loadData();
+        }
+    }
+
     async retrieveItem(key) {
         try {
             const retrievedItem = await AsyncStorage.getItem(key);
@@ -42,7 +54,8 @@ export class NewsFeedList extends Component {
         return
     }
     componentDidMount() {
-        this.makeRemoteRequest();
+        // this.makeRemoteRequest();
+        this.loadData();
     }
     navigateToProfile() {
         let action = NavigationActions.navigate({ routeName: 'profile' });
@@ -58,6 +71,12 @@ export class NewsFeedList extends Component {
             <FlatList
                 data={this.props.data}
                 keyExtractor={item => item._id}
+                refreshControl={
+                    <RefreshControl
+                      refreshing={this.state.refreshing}
+                      onRefresh={this._onRefresh.bind(this)}
+                    />
+                  }
                 renderItem={({ item }) => (
                     <ItemNewsFeedComponent
                         {...this.props}
