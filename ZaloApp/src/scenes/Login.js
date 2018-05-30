@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ActivityIndicator, Text, TextInput, StyleSheet, TouchableOpacity, StatusBar, AlertIOS, Platform } from 'react-native'
+import { View, ActivityIndicator, Text, TextInput, StyleSheet, TouchableOpacity, StatusBar, AlertIOS, Platform,AsyncStorage } from 'react-native'
 import { Button } from 'native-base';
 import { BackHandler } from 'react-native';
 import { NavigationActions } from 'react-navigation';
@@ -19,6 +19,18 @@ class Login extends BaseHeaderComponent {
         super(props);
     }
 
+    async storeItem(key, item) {
+        try {
+            //we want to wait for the Promise returned by AsyncStorage.setItem()
+            //to be resolved to the actual value before returning the value
+            var jsonOfItem = await AsyncStorage.setItem(key, JSON.stringify(item));
+            console.log(jsonOfItem);
+            return jsonOfItem;
+        } catch (error) {
+          console.log(error.message);
+        }
+      }
+
     getTitle() {
         return 'Login';
     }
@@ -27,6 +39,7 @@ class Login extends BaseHeaderComponent {
         if (this.canLogin()) {
             BackHandler.removeEventListener('hardwareBackPress', this.goBack);
             this.props.login(this.state.username, this.state.password);
+            
         }
     }
 
@@ -40,6 +53,7 @@ class Login extends BaseHeaderComponent {
 
     componentDidUpdate() {
         if (this.props.isLogged) {
+            this.storeItem("USER_DATA",this.props.userData)
             let action = NavigationActions.navigate({ routeName: 'tabBar' });
             this.props.navigation.dispatch(action);
         }
@@ -124,6 +138,7 @@ const mapStateToProps = state => ({
     isLogged: state.login.isLogged,
     error: state.login.error,
     isLoading: state.login.isLoading,
+    userData: state.login.userData
 });
 
 function mapDispatchToProps(dispatch) {
