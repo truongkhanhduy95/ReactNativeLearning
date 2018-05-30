@@ -1,16 +1,16 @@
 import { systemConstants }  from '../constants';
-import { contactService } from '../service';
+import { statusService } from '../service';
 
-export const contactActions = {
-  getContact
+export const statusActions = {
+  getStatus
 }
 
-function getContact() {
+function getStatus(key) {
   return (dispatch) => {
-    dispatch(getData())
+    dispatch(getData(key))
 
     //dispatch(getDataSuccess(username));
-    contactService.getContact()
+    statusService.getStatus(key)
       .then(
         result => {
           if(result.success)
@@ -27,7 +27,7 @@ function getContact() {
       );
   };
 
-  function getData() { return { type: systemConstants.GET_INFO_REQUEST }}
-  function getDataSuccess(contacts) { return { type: systemConstants.GET_INFO_SUCCESS, contacts }}
+  function getData(key) { return { type: systemConstants.GET_INFO_REQUEST, key }}
+  function getDataSuccess(statuses) { return { type: systemConstants.GET_INFO_SUCCESS, statuses }}
   function getDataFailure(error) { return { type: systemConstants.GET_INFO_FAILED, error }}
 }

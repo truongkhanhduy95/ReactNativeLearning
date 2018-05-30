@@ -1,22 +1,46 @@
 import React, { Component } from 'react';
-import { View, Image, Text, FlatList, StyleSheet, Switch, TextInput, TouchableOpacity } from 'react-native';
+import { View, Image, Text, FlatList, StyleSheet, Switch, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { List, ListItem } from "react-native-elements";
 import ItemNewsFeedComponent from './itemNewsFeed';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-export default class NewsFeedList extends Component {
+
+
+import { statusActions } from '../../actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+export class NewsFeedList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: false,
-            data: [],
-            page: 1,
-            seed: 1,
-            error: null,
             refreshing: false,
+            userData: {}
         };
+        this.retrieveItem("USER_DATA").then((user) => {
+            //this callback is executed when your Promise is resolved
+            this.setState({
+                userData: user
+            });
+            console.log(this.state.userData._id)
+                this.props.getStatus(this.state.userData._id);
+            }).catch((error) => {
+            //this callback is executed when your Promise is rejected
+            console.log('Promise is rejected with error: ' + error);
+            });
+         
     }
-
+    async retrieveItem(key) {
+        try {
+          const retrievedItem =  await AsyncStorage.getItem(key);
+          
+          const item = JSON.parse(retrievedItem);
+          return item;
+        } catch (error) {
+          console.log(error.message);
+        }
+        return
+      }
     componentDidMount() {
         this.makeRemoteRequest();
     }
@@ -25,42 +49,39 @@ export default class NewsFeedList extends Component {
         this.props.navigation.dispatch(action);
       }
     makeRemoteRequest = () => {
-        const { page, seed } = this.state;
-        const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
-        this.setState({ loading: true });
-        fetch(url)
-            .then(res => res.json())
-            .then(res => {
-                this.setState({
-                    data: page === 1 ? res.results : [...this.state.data, ...res.results],
-                    error: res.error || null,
-                    loading: false,
-                    refreshing: false
-                });
-            })
-            .catch(error => {
-                this.setState({ error, loading: false });
-            });
+        
     };
 
     render() {
         
         return (
             <FlatList
-                    data={this.state.data}
-                    keyExtractor={item => item.email}
+                    data={this.props.data}
+                    keyExtractor={item => item._id}
                     renderItem={({ item }) => (
                         <ItemNewsFeedComponent
                             {...this.props}
                             item={item}
-                            username={`${item.name.first} ${item.name.last}`}
+                            username={item.owner.user_name}
                             subtitle={'status'}
-                            avatar={item.picture.thumbnail}
+                            avatar={item.owner.user_avatar}
                             containerStyle={{ borderBottomWidth: 0 }} />)}
                 />
         );
     }
 }
+
+const mapStateToProps = state => ({
+    loading: state.status.isLoading,
+    error: state.status.error,
+    data: state.status.statuses,
+});
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(statusActions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewsFeedList);
 
 const styles = StyleSheet.create({
     container: {
