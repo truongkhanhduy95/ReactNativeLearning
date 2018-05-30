@@ -16,7 +16,7 @@ export default class ShareStatus extends BaseComponent {
             typedStatus: '',
             isSelected:false,
             selectedItems: [],
-            isFocus:false
+            isFocus:false 
         }
       }
       

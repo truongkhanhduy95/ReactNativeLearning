@@ -8,12 +8,16 @@ export const userActions = {
 function login(username, password) {
   return (dispatch) => {
     dispatch(getData(username))
-
-    //dispatch(getDataSuccess(username));
     userService.login(username, password)
       .then(
-        user => {
-          dispatch(getDataSuccess(username));
+        result => {
+          if(result.success)
+          {
+            dispatch(getDataSuccess(result.data));
+          }
+          else{
+            dispatch(getDataFailure(result.message))
+          }
         },
         err => {
           dispatch(getDataFailure(err))
@@ -26,11 +30,24 @@ function login(username, password) {
   function getDataFailure(error) { return { type: userConstants.LOGIN_FAILED, error }}
 }
 
-function register(phone) {
+function register(username, fullname, password, phone) {
   return (dispatch) => {
     dispatch(getData(phone))
-
-    dispatch(getDataSuccess(phone));
+    userService.register(username, fullname, password, phone)
+      .then(
+        result => {
+          if(result.success)
+          {
+            dispatch(getDataSuccess(result.data));
+          }
+          else{
+            dispatch(registerFailure(result.message))
+          }
+        },
+        err => {
+          dispatch(registerFailure(err))
+        }
+      );
   };
 
   function getData(user) { return { type: userConstants.REGISTER_REQUEST, user }}

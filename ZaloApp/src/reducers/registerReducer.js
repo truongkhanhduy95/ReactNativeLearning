@@ -5,6 +5,7 @@ const initialState = {
     userData: {},
     isRegistering: false,
     isRegistered: false,
+    error:'',
 };
 
 export default function (state = initialState, action) {
@@ -18,6 +19,7 @@ export default function (state = initialState, action) {
     case userConstants.REGISTER_SUCCESS:
         return {
             ...state,
+            userData : action.user,
             isRegistering :false,
             isRegistered: true,
             
@@ -27,6 +29,7 @@ export default function (state = initialState, action) {
         return {
             ...state,
             isRegistering :false,
+            error: action.error,
         };
 
     default:
