@@ -9,7 +9,7 @@ export function postStatusAsync(content) {
             user_id: user._id
         }
         console.log("Post status:" + JSON.stringify(owner));
-        StatusService.createStatus(owner, "11/2/2018", content, "sadasd", 2, 3).
+        StatusService.createStatus(owner, new Date(), content, "https://c1.staticflickr.com/5/4649/39098624815_96c023dae7_o.jpg", 999, 999).
             then(
                 result => {
                     if (result.success) {

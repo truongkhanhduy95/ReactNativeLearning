@@ -18,16 +18,20 @@ export default class ChatComponent extends BaseHeaderComponent {
   }
 
   componentWillMount() {
+    var avatar = this.props.navigation.state.params.avatar;
+    var username = this.props.navigation.state.params.username;
+    var message = this.props.navigation.state.params.message;
+
     this.setState({
       messages: [
         {
           _id: 1,
-          text: 'Hello developer',
+          text: message,
           createdAt: new Date(),
           user: {
             _id: 2,
-            name: 'React Native',
-            avatar: 'https://placeimg.com/140/140/any',
+            name: username,
+            avatar: avatar,
           },
         },
       ],
@@ -62,7 +66,7 @@ export default class ChatComponent extends BaseHeaderComponent {
   renderHeader() {
     return (
       <Header
-          title='Phuong'
+          title={this.props.navigation.state.params.username}
           onBack={()=>this.props.navigation.dispatch({ type: 'Navigation/BACK' })}
         />
     );

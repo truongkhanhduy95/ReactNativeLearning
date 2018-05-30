@@ -15,9 +15,11 @@ function getContact() {
         result => {
           if (result.success) {
             dispatch(getDataSuccess(result.data));
+            console.log(result.data)
           }
           else {
             dispatch(getDataFailure(result.data))
+            console.log(result.data)
           }
         },
         err => {
