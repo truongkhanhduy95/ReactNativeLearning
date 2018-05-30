@@ -67,7 +67,12 @@ class RegisterPhoneScreen extends BaseHeaderComponent{
         }
         
         if (this.props.error) {
-            AlertIOS.alert(this.props.error);
+            if(this.props.error.code == 11000){
+                AlertIOS.alert("Username already exist!");
+                this.goBack();
+            }
+            else
+                AlertIOS.alert(this.props.error);        
         }
 
     }

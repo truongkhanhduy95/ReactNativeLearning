@@ -63,7 +63,7 @@ export default class RegisterNameScreen extends BaseHeaderComponent
                     onChangeText={this.handlePassword}
                     clearButtonMode="always"
                     keyboardType='default'
-                    secureTextEntry = 'true'
+                    secureTextEntry = {true}
                     underlineColorAndroid='transparent'
                 />
                 <Button
