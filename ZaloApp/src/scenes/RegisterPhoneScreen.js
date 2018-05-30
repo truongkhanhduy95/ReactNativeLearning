@@ -23,17 +23,18 @@ import { bindActionCreators } from 'redux';
 
 
 class RegisterPhoneScreen extends BaseHeaderComponent{
-    state = {
-        phonenumber:'',
-        countryCode:'',
-        dialingCode:'',
-        isDisable:true,
-        isRegistered:false,
-        isLoading:false,
-        error: '',
-    }
+    
     constructor(props) {
         super(props);
+        this.state = {
+            phonenumber:'',
+            countryCode:'',
+            dialingCode:'',
+            isDisable:true,
+            isRegistered:false,
+            isLoading:false,
+            error: '',
+        };
     }
     getTitle(){
         return 'Phone number';
@@ -49,32 +50,32 @@ class RegisterPhoneScreen extends BaseHeaderComponent{
 
     onRegisterButtonPressed(){
         Keyboard.dismiss();
-        console.log(this.state.phonenumber);
         var fullname = this.props.navigation.state.params.fullname;
         var password = this.props.navigation.state.params.password;
         this.props.register(fullname, fullname, password, this.state.phonenumber);
-        console.log(this.props.isRegistered);
     }
+
     onSelectPhoneCode(){
         let action = NavigationActions.navigate({ routeName: 'phoneCode', params: {returnData: this.returnData } })
         this.props.navigation.dispatch(action);
     }
 
-    componentDidUpdate(){
-        if (this.props.isRegistered){
-            let action = NavigationActions.navigate({ routeName: 'tabBar' });
-            this.props.navigation.dispatch(action);
-        }
-        
-        if (this.props.error) {
-            if(this.props.error.code == 11000){
-                AlertIOS.alert("Username already exist!");
-                this.goBack();
+    componentWillReceiveProps(newProps){
+        if(!newProps.isLoading){
+            if (newProps.isRegistered){
+                let action = NavigationActions.navigate({ routeName: 'tabBar' });
+                this.props.navigation.dispatch(action);
             }
-            else
-                AlertIOS.alert(this.props.error);        
+            
+            if (newProps.error) {
+                if(newProps.error.code == 11000){
+                    AlertIOS.alert("Username already exist!");
+                    this.goBack();
+                }
+                else
+                    AlertIOS.alert(newProps.error);        
+            }
         }
-
     }
 
     componentDidMount() {

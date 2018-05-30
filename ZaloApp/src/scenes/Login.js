@@ -51,15 +51,17 @@ class Login extends BaseHeaderComponent {
         return this.state.username && this.state.password;
     }
 
-    componentDidUpdate() {
-        if (this.props.isLogged) {
-            this.storeItem("USER_DATA",this.props.userData)
-            let action = NavigationActions.navigate({ routeName: 'tabBar' });
-            this.props.navigation.dispatch(action);
-        }
-
-        if (this.props.error) {
-            AlertIOS.alert(this.props.error);
+    componentWillReceiveProps(newProps) {
+        if(!newProps.isLoading){
+            if (newProps.isLogged) {
+                this.storeItem("USER_DATA",newProps.userData)
+                let action = NavigationActions.navigate({ routeName: 'tabBar' });
+                this.props.navigation.dispatch(action);
+            }
+    
+            if (newProps.error) {
+                AlertIOS.alert(newProps.error);
+            }
         }
     }
 
