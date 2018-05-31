@@ -6,7 +6,10 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  BackHandler
+  BackHandler,
+  ActivityIndicator,
+  Keyboard,
+  AlertIOS
 } from 'react-native';
 
 import { Button } from 'native-base';
@@ -20,15 +23,18 @@ import { bindActionCreators } from 'redux';
 
 
 class RegisterPhoneScreen extends BaseHeaderComponent{
-    state = {
-        phonenumber:'',
-        countryCode:'',
-        dialingCode:'',
-        isDisable:true,
-        isRegistered:false
-    }
+    
     constructor(props) {
         super(props);
+        this.state = {
+            phonenumber:'',
+            countryCode:'',
+            dialingCode:'',
+            isDisable:true,
+            isRegistered:false,
+            isLoading:false,
+            error: '',
+        };
     }
     getTitle(){
         return 'Phone number';
@@ -43,21 +49,33 @@ class RegisterPhoneScreen extends BaseHeaderComponent{
     }
 
     onRegisterButtonPressed(){
-        console.log(this.state.phonenumber);
-        this.props.register(this.state.phonenumber);
-        console.log(this.props.isRegistered);
+        Keyboard.dismiss();
+        var fullname = this.props.navigation.state.params.fullname;
+        var password = this.props.navigation.state.params.password;
+        this.props.register(fullname, fullname, password, this.state.phonenumber);
     }
+
     onSelectPhoneCode(){
         let action = NavigationActions.navigate({ routeName: 'phoneCode', params: {returnData: this.returnData } })
         this.props.navigation.dispatch(action);
     }
 
-    componentDidUpdate(){
-        if (this.props.isRegistered){
-            let action = NavigationActions.navigate({ routeName: 'tabBar' });
-            this.props.navigation.dispatch(action);
-		}
-
+    componentWillReceiveProps(newProps){
+        if(!newProps.isLoading){
+            if (newProps.isRegistered){
+                let action = NavigationActions.navigate({ routeName: 'tabBar' });
+                this.props.navigation.dispatch(action);
+            }
+            
+            if (newProps.error) {
+                if(newProps.error.code == 11000){
+                    AlertIOS.alert("Username already exist!");
+                    this.goBack();
+                }
+                else
+                    AlertIOS.alert(newProps.error);        
+            }
+        }
     }
 
     componentDidMount() {
@@ -105,6 +123,11 @@ class RegisterPhoneScreen extends BaseHeaderComponent{
                         >
                         <Text style={{color:'white',fontWeight:'bold'}}>{'register'.toUpperCase()}</Text>
                 </Button>
+                {this.props.isLoading &&
+                    <View style={styles.loading}>
+                        <ActivityIndicator size='large' color="#25b8f7" />
+                    </View>
+                }
                 
             </View>
             
@@ -113,7 +136,9 @@ class RegisterPhoneScreen extends BaseHeaderComponent{
 
 }
 const mapStateToProps = state => ({
-    isRegistered: state.register.isRegistered
+    isRegistered: state.register.isRegistered,
+    isLoading: state.register.isRegistering,
+    error: state.register.error,
 });
 
 function mapDispatchToProps(dispatch) {
@@ -169,6 +194,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 10
-      }
+      },
+    loading: {
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor:'#00000040'
+        }
   });
   

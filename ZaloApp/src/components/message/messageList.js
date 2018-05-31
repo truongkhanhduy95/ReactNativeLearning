@@ -57,10 +57,6 @@ export default class MessageList extends Component {
         this.makeRemoteRequest();
       }
 
-      
-    onItemClick = () => {
-        this.props.onPress();
-    }
     makeRemoteRequest = () => {
         const { page, seed } = this.state;
         const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
@@ -106,7 +102,7 @@ export default class MessageList extends Component {
                             subtitle={item.location.street}
                             avatar={item.picture.thumbnail }
                             containerStyle={{ borderBottomWidth: 0 }}
-                            onPress={this.onItemClick}/>)}
+                            onPress={()=>this.props.onPress(item.picture.thumbnail,item.name.first,item.location.street)}/>)}
                     />
                 </View>
         );

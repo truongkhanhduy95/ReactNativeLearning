@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, StyleSheet, Animated, TouchableOpacity, StatusBar, AlertIOS, Platform, Image, ListView } from 'react-native'
+import { View, Text, TextInput, StyleSheet, Animated, TouchableOpacity, StatusBar, AlertIOS, Platform, Image, ListView,
+    PermissionsAndroid,AsyncStorage } from 'react-native'
 import { Button, Icon } from 'native-base';
 import { BackHandler } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import BaseComponent from '../components/BaseComponent';
 import MyStatusBar from '../components/MyStatusBar';
 import ImagePicker from 'react-native-image-picker';
+import TopBar from '../components/TopBar'
 
 const HEADER_MAX_HEIGHT = 300;
 const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 60 : 73;
@@ -17,7 +19,8 @@ const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
 export default class Profile extends BaseComponent {
 
     _data = {};
-
+    
+    userData= {};
     constructor(props) {
         super(props);
         this.state = {
@@ -27,6 +30,8 @@ export default class Profile extends BaseComponent {
                 Platform.OS === 'ios' ? -HEADER_MAX_HEIGHT : 0,
             ),
             refreshing: false,
+            userData: {}
+
         };
 
         // this.renderRow = this.renderRow.bind(this);
@@ -40,8 +45,30 @@ export default class Profile extends BaseComponent {
                 { Title: "Holidays 30/4 - 1/5", Content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut venenatis felis. Donec at tempus neque. Morbi vitae sem et nisi porta ornare. Cras at venenatis tellus. Curabitur consequat lacinia lacus, et luctus tortor dignissim nec. Suspendisse scelerisque aliquet vehicula. Integer at ante elit.' },
                 { Title: 'Birthday 6/5', Content: 'Suspendisse potenti. Proin varius risus ac venenatis elementum. Morbi fringilla ante et nibh accumsan, ultricies tempor est porta. Nunc molestie neque a efficitur posuere. Nunc egestas, massa vitae hendrerit feugiat, ligula sem ullamcorper ante, quis ultricies quam turpis ac lectus. Praesent luctus, sapien imperdiet sagittis iaculis, nibh lacus convallis velit, sed placerat enim justo ornare tortor. Phasellus sed dui id odio lobortis imperdiet. Duis sollicitudin tellus sed eros commodo ultrices. Donec auctor nunc id quam suscipit, tempus tincidunt elit placerat. Sed nec odio vel ligula maximus varius. Nullam vulputate augue non gravida lacinia. Nam ac lobortis libero, id sollicitudin nulla.' }],
         };
+        this.retrieveItem("USER_DATA").then((user) => {
+            //this callback is executed when your Promise is resolved
+            this.setState({
+                userData: user
+            });
+                console.log(this.state.userData.fullname)
+            }).catch((error) => {
+            //this callback is executed when your Promise is rejected
+            console.log('Promise is rejected with error: ' + error);
+            });
+        console.log(this.userData.fullname)
+         
     }
-
+    async retrieveItem(key) {
+        try {
+          const retrievedItem =  await AsyncStorage.getItem(key);
+          
+          const item = JSON.parse(retrievedItem);
+          return item;
+        } catch (error) {
+          console.log(error.message);
+        }
+        return
+      }
     selectPhotoTapped() {
         const options = {
             quality: 1.0,
@@ -76,12 +103,14 @@ export default class Profile extends BaseComponent {
             }
         });
     }
+    
 
+    
     renderRow(rowData, section, row) {
         const total = this._data.dataSource.length;
         const topLineStyle = styles.topLine;
         const bottomLineStyle = row == total - 1 ? [styles.bottomLine, styles.hiddenLine] : styles.bottomLine;
-
+        
         if (row == 0)
             return (<View key={row} style={styles.row}>
                 <View style={styles.timeline}>
@@ -93,13 +122,14 @@ export default class Profile extends BaseComponent {
                     </View>
                 </View>
                 <View style={styles.content}>
-                    <Text style={styles.eventDate}>Moments</Text>
-                    <View style={{ flex: 1, flexDirection: 'row', marginTop: 8 }}>
+                    <Text style={styles.eventDate}>Story</Text>
+                    <View style={{ flex: 1, flexDirection: 'row', marginTop: 8, marginRight:16 }}>
                         <Button style={{ marginBottom: 8 }}
+                            onPress={()=>this.navigateToShareStatus()}
                             bordered>
                             <Icon name='add' />
                         </Button>
-                        <Text style={{ marginLeft: 20, marginRight: 20 }}>Share wonderful moments in life with your friends</Text>
+                        <Text style={{ marginLeft: 20, marginRight: 20 }}>Create your story by capturing daily moments in your most creative way</Text>
                     </View>
                 </View>
             </View>);
@@ -121,17 +151,44 @@ export default class Profile extends BaseComponent {
             </View>);
     }
 
+    navigateToShareStatus()
+    {
+        let action = NavigationActions.navigate({ routeName: 'shareStatus' });
+        this.props.navigation.dispatch(action);
+    }
 
     _renderScrollViewContent() {
         const data = this._data.dataSource;
         let i = 0;
         console.log("Test : ")
+        
         return (
             <View style={styles.scrollViewContent}>
-                {data.map((item) => {
-                    i++;
-                    return this.renderRow(item, 0, i - 1);
-                })}
+                <TopBar>
+                    {/* Contact Tab */}
+                    <View title="NHAT KY" style={styles.contentTab}>
+                        
+                            {data.map((item) => {
+                                i++;
+                                return this.renderRow(item, 0, i - 1);
+                            })}
+                        
+                    </View>
+
+                    {/* Official Account tab */}
+                    <View title="ANH" style={{ flex: 1,                            
+                                                justifyContent: 'center',    
+                                                alignItems: 'center',          
+                                                backgroundColor: '#C2185B',   }}>
+                        <Text style={styles.headerTab}>
+                        Offical Account
+                        </Text>
+                        <Text style={styles.text}>
+                        Components you define will end up rendering as native platform widgets
+                        </Text>
+                    </View>
+            
+                </TopBar>
             </View>
         )
     }
@@ -201,7 +258,7 @@ export default class Profile extends BaseComponent {
                 {/* <MyStatusBar backgroundColor="#006FFD" barStyle="light-content" opacity={0.5} /> */}
                 <Animated.ScrollView
                     style={styles.fill}
-                    scrollEventThrottle={1}
+                    scrollEventThrottle={8}
                     onScroll={Animated.event(
                         [{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }],
                         { useNativeDriver: true },
@@ -212,6 +269,7 @@ export default class Profile extends BaseComponent {
                     contentOffset={{
                         y: -HEADER_MAX_HEIGHT,
                     }}
+                    bounces={false}
                 >
                     {this._renderScrollViewContent()}
                 </Animated.ScrollView>
@@ -249,7 +307,7 @@ export default class Profile extends BaseComponent {
                         ]
 
                     }]}
-                        source={{ uri: 'https://reactjs.org/logo-og.png' }} />
+                        source={{ uri: this.state.userData.avatar != null ?  this.state.userData.avatar : 'https://reactjs.org/logo-og.png'}} />
                 </Animated.View>
                 <Animated.View
                     style={[
@@ -262,7 +320,7 @@ export default class Profile extends BaseComponent {
                         },
                     ]}
                 >
-                    <Text style={styles.title}>Kris Nguyễn</Text>
+                    <Text style={styles.title}>{this.state.userData.fullname}</Text>
                 </Animated.View>
                 <View style={{
                     position: 'absolute', top: 0, left: 0, right: 0,
@@ -291,6 +349,7 @@ const styles = StyleSheet.create({
     scrollViewContent: {
         // iOS uses content inset, which acts like padding.
         paddingTop: Platform.OS !== 'ios' ? HEADER_MAX_HEIGHT : 0,
+
     },
     avatar: {
         backgroundColor: 'transparent',
@@ -390,9 +449,9 @@ const styles = StyleSheet.create({
         width: 0,
     },
     bigDot: {
-        width: 32,
-        height: 32,
-        borderRadius: 30,
+        width: 24,
+        height: 24,
+        borderRadius: 20,
         backgroundColor: 'black',
     },
     dot: {
@@ -406,6 +465,24 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: 'red',
         fontWeight: 'bold'
+    },
+    contentTab: {
+        flex: 1, 
+        backgroundColor: "#f4f6f7",
+        paddingTop:16
+    },
+    headerTab: {
+        margin: 10, 
+        color: '#FFFFFF',                 
+        fontFamily: 'Avenir',            
+        fontSize: 26,                      
+    },
+    text: {
+        marginHorizontal: 20,              
+        color: 'rgba(255, 255, 255, 0.75)', 
+        textAlign: 'center', 
+        fontFamily: 'Avenir',
+        fontSize: 18,
     },
 });
 

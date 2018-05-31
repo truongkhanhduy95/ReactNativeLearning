@@ -16,27 +16,35 @@ export default class RegisterNameScreen extends BaseHeaderComponent
 {
     state = {
         fullname:'',
-        isDisable:true
+        password:'',
     }
     
     getTitle(){
         return 'Name';
     }
 
-
     handleFullname = (text) => {
         this.setState({fullname:text})
-        if(text === '')
-            this.setState({isDisable:true})
-        else
-            this.setState({isDisable:false})
+    }
 
+    handlePassword = (text) => {
+        this.setState({password:text})
+    }
+
+    canRegister(){
+        return this.state.fullname && this.state.password;
     }
 
     onRegisterButtonPressed(){
-        let action = NavigationActions.navigate({ routeName: 'registerPhone', params: {'fullname': this.state.fullname} })
+        let action = NavigationActions.navigate({ 
+            routeName: 'registerPhone',
+            params: {
+                fullname: this.state.fullname,
+                password: this.state.password
+            } })
         this.props.navigation.dispatch(action);
     }
+
     renderContent() {
         return (
             <View style= {styles.container}>
@@ -49,13 +57,22 @@ export default class RegisterNameScreen extends BaseHeaderComponent
                     keyboardType='default'
                     underlineColorAndroid='transparent'
                 />
+                <Text style={styles.body}>Type your password here.</Text>
+                <TextInput style={styles.textInput}
+                    placeholder='Enter your password'
+                    onChangeText={this.handlePassword}
+                    clearButtonMode="always"
+                    keyboardType='default'
+                    secureTextEntry = {true}
+                    underlineColorAndroid='transparent'
+                />
                 <Button
                         style={styles.registerButton}
                         full
                         rounded
                         info
                         onPress={this.onRegisterButtonPressed.bind(this)}
-                        disabled={this.state.isDisable}>
+                        disabled={!this.canRegister()}>
                         <Text style={{color:'white',fontWeight:'bold'}}>{'next'.toUpperCase()}</Text>
                 </Button>
             </View>
@@ -80,12 +97,13 @@ const styles = StyleSheet.create({
     body: {
       textAlign: 'center',
       color: '#333333',
-      marginBottom: 40,
+      marginBottom: 20,
     },
     textInput: {
         borderTopWidth: 1,
         borderBottomWidth: 1,
         borderColor: 'gray',
+        marginBottom: 20,
         fontSize: 20,
         height: 50,
         paddingLeft:10,
@@ -100,7 +118,6 @@ const styles = StyleSheet.create({
         height: 50
     },
     registerButton:{
-        marginTop: 20,
         marginLeft:80,
         marginRight:80,
         alignSelf: 'stretch',

@@ -4,15 +4,14 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { List, ListItem } from "react-native-elements";
 import ContactRow from '../contact/contactRow';
 
-export default class ContactList extends Component {
+import { contactActions } from '../../actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+export class ContactList extends Component {
     constructor(props){
         super(props);        
         this.state = {
-            loading: true,
-            data: [],
-            page: 1,
-            seed: 1,
-            error: null,
             refreshing: false,
           };
     }
@@ -22,14 +21,15 @@ export default class ContactList extends Component {
       }
 
     makeRemoteRequest = () => {
-        const { page, seed } = this.state;
-        const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
+        this.props.getContact();
+        /*const { page, seed } = this.state;
+        const url = `https://zaloapp-service.herokuapp.com/api/contacts`;
         this.setState({ loading: true });
         fetch(url)
           .then(res => res.json())
           .then(res => {
             this.setState({
-              data: page === 1 ? res.results : [...this.state.data, ...res.results],
+              data: res,
               error: res.error || null,
               loading: false,
               refreshing: false
@@ -37,13 +37,13 @@ export default class ContactList extends Component {
           })
           .catch(error => {
             this.setState({ error, loading: false });
-          });
+          });*/
     };
 
     render() {
         const title ='Bạn mới cập nhật';
         const changeStatus = ' "Thay đổi trạng thái?"';
-        if (this.state.loading)
+        if (this.props.loading)
             return (
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <ActivityIndicator size="large" color="#25b8f7" />
@@ -68,20 +68,31 @@ export default class ContactList extends Component {
                         />
                     </View>
                     <FlatList
-                        data={this.state.data}
-                        keyExtractor={item => item.email}
+                        data={this.props.data}
+                        keyExtractor={item => item._id}
                         renderItem={({ item }) => (
                         <ContactRow
-                            username={`${item.name.first} ${item.name.last}`}
+                            username={`${item.contact_name}`}
                             subtitle={'status'}
-                            avatar={item.picture.thumbnail }
-                            onItemClick = {()=>this.props.onItemClick()}
+                            avatar={item.avatar }
+                            onItemClick = {()=>this.props.onItemClick(item.avatar,item.contact_name,"Hello!!")}
                             containerStyle={{ borderBottomWidth: 0 }}/>)}
-                    />
+                        />
                 </View>
         );
     }
 }
+const mapStateToProps = state => ({
+    loading: state.contact.isLoading,
+    error: state.contact.error,
+    data: state.contact.contacts,
+});
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(contactActions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
 
 const styles = StyleSheet.create({
     container:{

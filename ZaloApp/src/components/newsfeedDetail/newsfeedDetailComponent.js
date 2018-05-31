@@ -32,25 +32,25 @@ export default class NewsFeedDetailComponent extends BaseHeaderComponent {
             <ScrollView style={{ flex: 1 }}>
                 <View style={{ flex: 1, backgroundColor: '#fff' }}>
                     <View style={{ flexDirection: 'row', backgroundColor: '#fff' }}>
-                        <Image style={{ borderRadius: 20, margin: 10, width: 40, height: 40 }} source={{ uri: item.picture.thumbnail }} />
+                        <Image style={{ borderRadius: 20, margin: 10, width: 40, height: 40 }} source={{ uri: item.owner.user_avatar }} />
                         <View style={{ flex: 1, flexDirection: 'column' }}>
                             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end' }} >
-                                <Text style={{ color: '#000' }}>{`${item.name.first} ${item.name.last}`}</Text>
+                                <Text style={{ color: '#000' }}>{item.owner.user_name}</Text>
                             </View>
                             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-start' }} >
-                                <Text style={{ fontSize: 12, color: '#838B92' }} >1 giờ trước</Text>
+                                <Text style={{ fontSize: 12, color: '#838B92' }} >{item.time_create}</Text>
                             </View>
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'flex-start' }} >
                             <Ionicons.Button onPress={this.props.onBack} backgroundColor='transparent' size={26} color='#000' name='ios-arrow-down' />
                         </View>
                     </View>
-                    <Text style={{ flex: 1, margin: 10, color: '#000' }} >Hôm nay tôi buồn</Text>
+                    <Text style={{ flex: 1, margin: 10, color: '#000' }} >{item.content}</Text>
                     <Image style={{ width: width, height: width }} source={{ uri: 'https://reactjs.org/logo-og.png' }} />
                     <View style={{ marginLeft: 10, marginRight: 10, height: 1, backgroundColor: '#DEDEDE', marginTop: 10 }}></View>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <EvilIcons.Button onPress={this.props.onBack} backgroundColor='transparent' size={26} color='#000' name='heart' />
-                        <Text style={{ marginRight: 10, color: '#000' }} >10</Text>
+                        <Text style={{ marginRight: 10, color: '#000' }} >{item.likes}</Text>
 
                         <Text style={{ color: '#000' }} >Xem lượt thích</Text>
                     </View>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ActivityIndicator, Text, TextInput, StyleSheet, TouchableOpacity, StatusBar, AlertIOS, Platform } from 'react-native'
+import { View, ActivityIndicator, Text, TextInput, StyleSheet, TouchableOpacity, StatusBar, AlertIOS, Platform,AsyncStorage } from 'react-native'
 import { Button } from 'native-base';
 import { BackHandler } from 'react-native';
 import { NavigationActions } from 'react-navigation';
@@ -11,13 +11,25 @@ import { bindActionCreators } from 'redux';
 class Login extends BaseHeaderComponent {
     state = {
         isShowPassword: false,
-        username: 'Test',
-        password: '1234',
+        username: 'khanhduy',
+        password: 'khanhduy',
     }
 
     constructor(props) {
         super(props);
     }
+
+    async storeItem(key, item) {
+        try {
+            //we want to wait for the Promise returned by AsyncStorage.setItem()
+            //to be resolved to the actual value before returning the value
+            var jsonOfItem = await AsyncStorage.setItem(key, JSON.stringify(item));
+            console.log(jsonOfItem);
+            return jsonOfItem;
+        } catch (error) {
+          console.log(error.message);
+        }
+      }
 
     getTitle() {
         return 'Login';
@@ -27,6 +39,7 @@ class Login extends BaseHeaderComponent {
         if (this.canLogin()) {
             BackHandler.removeEventListener('hardwareBackPress', this.goBack);
             this.props.login(this.state.username, this.state.password);
+            
         }
     }
 
@@ -38,14 +51,17 @@ class Login extends BaseHeaderComponent {
         return this.state.username && this.state.password;
     }
 
-    componentDidUpdate() {
-        if (this.props.isLogged) {
-            let action = NavigationActions.navigate({ routeName: 'tabBar' });
-            this.props.navigation.dispatch(action);
-        }
-
-        if (this.props.error) {
-            AlertIOS.alert(this.props.error);
+    componentWillReceiveProps(newProps) {
+        if(!newProps.isLoading){
+            if (newProps.isLogged) {
+                this.storeItem("USER_DATA",newProps.userData)
+                let action = NavigationActions.navigate({ routeName: 'tabBar' });
+                this.props.navigation.dispatch(action);
+            }
+    
+            if (newProps.error) {
+                AlertIOS.alert(newProps.error);
+            }
         }
     }
 
@@ -124,6 +140,7 @@ const mapStateToProps = state => ({
     isLogged: state.login.isLogged,
     error: state.login.error,
     isLoading: state.login.isLoading,
+    userData: state.login.userData
 });
 
 function mapDispatchToProps(dispatch) {
