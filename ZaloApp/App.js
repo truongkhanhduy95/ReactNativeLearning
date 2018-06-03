@@ -47,7 +47,7 @@ export default class App extends Component {
     }
 
     firebase.messaging().getToken().then(token => {
-      alert("TOKEN: "+token);
+      // alert("TOKEN: "+token);
     });
   }
 
