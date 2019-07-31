@@ -8,4 +8,4 @@ _One of the best ways to learn a new programming language or framework is to get
 ## Contributors
 |                  Duy Trương                  |            Ân Ngô            |           Nam Nguyễn           |
 | :---------------------------------------------: | :-----------------------------------: | :---------------------------------: |
-| [![duytruong]](https://github.com/truongkhanhduy95) | [!anngo]](https://github.com/andyngo95) | [![namnguyen]](https://github.com/QuocNamIT1) |
+| [![truongkhanhduy95]](https://github.com/truongkhanhduy95) | [!anngo]](https://github.com/andyngo95) | [![namnguyen]](https://github.com/QuocNamIT1) |
